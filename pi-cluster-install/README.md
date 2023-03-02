@@ -11,3 +11,5 @@ Do uruchomienia skryptu nalezy uzyc ponizszego polecenia w powloce Bash
 Gdzie w miejscu \<siec\> trzeba wpisac adres sieci razem z maska, np. 192.168.0.0/24
 Skrypt ten, po przeprowadzeniu wstepnych konfiguracji (np. utworzenie plikow w inventory Ansible czy zainstalowanie kluczy ssh w hostach klastra) wywoluje zasadniczy playbook instalacyjny dla k3s:
    ansible-playbook -i inventory/hosts.ini install_k3s.yaml --extra-vars "network=$NETWORK"
+
+Na koncu skrypt sciaga z klastra plik config (dna potrzeby kubectl) i zapisuje go jako plik ~/.kube/config.

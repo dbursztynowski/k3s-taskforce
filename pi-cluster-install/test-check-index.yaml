@@ -1,7 +1,0 @@
-- hosts: node
-  gather_facts: false
-  vars:
-    sequential_var: "{{groups['node'].index(inventory_hostname)}}"
-  tasks:
-    - debug:
-        var: sequential_var
