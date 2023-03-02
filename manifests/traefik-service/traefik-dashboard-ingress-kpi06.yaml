@@ -1,3 +1,4 @@
+#this is only example, use your own obtained usink kubectl ger ... (ref. the guide)
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
