@@ -1,6 +1,6 @@
 # k3s-taskforce
 
-##Ogólnie
+##**Ogólnie**
 
 Repozytorium dla studentów SPIW/k3s-taskforce. Opisy wykorzystania podano w instrukcjach.
 
@@ -10,14 +10,14 @@ Wszelkie sugestie są mile widziane, w szególności też propozycje zadań prak
 
 (Uwaga: niedługo dojdzie trzecia "instalacyjna" - dot. monitorowania Prometheus/Grafana z użyciem stosu kube-prometheus.
 
-#Co teraz mamy w katalogach:
+##**Co teraz mamy w katalogach:**
 
-#instrukcje# - intrukcje labowe (docelowo do użycia w ramach lagorki)
+**_instrukcje_** - intrukcje labowe (docelowo do użycia w ramach lagorki)
 
-#pi-cluster-install# - źródłowe pliki instalacyje k3s (bash, Ansible)
+**_pi-cluster-install_** - źródłowe pliki instalacyje k3s (bash, Ansible)
 
-#manifests# - manifesty Kubernetes dla instalowanych modułó, testowanych wdrożeń (deploymentów), przykłady ćwiczeń laborkowych (na razie niewiele laborkowych - to co wynika bezpośrednio z instrukcji)
+**_manifests_** - manifesty Kubernetes dla instalowanych modułó, testowanych wdrożeń (deploymentów), przykłady ćwiczeń laborkowych (na razie niewiele laborkowych - to co wynika bezpośrednio z instrukcji)
 
-#troubleshooting.txt# - napotkane problemy i sposób ich rozwiązania
+**_troubleshooting.txt_** - napotkane problemy i sposób ich rozwiązania
 
 
