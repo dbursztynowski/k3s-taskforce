@@ -16,7 +16,7 @@ Uwaga: niedługo dojdzie trzecia "instalacyjna" - dot. monitorowania Prometheus/
 
 **_pi-cluster-install_** - źródłowe pliki instalacyje k3s (bash, Ansible)
 
-**_manifests_** - manifesty Kubernetes dla instalowanych modułó, testowanych wdrożeń (deploymentów), przykłady ćwiczeń laborkowych (na razie niewiele laborkowych - to co wynika bezpośrednio z instrukcji)
+**_manifests_** - manifesty Kubernetes dla instalowanych modułów, testowanych wdrożeń (deploymentów), przykłady ćwiczeń laborkowych (na razie zajawka laborkowych - to co wynika bezpośrednio z instrukcji)
 
 **_troubleshooting.txt_** - napotkane problemy i sposób ich rozwiązania
 
