@@ -8,7 +8,7 @@
 
 * Wszelkie sugestie są mile widziane, w szególności też propozycje zadań praktycznych do wykonania - już po uruchomieniu, skonfigurowaniu i wstępnym sprawdzeniu klastra "bojem" wg obecnej wersji instrukcji.
 
-(Uwaga: niedługo dojdzie trzecia "instalacyjna" - dot. monitorowania Prometheus/Grafana z użyciem stosu kube-prometheus.
+Uwaga: niedługo dojdzie trzecia "instalacyjna" - dot. monitorowania Prometheus/Grafana z użyciem stosu kube-prometheus.
 
 ## **Co teraz mamy w katalogach:**
 
