@@ -1,0 +1,29 @@
+---
+
+# Our palybook structure.
+# It contains 4 roles (upgrade, preparation, master, node) executed at the play level.
+# There will be 3 plays to execute: one for cluster, one for the master and one for the nodes (workers).
+# Ref. for roles/play level:
+#   https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html#using-roles-at-the-play-level
+
+# Play for all cluster nodes (common configs)
+- hosts: cluster
+  gather_facts: yes
+  become: yes
+  roles:
+    # OS update/upgrade/useful package install (common)
+    - role: upgrade
+    # k3s-oriented configurations common for all hosts
+    - role: preparation
+
+# Play for the k3s master node (master-specific). Installs k3s on master.
+- hosts: master
+  become: yes
+  roles:
+    - role: master
+
+# Play for k3s worker nodes (worker-specific). Installs k3s on workers.
+- hosts: node
+  become: yes
+  roles:
+    - role: node

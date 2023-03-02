@@ -1,0 +1,5 @@
+---
+- name: Uninstall k3s from nodes
+  shell:
+    cmd: /usr/local/bin/k3s-agent-uninstall.sh
+    removes: /usr/local/bin/k3s-agent-uninstall.sh

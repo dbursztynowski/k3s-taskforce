@@ -1,0 +1,14 @@
+---
+
+- name: Uninstall k3s from master
+  shell:
+    cmd: /usr/local/bin/k3s-uninstall.sh
+    removes: /usr/local/bin/k3s-uninstall.sh
+
+- name: Remove k3s artifacts
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /home/ubuntu/.kube
+    - /etc/rancher

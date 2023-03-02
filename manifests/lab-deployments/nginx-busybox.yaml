@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-busybox
+spec:
+  containers:
+  - command:
+    - sleep
+    - infinity
+    image: busybox
+    name: busybox
+    imagePullPolicy: IfNotPresent
+  - image: nginx
+    name: nginx
+    imagePullPolicy: IfNotPresent
+
+

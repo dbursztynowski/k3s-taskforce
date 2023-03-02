@@ -1,0 +1,78 @@
+---
+
+# Installing k3s on master and respective configurations
+# all below are Ansible tasks
+
+- name: Allow tcp/6443 traffic on the master node for all directions
+  ufw:
+    rule: allow
+    to_port: 6443
+    proto: tcp
+
+- name: Set Ubuntu hostname for the master (equal to inventory_hostname, i.g., name from the hosts.yaml)
+  hostname:
+    name: "{{ inventory_hostname }}"
+    #previously it was explicitly kpi0x1
+
+- name: Check if k3s already installed
+  stat:
+    path: /usr/local/bin/k3s
+  register: k3s_installed
+    
+- name: Install k3s on master
+  # to ze master, widac i po formacie parametrow, i po parametrze 'server' w dyrektywie INSTALL_K3S_EXEC
+  # --node-taint CriticalAddonsOnly=true:NoExecute spowoduje, ze na wezle master nie beda instancjonowane zwykle pody, chyba ze
+  # w deployment zostanie to dozwolone ("przebite") dyrektywa "tolerations" w selektorze pod-ow (zobaczymy to w laborce dot. 
+  # konfiguracji MetalLB/Traefik)
+  shell:
+    cmd: >
+      curl -sfL https://get.k3s.io | 
+      INSTALL_K3S_VERSION={{ k3s_version }} 
+      INSTALL_K3S_EXEC="server --node-taint CriticalAddonsOnly=true:NoExecute --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller"
+      sh -s -
+  when: not k3s_installed.stat.exists
+
+- name: Wait for node-token to be created
+  wait_for:
+    path: /var/lib/rancher/k3s/server/node-token
+
+- name: Read node-token from master
+  slurp:
+    src: /var/lib/rancher/k3s/server/node-token
+  register: node_token
+
+- name: Store node-token
+  set_fact:
+    token: "{{ node_token.content | b64decode | regex_replace('\n', '') }}"
+
+- name: Create directory .kube
+  file:
+    path: ~{{ ansible_user }}/.kube
+    state: directory
+    owner: "{{ ansible_user }}"
+
+- name: Copy config file to user home directory
+  copy:
+    src: /etc/rancher/k3s/k3s.yaml
+    dest: ~{{ ansible_user }}/.kube/config
+    remote_src: yes
+    owner: "{{ ansible_user }}"
+
+- name: Replace cluster server address from localhost to k3s master IP
+  command: >
+    k3s kubectl config set-cluster default
+      --server=https://{{ master_ip }}:6443
+      --kubeconfig ~{{ ansible_user }}/.kube/config
+  changed_when: true
+
+- name: Create kubectl symlink
+  file:
+    src: /usr/local/bin/k3s
+    dest: /usr/local/bin/kubectl
+    state: link
+
+- name: Create crictl symlink
+  file:
+    src: /usr/local/bin/k3s
+    dest: /usr/local/bin/crictl
+    state: link

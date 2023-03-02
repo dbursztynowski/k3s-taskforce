@@ -1,0 +1,64 @@
+---
+
+# Configure certain nitty-gritty details specific to k3s on all cluster nodes.
+
+- name: Update the /etc/hosts file with localhost name
+  lineinfile:
+    dest: /etc/hosts
+    regexp: "^127.0.0.1"
+    line: "127.0.0.1 {{ inventory_hostname }}"
+
+- name: Update the /etc/hosts file with other cluster nodes' IP and hostname
+  lineinfile:
+    dest: /etc/hosts
+    regexp: ".*{{ item }}$"
+    line: "{{ hostvars[item].ansible_default_ipv4.address }} {{ item }}"
+    state: present
+  with_items: "{{ groups.all | difference([inventory_hostname]) }}"
+
+- name: Update /etc/cloud/cloud.cfg file
+  lineinfile:
+    dest: /etc/cloud/cloud.cfg
+    regexp: "^preserve_hostname:"
+    line: "preserve_hostname: true"
+  
+- name: Clean up netplan config
+  replace:
+    path: /etc/netplan/50-cloud-init.yaml
+    after: "following:"
+    regexp: '^(.*)$'
+    replace: ''
+
+- name: Configure Static IP address
+  blockinfile:
+    path: /etc/netplan/50-cloud-init.yaml
+    insertafter: "following:"
+    block: |
+      network:
+        ethernets:
+          eth0:
+            dhcp4: false
+            addresses: [{{ ansible_default_ipv4.address }}/24]
+            gateway4: {{ gateway }}
+            nameservers:
+              addresses: [{{ gateway }}, 8.8.8.8, 8.8.4.4]
+        version: 2
+
+- name: Apply netplan
+  shell: netplan apply
+
+- name: Enable cgroup according to https://docs.k3s.io/advanced#raspberry-pi
+  replace:
+    path: /boot/firmware/cmdline.txt
+    regexp: '^([\w](?!.*\b{{ item }}\b).*)$'
+    replace: '\1 {{ item }}'
+  with_items:
+  - "cgroup_enable=cpuset"
+  - "cgroup_memory=1"
+  - "cgroup_enable=memory"
+  register: cgroup_activation
+
+- name: Reboot
+  reboot:
+  when:
+  - cgroup_activation is changed

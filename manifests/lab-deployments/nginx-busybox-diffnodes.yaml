@@ -1,0 +1,31 @@
+# Two pods will be created in predefined (different) cluster nodes
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-kpi092
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: kpi092
+  containers:
+  - image: nginx
+    name: nginx
+    imagePullPolicy: IfNotPresent
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-kpi093
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: kpi093
+  containers:
+  - command:
+    - sleep
+    - infinity
+    image: busybox
+    name: busybox
+    imagePullPolicy: IfNotPresent
+

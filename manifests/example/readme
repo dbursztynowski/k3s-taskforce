@@ -1,0 +1,15 @@
+# deploy a service of type LoadBalancer with 3 replicas of nginx and check loadbalancing (use NodePort or internally)
+# referenced inn the lab guides - see the details therein
+# run the commands one by one
+
+kubectl apply -f example/deployment.yaml
+kubectl apply -f example/service.yaml
+
+kubectl describe service nginx #or kubectl get service -A
+curl http://192.168.1.xxx # you can also enter the ip address of the service into your browser
+
+kubectl delete -f example/deployment.yaml
+kubectl delete -f example/service.yaml
+
+
+

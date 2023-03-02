@@ -1,0 +1,16 @@
+---
+# former: k3s_version: v1.24.2+k3s2
+k3s_version: v1.25.5+k3s2
+
+ansible_user: ubuntu
+
+# ansible_default_ipv4 - ref. https://medium.com/opsops/ansible-default-ipv4-is-not-what-you-think-edb8ab154b10
+gateway: "{{ ansible_default_ipv4.gateway }}"
+
+# hostvars, groups, inventory_hostname - 
+#    ref. https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html
+master_ip: "{{ hostvars[groups['master'][0]]['ansible_default_ipv4']['address'] }}"
+k3s_token: "{{ hostvars[groups['master'][0]]['token'] }}"
+
+# worker_number is not needed now, can be deleted
+worker_number: "{{ groups['node'].index(inventory_hostname) }}"
