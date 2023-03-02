@@ -1,6 +1,6 @@
 # k3s-taskforce
 
-##**Ogólnie**
+## **Ogólnie**
 
 Repozytorium dla studentów SPIW/k3s-taskforce. Opisy wykorzystania podano w instrukcjach.
 
@@ -10,7 +10,7 @@ Wszelkie sugestie są mile widziane, w szególności też propozycje zadań prak
 
 (Uwaga: niedługo dojdzie trzecia "instalacyjna" - dot. monitorowania Prometheus/Grafana z użyciem stosu kube-prometheus.
 
-##**Co teraz mamy w katalogach:**
+## **Co teraz mamy w katalogach:**
 
 **_instrukcje_** - intrukcje labowe (docelowo do użycia w ramach lagorki)
 
