@@ -14,4 +14,4 @@ Skrypt ten, po przeprowadzeniu wstepnych konfiguracji (np. utworzenie plikow w i
 
 (Powyżej zakładamy względną lokalizację katalogów jak w naszym repozytorium - ze względu na ścieżki podane w skrypcie.) 
 
-Na końcu skrypt ściąga z klastra plik config (dna potrzeby kubectl) i zapisuje go na maszynie management-host jako plik ~/.kube/<podana-nazwa>, gdzie <podana-nazwa> powinna być wpisana ręcznie, najlepiej jako unikatowa, przed wykonaniem skryptu.
+Na końcu skrypt ściąga z klastra plik config (na potrzeby narzędzia kubectl) i zapisuje go na maszynie management-host jako plik ~/.kube/<podana-nazwa>, gdzie <podana-nazwa> powinna być wpisana ręcznie, najlepiej jako unikatowa, przed wykonaniem skryptu.
