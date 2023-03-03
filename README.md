@@ -13,15 +13,17 @@ Uwaga: niedługo dojdzie trzecia instrukcja "instalacyjna" - dot. monitorowania 
 ## **Zakładane do osiągnięcia cele laborki**
 
 * zapoznanie się z deklaratywną naturą Ansible (na tle wybitnie ipmeratywnych skryptów bash) - jako przykłAdu notacji deklaratywne do automatyzaci zadań konfiguracyjnych
-* zapoznanie się z zasadami "sieciowania" w klastrach kubernetes
+* zapoznanie się z zasadami "sieciowania" (_networking_) w klastrach kubernetes
   * koncepcja CNI na podstawie CNI flannel
-  * usługi Servis typu NodePort, LoadBalancer; ekspozycja usług poprzez obiekt Ingress
+  * usługi (Service) typu ClusterIP, NodePort, LoadBalancer; ekspozycja usług poprzez obiekt Ingress
   * koncepcja NetworkPolicy (reguły filtrowania ruchu na poziomie użytkowym (twórcy usługi) )
 * zapoznanie się z wybranymi aspektami zarządzania zasobami i aplikacjami w klastrach Kubernetes 
-  * ograniczanie swobody rozkładania podów przez Kubernetes scheduler - mechanizm \<taint\> i \<tolerations\>
+  * ograniczanie swobody rozkładania podów przez Kubernetes scheduler - mechanizmy _taint_ i _tolerations_
   * inne - do wymyślenia/zaproponowania w ramach task-force
 * zapoznanie się z problematyką monitorowania usług w środowiskacch CNF (na podstawie Prometheus/Grafana)
   * jako elementy szereszgo obszaru "telemetry"/"observability"
+
+Drogą do osiągnięcia tych celów jest instalacja klastra k3s "bare metal" na platformie Raspberry Pi, instalacja i konfiguracja wybranych modułów składowych klastra (MetalLB, Traefik), aplikacji poziomu "observability" (Prometheus/Grafana), a także uruchamianie wybranych przykładów "aplikacji" demonstracyjnych w celu ilustracji wybranych konceptów.
 
 ## **Co teraz mamy w katalogach**
 
