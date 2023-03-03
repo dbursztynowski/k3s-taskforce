@@ -21,7 +21,7 @@ Uwaga: niedługo dojdzie trzecia instrukcja "instalacyjna" - dot. monitorowania 
   * elementy zarządzania zasobami w klastrach Kubernetes, np. 
     * ograniczanie swobody rozkładania podów przez Kubernetes scheduler - mechanizm \<taint\> i \<tolerations\>
     * inne - do wymyślenia/zaproponowania w ramach task-force
-* zapoznanie się z problematyką monitorwania usług w środowiskacch CNF (na podstawie Prometheus/Grafana)
+* zapoznanie się z problematyką monitorowania usług w środowiskacch CNF (na podstawie Prometheus/Grafana)
   * jako elementy szereszgo obszaru "telemetry"/"observability"
 
 ## **Co teraz mamy w katalogach**
