@@ -8,7 +8,7 @@ Do uruchomienia skryptu nalezy uzyc ponizszego polecenia w powloce Bash
 ```bash
    ./install.sh <sieć>
 ```
-Gdzie w miejscu \<sieć\> trzeba wpisac adres sieci razem z maska, np. 192.168.1.0/24. Skrypt ten, po przeprowadzeniu wstepnych konfiguracji (np. utworzenie plikow w inventory Ansible czy zainstalowanie kluczy ssh w hostach klastra), wywoluje zasadniczy playbook instalacyjny dla k3s:
+Gdzie w miejscu \<sieć\> trzeba wpisac adres sieci razem z maska, np. 192.168.1.0/24. Skrypt ten, po przeprowadzeniu wstepnych konfiguracji (np. utworzenie plikow w inventory Ansible czy zainstalowanie kluczy ssh w hostach klastra - por. komentarze wewnątrz skryptu), wywoluje zasadniczy playbook instalacyjny dla k3s:
 
 ```bash
    ansible-playbook -i inventory/hosts.ini install_k3s.yaml --extra-vars "network=$NETWORK"
