@@ -10,7 +10,7 @@
 
 Uwaga: niedługo dojdzie trzecia instrukcja "instalacyjna" - dot. monitorowania Prometheus/Grafana z użyciem stosu kube-prometheus.
 
-## **Zakładane do osiągnięcia cele laborki**
+## **Zakładane do osiągnięcia cele laborki (lista "żywa")**
 
 * zapoznanie się z deklaratywną naturą Ansible (na tle wybitnie ipmeratywnych skryptów bash) - jako przykłAdu notacji deklaratywne do automatyzaci zadań konfiguracyjnych
 * zapoznanie się z zasadami "sieciowania" (_networking_) w klastrach kubernetes
