@@ -10,7 +10,7 @@
 
 Uwaga: niedługo dojdzie trzecia instrukcja "instalacyjna" - dot. monitorowania Prometheus/Grafana z użyciem stosu kube-prometheus.
 
-## **Co teraz mamy w katalogach:**
+## **Co teraz mamy w katalogach**
 
 **_instrukcje/_** - intrukcje labowe (docelowo do użycia w ramach laborki)
 
