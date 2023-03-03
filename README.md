@@ -15,7 +15,7 @@ Uwaga: niedługo dojdzie trzecia instrukcja "instalacyjna" - dot. monitorowania 
 * zapoznanie się z deklaratywną naturą Ansible (na tle wybitnie ipmeratywnych skryptów bash) - jako przykładu notacji deklaratywne do automatyzaci zadań konfiguracyjnych
 * zapoznanie się z zasadami "sieciowania" (_networking_) w klastrach kubernetes
   * koncepcja CNI na podstawie CNI flannel
-  * usługi (Service) typu ClusterIP, NodePort, LoadBalancer; ekspozycja usług poprzez obiekt Ingress
+  * usługi (Service) typu ClusterIP, NodePort, LoadBalancer; ekspozycja usług poprzez obiekt IngressPolicy
   * koncepcja NetworkPolicy (reguły filtrowania ruchu na poziomie użytkowym (twórcy usługi) )
 * zapoznanie się z wybranymi aspektami zarządzania zasobami i aplikacjami w klastrach Kubernetes 
   * ograniczanie swobody rozkładania podów przez Kubernetes scheduler - mechanizmy _taint_ i _tolerations_
