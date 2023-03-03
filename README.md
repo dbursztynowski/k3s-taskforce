@@ -12,14 +12,14 @@ Uwaga: niedługo dojdzie trzecia instrukcja "instalacyjna" - dot. monitorowania 
 
 ## **Zakładane do osiągnięcia cele laborki (lista "żywa")**
 
-* zapoznanie się z deklaratywną naturą Ansible (na tle wybitnie ipmeratywnych skryptów bash) - jako przykłAdu notacji deklaratywne do automatyzaci zadań konfiguracyjnych
+* zapoznanie się z deklaratywną naturą Ansible (na tle wybitnie ipmeratywnych skryptów bash) - jako przykładu notacji deklaratywne do automatyzaci zadań konfiguracyjnych
 * zapoznanie się z zasadami "sieciowania" (_networking_) w klastrach kubernetes
   * koncepcja CNI na podstawie CNI flannel
   * usługi (Service) typu ClusterIP, NodePort, LoadBalancer; ekspozycja usług poprzez obiekt Ingress
   * koncepcja NetworkPolicy (reguły filtrowania ruchu na poziomie użytkowym (twórcy usługi) )
 * zapoznanie się z wybranymi aspektami zarządzania zasobami i aplikacjami w klastrach Kubernetes 
   * ograniczanie swobody rozkładania podów przez Kubernetes scheduler - mechanizmy _taint_ i _tolerations_
-  * inne - do wymyślenia/zaproponowania w ramach task-force Przykłady pożądanych: skalowanie poziome/pionowe, własne metryki, ... - ale w sensownym wymiarze!)
+  * inne - do wymyślenia/zaproponowania w ramach task-force (przykłady pożądanych: skalowanie poziome/pionowe, własne metryki, ... - ale w sensownym wymiarze\!)
 * zapoznanie się z problematyką monitorowania usług w środowiskacch CNF (na podstawie Prometheus/Grafana)
   * jako fragmentem szerszego obszaru "telemetry"/"observability"
 
