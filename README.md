@@ -12,7 +12,7 @@ Uwaga: niedługo dojdzie trzecia instrukcja "instalacyjna" - dot. monitorowania 
 
 ## **Co teraz mamy w katalogach**
 
-**_instrukcje/_** - intrukcje labowe (docelowo do użycia w ramach laborki)
+**_instrukcje/_** - intrukcje labowe (docelowo do użycia w ramach laborki); jednym z oczekiwań (i efektów nauczania) odnośnie tej części laborki jest analiza szablnów Ansible w celu zaznajomienia się z ich deklaratywną naturą (na tle wybitnie ipmeratywnych skryptów bash)
 
 **_pi-cluster-install/_** - źródłowe pliki instalacyje k3s (bash, Ansible)
 
