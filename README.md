@@ -16,11 +16,10 @@ Uwaga: niedługo dojdzie trzecia instrukcja "instalacyjna" - dot. monitorowania 
 * zapoznanie się z zasadami "sieciowania" w klastrach kubernetes
   * koncepcja CNI na podstawie CNI flannel
   * usługi Servis typu NodePort, LoadBalancer; ekspozycja usług poprzez obiekt Ingress
-  * koncepcja NetworkPolicy (reguły filtrowania ruchu na poziomie użytkowym (twórcy usługi)
-* zapoznanie się z wybranymi aspektami zarządzania aplikacjami w klastrach kubernetes
-  * elementy zarządzania zasobami w klastrach Kubernetes, np. 
-    * ograniczanie swobody rozkładania podów przez Kubernetes scheduler - mechanizm \<taint\> i \<tolerations\>
-    * inne - do wymyślenia/zaproponowania w ramach task-force
+  * koncepcja NetworkPolicy (reguły filtrowania ruchu na poziomie użytkowym (twórcy usługi) )
+* zapoznanie się z wybranymi aspektami zarządzania zasobami i aplikacjami w klastrach Kubernetes 
+  * ograniczanie swobody rozkładania podów przez Kubernetes scheduler - mechanizm \<taint\> i \<tolerations\>
+  * inne - do wymyślenia/zaproponowania w ramach task-force
 * zapoznanie się z problematyką monitorowania usług w środowiskacch CNF (na podstawie Prometheus/Grafana)
   * jako elementy szereszgo obszaru "telemetry"/"observability"
 
