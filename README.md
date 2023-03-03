@@ -20,6 +20,6 @@ Uwaga: niedługo dojdzie trzecia instrukcja "instalacyjna" - dot. monitorowania 
 
 **_troubleshooting.txt_** - napotkane problemy i sposób ich rozwiązania; tutaj można dopisywać swoje przypadki, które uznajemy za istotne (a kiedyś być może zorganizować to lepiej - odrębny katalog/odrębny README.md, ...)
 
-**_shutubu.sh_** - wywołanie w trybie _ad-hoc_ komendy Ansible wyłączającej węzły klastra; po jej wywołaniu nie trzeba czekać na zakończenie pracy Ansible i w razie czego można od razu zamknąć swoją maszynę management-host (w tym przypadku Ansible zamyka klaster autonomicznie, bez kontaktowania się zwrotnie z management-host). Trzeba tylko dostosować do swojego przypadku nazwy węzłów klastra w pliku pi-cluster-install/shutdown-hosts.ini. **To jest zalecana forma wyłączania klastra - aby ograniczyć ryzyko wystąpienia uszkodzeń wskutek "twardego" odłączenia zasilania.
+**_shutubu.sh_** - wywołanie w trybie _ad-hoc_ komendy Ansible wyłączającej węzły klastra; po jej wywołaniu nie trzeba czekać na zakończenie pracy Ansible i w razie czego można od razu zamknąć swoją maszynę management-host (w tym przypadku Ansible zamyka klaster autonomicznie, bez kontaktowania się zwrotnie z management-host). Trzeba tylko dostosować do swojego przypadku nazwy węzłów klastra w pliku pi-cluster-install/shutdown-hosts.ini. **To jest zalecana forma wyłączania klastra - aby ograniczyć ryzyko wystąpienia uszkodzeń wskutek "twardego" odłączenia zasilania.**
 
 
