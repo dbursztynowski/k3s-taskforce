@@ -10,11 +10,25 @@
 
 Uwaga: niedługo dojdzie trzecia instrukcja "instalacyjna" - dot. monitorowania Prometheus/Grafana z użyciem stosu kube-prometheus.
 
+## **Zamierane do osiagnięcia cele laborki**
+
+* zapoznanie się z deklaratywną naturą Ansible (na tle wybitnie ipmeratywnych skryptów bash) - jako przykłAdu notacji deklaratywne do automatyzaci zadań konfiguracyjnych
+* zapoznanie się z zasadami "sieciowania" w klastrach kubernetes
+  * koncepcja CNI na podstawie CNI flannel
+  * usługi Servis typu NodePort, LoadBalancer; ekspozycja usług poprzez obiekt Ingress
+  * koncepcja NetworkPolicy (reguły filtrowania ruchu na poziomie użytkowym (twórcy usługi)
+* zapoznanie się z wybranymi aspektami zarządzania aplikacjami w klastrach kubernetes
+  * elementy zarządzania zasobami w klastrach Kubernetes, np. 
+    * ograniczanie swobody rozkładania podów przez Kubernetes scheduler - mechanizm \<taint\> i \<tolerations\>
+    * inne - do wymyślenia/zaproponowania w ramach task-force
+* zapoznanie się z problematyką monitorwania usług w środowiskacch CNF (na podstawie Prometheus/Grafana)
+  * jako elementy szereszgo obszaru "telemetry"/"observability"
+
 ## **Co teraz mamy w katalogach**
 
-**_instrukcje/_** - intrukcje labowe (docelowo do użycia w ramach laborki); jednym z oczekiwań (i efektów nauczania) odnośnie tej części laborki jest analiza szablnów Ansible w celu zaznajomienia się z ich deklaratywną naturą (na tle wybitnie ipmeratywnych skryptów bash)
+**_instrukcje/_** - intrukcje labowe (docelowo do użycia w ramach laborki)
 
-**_pi-cluster-install/_** - źródłowe pliki instalacyje k3s (bash, Ansible)
+**_pi-cluster-install/_** - źródłowe pliki instalacyje k3s (bash, Ansible); jednym z oczekiwań (i efektów nauczania) odnośnie tej części laborki jest analiza szablnów Ansible w celu zapoznania się z ich deklaratywną naturą (na tle wybitnie ipmeratywnych skryptów bash)
 
 **_manifests/_** - manifesty Kubernetes dla instalowanych modułów, testowanych wdrożeń (deploymentów), przykłady ćwiczeń laborkowych (na razie zajawka - to co wynika bezpośrednio z instrukcji)
 
