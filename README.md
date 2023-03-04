@@ -22,7 +22,7 @@ Uwaga: niedługo dojdzie trzecia instrukcja "instalacyjna" - dot. monitorowania 
   * _inne - do wymyślenia/zaproponowania w ramach task-force (przykłady pożądanych: skalowanie poziome/pionowe, własne metryki, ... - ale w sensownym wymiarze\!)_
 * zapoznanie się z problematyką monitorowania usług w środowiskacch CNF (na podstawie Prometheus/Grafana) **(part 3)**
   * jako fragmentem szerszego obszaru "telemetry"/"observability"
-  * _szczegółowe działania (poza ogólnym oglądem informachi w dashboardach) pozostają do zaproponowania/opracowania_
+  * _szczegółowe działania (poza zwykłym przeglądaniem informacji w dashboardach) pozostają do zaproponowania/opracowania_
 
 Drogą do osiągnięcia tych celów jest instalacja klastra k3s "bare metal" na platformie Raspberry Pi, instalacja i konfiguracja wybranych modułów składowych klastra (MetalLB, Traefik) oraz aplikacji poziomu "observability" (Prometheus/Grafana), a także uruchamianie przykładowych "aplikacji" demonstracyjnych w celu ilustracji wybranych konceptów.
 
