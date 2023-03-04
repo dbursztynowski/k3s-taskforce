@@ -2,7 +2,7 @@
 
 ## **Ogólnie**
 
-* Repozytorium dla studentów SPIW/k3s-taskforce. Opisy wykorzystania podano w instrukcjach.
+* Repozytorium dla studentów SPIW/k3s-taskforce. Opisy postępowania podano w instrukcjach.
 
 * Instrukcje są dostępne w formacie edytowalnym (Word) w celu ich poprawiania / komentowania przez uczestników.
 
