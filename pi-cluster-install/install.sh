@@ -2,16 +2,16 @@
 
 # READ ALL THE NOTES BELOW:
 
-# This script selects running DietPi machines (but the management host) in subnetwork with a given 
-# CIDR range and creates their ssh config names based on the <prefix>-<id> pattern and configure ssh credentials to 
-#   later access them remotely using ansible. Finaly, it runs ansible playbook to install K3s cluster on those machines.\
-# A predefined host with name given by variable MASTER_NODE is assigned the role of the master node in the cluster.
+# This script selects running Raspberry Pi machines in a subnetwork with a given 
+# CIDR range and creates their ssh config names based on the <prefix>-<id> pattern and configures ssh credentials for 
+#    accessing them remotely using ansible. Finaly, it runs ansible playbook to install K3s cluster on those machines.
+# A predefined host with the name given by variable MASTER_NODE is assigned the role of the k3s master in the cluster.
 
-# NOTICE 0: (not important now) set from command line: "$ sudo chmod +s <this-script-name> " to let "sudo nmap ..." run \
-#   without asking for the password
+# NOTICE 0: (not important now) set from command line: "$ sudo chmod +s <this-script-name> " to let "sudo nmap ..." run
+#   without asking for password
 # NOTICE 1: remember to set cluster CIDR/mask (e.g., 192.168.1.0/24) as script parameter NETWORK; 
 #   thus, a complete script invocation should take the form as, e.g.: ./install.sh 192.168.1.0/24
-# NOTICE 2: remember to set the date in the name of file config-cluster-<date> at the last but one line \
+# NOTICE 2: remember to set the date in the name of file config-cluster-<date> at the last but one line
 #   and verify/align user/password for your cluster nodes
 
 NETWORK="$1"                            # cluster CIDR/mask, script parameter
