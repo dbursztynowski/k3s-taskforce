@@ -21,7 +21,7 @@ HOST_FILE="./cluster"                   # auxiliary file for IPs addresses of ho
 INVENTORY_FILE="inventory/hosts.ini"    # Ansible inventory file
 CONFIG_FILE="$HOME/.ssh/config"         # ssh config file (to ssh to the RbPi-s)
 ERROR_FILE="/tmp/ssh-copy_error.txt"    # error log file
-PUBLIC_KEY_FILE="$HOME/.ssh/db_id_rsa"  # adjust to your settings, your ssh public key file
+PRIVATE_KEY_FILE="$HOME/.ssh/db_id_rsa" # adjust to your settings, your ssh public key file
 MASTER_GROUP="master"                   # Ansible group of nodes (one node for us)
 MASTER_NODE="kpi061"                    # adjust to your settings, apply the name format assumed: <prefix><1>
 WORKER_GROUP="node"                     # Ansible group of nodes serving as worker
@@ -52,12 +52,12 @@ if [ ! -f $CONFIG_FILE ]; then
 fi
 
 # check for the presence of your public key; if you do not have one a new key will be created
-if [ ! -f $PUBLIC_KEY_FILE ]; then
-    ssh-keygen -q -t rsa -b 4096 -N "" -f $PUBLIC_KEY_FILE
+if [ ! -f $PRIVATE_KEY_FILE ]; then
+    ssh-keygen -q -t rsa -b 4096 -N "" -f $PRIVATE_KEY_FILE
 fi
 
-if [ ! -f  $PUBLIC_KEY_FILE ]; then
-    echo "File '$PUBLIC_KEY_FILE' not found!"
+if [ ! -f  $PRIVATE_KEY_FILE ]; then
+    echo "File '$PRIVATE_KEY_FILE' not found!"
     exit 1
 fi
 
@@ -85,7 +85,7 @@ do
             echo -e "\tUser $USER_NAME"
         } >> $CONFIG_FILE
     fi
-    ssh-copy-id -p 22 -i $PUBLIC_KEY_FILE $USER_NAME@$IP 2>$ERROR_FILE
+    ssh-copy-id -p 22 -i $PRIVATE_KEY_FILE $USER_NAME@$IP 2>$ERROR_FILE
     ERROR_CODE=$?
     if [ $ERROR_CODE -eq 0 ]; then
         echo "Public key successfully copied to $IP"
@@ -121,7 +121,7 @@ done
     echo -e "ansible_user=$USER_NAME"
     echo -e "ansible_become_method=sudo"
     echo -e "ansible_become_pass=$PASSWORD"
-    echo -e "ansible_ssh_private_key_file=$PUBLIC_KEY_FILE"
+    echo -e "ansible_ssh_private_key_file=$PRIVATE_KEY_FILE"
     echo -e "cfg_static_network=true"
 } >> $INVENTORY_FILE
 
