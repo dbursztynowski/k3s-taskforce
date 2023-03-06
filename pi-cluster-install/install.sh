@@ -46,7 +46,7 @@ sudo nmap -sP $NETWORK | awk '/^Nmap/{ipaddress=$NF}/28:CD:C1|B8:27:EB|DC:A6:32|
 HOSTS_NUMBER="$(wc -l $HOST_FILE | awk '{print $1}')"
 # check the number of hosts discovered
 if [ "$HOSTS_NUMBER" -lt "1" ]; then
-    echo "No active hosts found in network $NETWORK. Exiting."
+    echo "No active hosts discovered in network $NETWORK. Exiting."
     exit 3
 fi
 
