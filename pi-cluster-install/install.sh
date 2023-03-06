@@ -23,9 +23,9 @@ CONFIG_FILE="$HOME/.ssh/config"         # ssh config file (to ssh to the RbPi-s)
 ERROR_FILE="/tmp/ssh-copy_error.txt"    # error log file
 PRIVATE_KEY_FILE="$HOME/.ssh/db_id_rsa" # adjust to your settings, your ssh private key file (respective *.pub file has to be present, too)
 MASTER_GROUP="master"                   # Ansible group of nodes (one node for us)
-MASTER_NODE="kpi061"                    # adjust to your settings, apply the name format assumed: <prefix><1>
+MASTER_NODE="kpi061"                    # adjust to your settings, apply the name format assumed: <your_cluster_prefix><1>
 WORKER_GROUP="node"                     # Ansible group of nodes serving as worker
-WORKER_NODE="kpi06"                     # adjust to your settings, apply the name format assumed: <prefix><consectutive_integer>
+WORKER_NODE="kpi06"                     # adjust to your settings, apply the name format assumed: <your_cluster_prefix><consectutive_integer>
 CLUSTER_GROUP="cluster"                 # Ansible group containing all nodes in the cluster
 
 # check the presence of NETWORK parameter
