@@ -1,4 +1,4 @@
-# Zbuduj klaster Kubernetes k3s używając Ansible
+# Zbuduj klaster Kubernetes k3s "bare metal" na Raspberry Pi używając Ansible
 ## K3s Ansible Playbook
 Skrypt automatycznie wykrywa urzadzenia Raspberry Pi w sieci podanej jako argument skryptu na podstawie zainstalowanego w nich systemu operacyjnego i ustanawia z nimi polaczenia ssh. Nastepnie instaluje na tych urzadzeniach k3s.
 ## Wymagania systemowe
