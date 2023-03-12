@@ -1,0 +1,69 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  labels:
+    app.kubernetes.io/component: prometheus
+    app.kubernetes.io/instance: k8s
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/part-of: kube-prometheus
+    app.kubernetes.io/version: 2.42.0
+  name: k8s
+  namespace: monitoring
+spec:
+  alerting:
+    alertmanagers:
+    - apiVersion: v2
+      name: alertmanager-main
+      namespace: monitoring
+      port: web
+  enableFeatures: []
+# (blank braces {} mean "all")
+  externalLabels: {}
+  image: quay.io/prometheus/prometheus:v2.42.0
+  nodeSelector:
+    kubernetes.io/os: linux
+# SPIW addition: control Prometheus server placement if if we had not set 
+# CriticalAddonsOnly=true:NoExecute during cluster installation.
+#    node-role.kubernetes.io/worker: true
+  podMetadata:
+    labels:
+      app.kubernetes.io/component: prometheus
+      app.kubernetes.io/instance: k8s
+      app.kubernetes.io/name: prometheus
+      app.kubernetes.io/part-of: kube-prometheus
+      app.kubernetes.io/version: 2.42.0
+  podMonitorNamespaceSelector: {}
+  podMonitorSelector: {}
+  probeNamespaceSelector: {}
+  probeSelector: {}
+  replicas: 1
+# SPIW addition: limit event retention time to control storage usage
+  retention: 3d
+  resources:
+    requests:
+      memory: 400Mi
+  ruleNamespaceSelector: {}
+  ruleSelector: {}
+  securityContext:
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+# (blank braces {} mean "all") All service monitors form all namespaces can be scraped by Prometheus
+  serviceAccountName: prometheus-k8s
+  serviceMonitorNamespaceSelector: {}
+  serviceMonitorSelector: {}
+  version: 2.42.0
+# SPIW addition: define storage which suits our basic needs and allows to control the amount of disk 
+# space used; # unfortunately, at the time of this writing (Oct. 2022) the declaration of 2Gi sharp 
+# will be ignored in k3s and as a workaround we use a soft control in the form of retention property
+# set to 3 days (see above)
+  storage:
+    volumeClaimTemplate:
+      spec:
+        storageClassName: local-path
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 2Gi
+
