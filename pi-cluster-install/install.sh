@@ -134,6 +134,13 @@ done
 # run ansible playbook installing k3s on cluster hosts
 ansible-playbook playbook_install_k3s.yaml -i $INVENTORY_FILE
 
+if [ ! -d "$HOME/.kube" ]; then
+    mkdir "$HOME/.kube"
+    echo "Created ~/.kube directory"
+else
+    echo "Directory ~/.kube already exists"
+fi
+
 # download the config file (for the use with kubectl) form the master node of the cluster 
 scp $USER_NAME@$MASTER_NODE:~/.kube/config ~/.kube/config-cluster-20230301
 
