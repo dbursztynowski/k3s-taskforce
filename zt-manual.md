@@ -3,10 +3,10 @@ W poradniku przedstawię sposób połączenia udostępnionego clustra z siecią 
 
 ## Utworzenie sieci ZeroTier
 1. Załóż konto na [zerotier.com](https://my.zerotier.com)
-2. Po zalogowaniu, w panelu kontrolnym wybierz żółty przycisk *Create A Network*. System wygeneruje sieć i przydzieli jej nazwę. Klikając w nią przejdziesz do ustawień sieci.
+2. Po zalogowaniu, w panelu kontrolnym wybierz żółty przycisk *Create A Network*. System wygeneruje sieć i przydzieli jej nazwę. Klikając w nią, przejdziesz do ustawień sieci.
 
 ## Instalacja ZeroTier na hoście kontrolującym (management host)
-Management host to w moim przypadku VM z Ubuntu 20.04 LTS. Instalacja przebiage identycznie dla wszystkich pozostałych hostów, które np. będą łączyć się zdalnie.
+Management host to w moim przypadku VM z Ubuntu 20.04 LTS. Instalacja przebiega identycznie dla wszystkich pozostałych hostów, które np. będą łączyć się zdalnie.
 
 1. Zainstaluj klienta sieci za pomocą polecenia
 ```bash
@@ -16,17 +16,17 @@ curl -s https://install.zerotier.com | sudo bash
 ```bash
 sudo zerotier-cli join [NETWORK-ID]
 ```
-3. Jeśli zobaczysz komunikat ```200 join OK``` wróć do panelu kontrolnego ZeroTier i zaakecptuj podłączenie hosta (lista *members*) zaznaczając check box po lewej stronie. System przydzieli hostowi adres IP z odpowiedniej puli (możesz zmienić ją w ustawieniach w górnej części strony).
+3. Jeśli zobaczysz komunikat ```200 join OK``` wróć do panelu kontrolnego ZeroTier i zaakceptuj podłączenie hosta (lista *members*) zaznaczając check box po lewej stronie. System przydzieli hostowi adres IP z odpowiedniej puli (możesz zmienić ją w ustawieniach w górnej części strony).
 ![akceptacja połączenia hosta](https://i.ibb.co/fX02nVx/accept-connection.png "akceptacja połączenia hosta")
 
-4. Weryfikację przydzielenia adresu IP z puli ZT można przeprowadzić wykonując polecenie ```ip a | grep "zt"```. W moim przypadku host otrzymał IP 192.168.192.101/24.
+4. Weryfikację przydzielenia adresu IP z puli ZT można przeprowadzić, wykonując polecenie ```ip a | grep "zt"```. W moim przypadku host otrzymał IP 192.168.192.101/24.
 ![ip przydzielone hostowi](https://i.ibb.co/SNj1gjG/zt-ip.png "ip przydzielone hostowi")
 
 ## Zakończenie konfiguracji
 Konfigurację będziemy "dopinać" na poniższym sprzęcie:
 - router Linksys udostępniony do realizacji laboratorium
 - management host z zainstalowanym i skonfigurowanym klientem ZeroTier
-- zdalny management host, również skonfigurowany zgodnie z intrukcją
+- zdalny management host, również skonfigurowany zgodnie z instrukcją
 - cluster 
 
 ### Udostępnienie clustra
@@ -36,11 +36,13 @@ Konfigurację będziemy "dopinać" na poniższym sprzęcie:
 3. Kolejny krok to wprowadzenie zmian w obsłudze pakietów po stronie management hosta. Wykonaj plik ```zt-config.sh``` z tego repo na management hoście jako root. Podaj 2 argumenty - 1. nazwa interfejsu, przez który host łączy się z siecią LAN (np. eth0, enp0s1). Drugi to nazwa interfejsu sieci ZeroTier (zawsze zaczyna się od *zt*). 
 
 ### Weryfikacja połączenia
-Na komputerze nieznajdującym się w twojej obecnej sieci spróbuj otworzyć stronę konfiguracyjną routera (u mnie 192.168.90.1). Możesz także pingnąć któryś z hostów jeśli są już podłączone do sieci. Jeśli połączenie nie działa sprawdź czy ZeroTier jest aktywny (```sudo zerotier-cli info```) oraz czy zmiany wprowadzane skryptem zapisały się poprawnie (```sudo iptables -S```, powinieś zobaczyć 2 wpisy zaczynające się od ```-A FORWARD -i```).
+Na komputerze nieznajdującym się w twojej obecnej sieci spróbuj otworzyć stronę konfiguracyjną routera (u mnie 192.168.90.1). Możesz także pingnąć któryś z hostów jeśli są już podłączone do sieci. Jeśli połączenie nie działa sprawdź, czy ZeroTier jest aktywny (```sudo zerotier-cli info```) oraz czy zmiany wprowadzane skryptem zapisały się poprawnie (```sudo iptables -S```, powinieneś zobaczyć 2 wpisy zaczynające się od ```-A FORWARD -i```).
 
 ## That's all Folks!
-Po wykonaniu skryptu management host będzie skonfigurowany do przekazywania pakietów pomiędzy interfejsami. Dzięki temu, twój zespół będzie w stanie podłączyć się do clustra bez większych trudności. 
+Po wykonaniu skryptu management host będzie skonfigurowany do przekazywania pakietów pomiędzy interfejsami. Dzięki temu twój zespół będzie w stanie podłączyć się do clustra bez większych trudności. 
 
 Uwaga 1: dla niektórych klientów ZT trzeba dodatkowo zaznaczyć opcję *Enable Default Route* przed podłączeniem do sieci. Inaczej dostęp nie będzie działał. 
+
 Uwaga 2: w razie problemów z ZT – a próbował pan wyłączyć i włączyć? ;)
+
 Uwaga 3: zmiany wprowadzone skryptem znikną po reboocie, więc w razie potrzeby wykonaj go jeszcze raz.
