@@ -14,19 +14,20 @@
 # NOTICE 2: remember to set the date in the name of file config-cluster-<date> at the last but one line
 #   and verify/align user/password for your cluster nodes
 
-NETWORK="$1"                            # cluster CIDR/mask, script parameter
-USER_NAME="ubuntu"                      # adjust to your settings, login user for cluster nodes
-PASSWORD="raspberry"                    # adjust to your settings, password for cluster hosts
-HOST_FILE="./cluster"                   # auxiliary file for IPs addresses of hosts
-INVENTORY_FILE="inventory/hosts.ini"    # Ansible inventory file
-CONFIG_FILE="$HOME/.ssh/config"         # ssh config file (to ssh to the RbPi-s)
-ERROR_FILE="/tmp/ssh-copy_error.txt"    # error log file
-PRIVATE_KEY_FILE="$HOME/.ssh/db_id_rsa" # adjust to your settings, your ssh private key file (respective *.pub file has to be present, too)
-MASTER_GROUP="master"                   # Ansible group of nodes (one node for us)
-MASTER_NODE="kpi061"                    # adjust to your settings, apply the name format assumed: <your_cluster_prefix><1>
-WORKER_GROUP="node"                     # Ansible group of nodes serving as worker
-WORKER_NODE="kpi06"                     # adjust to your settings, apply the name format assumed: <your_cluster_prefix><consectutive_integer>
-CLUSTER_GROUP="cluster"                 # Ansible group containing all nodes in the cluster
+NETWORK="$1"                          # cluster CIDR/mask, script parameter; remember to set it in a script call
+USER_NAME="ubuntu"                    # adjust to your settings, login user for your cluster hosts
+PASSWORD="raspberry"                  # adjust to your settings, password for your cluster hosts
+HOST_FILE="./cluster"                 # auxiliary file for IPs addresses of your hosts
+INVENTORY_FILE="inventory/hosts.ini"  # Ansible inventory file
+CONFIG_FILE="$HOME/.ssh/config"       # ssh config file (to ssh to the RbPi-s)
+ERROR_FILE="/tmp/ssh-copy_error.txt"  # error log file
+SSH_KEY_FILE="$HOME/.ssh/id_ed25519"  # your ssh key, if it does not exist it will be generated
+MASTER_GROUP="master"                 # Ansible group of hosts serving as master (one host in our case) - check Ansible files to understand the structure
+MASTER_NODE="kpi061"                  # adjust name prefix to your settings, apply the name format assumed: <your_cluster_prefix><1>
+WORKER_GROUP="node"                   # Ansible group of nodes serving as worker - check Ansible files to understand the structure
+WORKER_NODE="kpi06"                   # adjust name prefix to your settings, apply the name format assumed: <your_cluster_prefix><consecutive_integer>
+CLUSTER_GROUP="cluster"               # Ansible group of all hosts in the cluster - check Ansible files to understand the structure
+CURRENT_DATE=$(date +%m-%dT%T)        # date-time to generate a unique name of Kubernetes "config" file
 
 # check the presence of NETWORK parameter
 if [ $# -ne 1 ]; then
@@ -58,12 +59,12 @@ if [ ! -f $CONFIG_FILE ]; then
 fi
 
 # check for the presence of your public key; if you do not have one a new key will be created
-if [ ! -f $PRIVATE_KEY_FILE ]; then
-    ssh-keygen -q -t rsa -b 4096 -N "" -f $PRIVATE_KEY_FILE
+if [ ! -f $SSH_KEY_FILE ]; then
+    ssh-keygen -q -t rsa -b 4096 -N "" -f $SSH_KEY_FILE
 fi
 
-if [ ! -f  $PRIVATE_KEY_FILE ]; then
-    echo "File '$PRIVATE_KEY_FILE' not found!"
+if [ ! -f  $SSH_KEY_FILE ]; then
+    echo "File '$SSH_KEY_FILE' not found!"
     exit 1
 fi
 
@@ -91,7 +92,7 @@ do
             echo -e "\tUser $USER_NAME"
         } >> $CONFIG_FILE
     fi
-    ssh-copy-id -p 22 -i $PRIVATE_KEY_FILE $USER_NAME@$IP 2>$ERROR_FILE
+    ssh-copy-id -p 22 -i $SSH_KEY_FILE $USER_NAME@$IP 2>$ERROR_FILE
     ERROR_CODE=$?
     if [ $ERROR_CODE -eq 0 ]; then
         echo "Public key successfully copied to $IP"
@@ -127,7 +128,7 @@ done
     echo -e "ansible_user=$USER_NAME"
     echo -e "ansible_become_method=sudo"
     echo -e "ansible_become_pass=$PASSWORD"
-    echo -e "ansible_ssh_private_key_file=$PRIVATE_KEY_FILE"
+    echo -e "ansible_ssh_private_key_file=$SSH_KEY_FILE"
     echo -e "cfg_static_network=true"
 } >> $INVENTORY_FILE
 
@@ -142,8 +143,8 @@ else
 fi
 
 # download the config file (for the use with kubectl) form the master node of the cluster 
-scp $USER_NAME@$MASTER_NODE:~/.kube/config ~/.kube/config-cluster-20230301
+scp $USER_NAME@$MASTER_NODE:~/.kube/config ~/.kube/config-cluster-$CURRENT_DATE
 
 # environment variable - for current boot use only, can be left commented
-#export KUBECONFIG=~/.kube/config-cluster-20230301
+#export KUBECONFIG=~/.kube/config-cluster-$CURRENT_DATE
 
