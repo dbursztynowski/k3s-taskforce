@@ -5,7 +5,7 @@ W poradniku przedstawię sposób połączenia udostępnionego clustra z siecią 
 1. Załóż konto na [zerotier.com](https://my.zerotier.com)
 2. Po zalogowaniu, w panelu kontrolnym wybierz żółty przycisk *Create A Network*. System wygeneruje sieć i przydzieli jej nazwę. Klikając w nią, przejdziesz do ustawień sieci.
 
-## Instalacja ZeroTier na hoście kontrolującym (management host)
+## Instalacja ZeroTier na hoście kontrolującym (management host wg instrukcji do laboratorium)
 Management host to w moim przypadku VM z Ubuntu 20.04 LTS. Instalacja przebiega identycznie dla wszystkich pozostałych hostów, które np. będą łączyć się zdalnie.
 
 1. Zainstaluj klienta sieci za pomocą polecenia
