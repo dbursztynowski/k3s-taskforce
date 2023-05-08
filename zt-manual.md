@@ -30,13 +30,13 @@ Konfigurację będziemy "dopinać" na poniższym sprzęcie:
 - cluster 
 
 ### Udostępnienie clustra
-1. Podłączamy komputer, na którym działa management host do sieci utworzonej przez Linksys. Management host **musi** otrzymywać adres IP za pomocą zmostkowanej karty sieciowej (bridged).
+1. Podłączamy komputer, na którym działa management host do sieci utworzonej przez Linksys (czyli zgodnie z Fig. 1 w instrukcji laborattoryjnej K3s-P1-K3s-installation). Management host, jeśli jest implementoweany jako VM, **musi** otrzymywać adres IP za pomocą zmostkowanej karty sieciowej (bridged).
 2. W panelu konfiguracyjnym ZeroTier dodajemy route w karcie *Advanced -> Managed routes*. Mój Linsksys przydziela adresy z klasy 192.168.90.0/24, i taką trasę trzeba wprowadzić do ustawień ZT. 192.168.192.101 to adres management hosta, który został skonfigurowany wcześniej. Wprowadzamy route **tylko** dla hosta, który jest w jednej sieci z Linksysem.
 ![route do sieci linksys](https://i.ibb.co/cyM3vtf/routes.png "route do sieci linksys")
 3. Kolejny krok to wprowadzenie zmian w obsłudze pakietów po stronie management hosta. Wykonaj plik ```zt-config.sh``` z tego repo na management hoście jako root. Podaj 2 argumenty - 1. nazwa interfejsu, przez który host łączy się z siecią LAN (np. eth0, enp0s1). Drugi to nazwa interfejsu sieci ZeroTier (zawsze zaczyna się od *zt*). 
 
 ### Weryfikacja połączenia
-Na komputerze nieznajdującym się w twojej obecnej sieci spróbuj otworzyć stronę konfiguracyjną routera (u mnie 192.168.90.1). Możesz także pingnąć któryś z hostów jeśli są już podłączone do sieci. Jeśli połączenie nie działa sprawdź, czy ZeroTier jest aktywny (```sudo zerotier-cli info```) oraz czy zmiany wprowadzane skryptem zapisały się poprawnie (```sudo iptables -S```, powinieneś zobaczyć 2 wpisy zaczynające się od ```-A FORWARD -i```).
+Na komputerze nieznajdującym się w twojej obecnej sieci spróbuj otworzyć stronę konfiguracyjną routera (u mnie 192.168.90.1). Możesz także pingnąć któryś z hostów klastra, jeśli są już podłączone do sieci. Jeśli połączenie nie działa sprawdź, czy ZeroTier jest aktywny (```sudo zerotier-cli info```) oraz czy zmiany wprowadzane skryptem zapisały się poprawnie (```sudo iptables -S```, powinieneś zobaczyć 2 wpisy zaczynające się od ```-A FORWARD -i```).
 
 ## That's all Folks!
 Po wykonaniu skryptu management host będzie skonfigurowany do przekazywania pakietów pomiędzy interfejsami. Dzięki temu twój zespół będzie w stanie podłączyć się do clustra bez większych trudności. 
@@ -45,4 +45,4 @@ Uwaga 1: dla niektórych klientów ZT trzeba dodatkowo zaznaczyć opcję *Enabl
 
 Uwaga 2: w razie problemów z ZT – a próbował pan wyłączyć i włączyć? ;)
 
-Uwaga 3: zmiany wprowadzone skryptem znikną po reboocie, więc w razie potrzeby wykonaj go jeszcze raz.
+Uwaga 3: zmiany wprowadzone skryptem ```zt-config.sh``` znikną po reboocie, więc w razie potrzeby wykonaj go jeszcze raz.
