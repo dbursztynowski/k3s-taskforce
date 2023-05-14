@@ -5,8 +5,8 @@ W poradniku przedstawię sposób połączenia udostępnionego clustra z siecią 
 1. Załóż konto na [zerotier.com](https://my.zerotier.com)
 2. Po zalogowaniu, w panelu kontrolnym wybierz żółty przycisk *Create A Network*. System wygeneruje sieć i przydzieli jej nazwę. Klikając w nią, przejdziesz do ustawień sieci.
 
-## Instalacja ZeroTier na hoście kontrolującym (management host wg instrukcji do laboratorium)
-Management host to w moim przypadku VM z Ubuntu 20.04 LTS. Instalacja przebiega identycznie dla wszystkich pozostałych hostów, które np. będą łączyć się zdalnie.
+## Instalacja ZeroTier na jednym z workerów (np. ostatnia raspberrka od prawej)
+ Instalację przeprowadzamy dla wybranej raspberrki, najlepiej wybrać jedną z pracujących jako worker (np. ostatnią z prawej). Logujemy z się z poziomu management hosta poprzez ssh i przeprowadzamy instalację. Instalacja przebiega identycznie dla wszystkich pozostałych hostów, które np. będą łączyć się zdalnie.
 
 1. Zainstaluj klienta sieci za pomocą polecenia
 ```bash
@@ -25,24 +25,56 @@ sudo zerotier-cli join [NETWORK-ID]
 ## Zakończenie konfiguracji
 Konfigurację będziemy "dopinać" na poniższym sprzęcie:
 - router Linksys udostępniony do realizacji laboratorium
-- management host z zainstalowanym i skonfigurowanym klientem ZeroTier
-- zdalny management host, również skonfigurowany zgodnie z instrukcją
+- raspberry pi z zainstalowanym i skonfigurowanym klientem ZeroTier (poprzedni podpunkt)
+- zdalny management host, również skonfigurowany zgodnie z instrukcją (poprzedni podpunkt)
 - cluster 
 
 ### Udostępnienie clustra
 1. Podłączamy komputer, na którym działa management host do sieci utworzonej przez Linksys (czyli zgodnie z Fig. 1 w instrukcji laborattoryjnej K3s-P1-K3s-installation). Management host, jeśli jest implementoweany jako VM, **musi** otrzymywać adres IP za pomocą zmostkowanej karty sieciowej (bridged).
-2. W panelu konfiguracyjnym ZeroTier dodajemy route w karcie *Advanced -> Managed routes*. Mój Linsksys przydziela adresy z klasy 192.168.90.0/24, i taką trasę trzeba wprowadzić do ustawień ZT. 192.168.192.101 to adres management hosta, który został skonfigurowany wcześniej. Wprowadzamy route **tylko** dla hosta, który jest w jednej sieci z Linksysem.
+2. W panelu konfiguracyjnym ZeroTier dodajemy route w karcie *Advanced -> Managed routes*. Mój Linsksys przydziela adresy z klasy 192.168.90.0/24, i taką trasę trzeba wprowadzić do ustawień ZT. 192.168.192.101 to adres rappbery (nadany z puli ZeroTier), który został skonfigurowany wcześniej. Wprowadzamy route **tylko** dla hosta, który jest w jednej sieci z Linksysem.
 ![route do sieci linksys](https://i.ibb.co/cyM3vtf/routes.png "route do sieci linksys")
-3. Kolejny krok to wprowadzenie zmian w obsłudze pakietów po stronie management hosta. Wykonaj plik ```zt-config.sh``` z tego repo na management hoście jako root. Podaj 2 argumenty - 1. nazwa interfejsu, przez który host łączy się z siecią LAN (np. eth0, enp0s1). Drugi to nazwa interfejsu sieci ZeroTier (zawsze zaczyna się od *zt*). 
+3. Kolejny krok to wprowadzenie zmian w obsłudze pakietów po stronie wybranej rasppberki. Wykonaj plik ```zt-config.sh``` z tego repo na rasppbery jako root (wygodnie jest przekopiować go dzięki MobaXterm). Podaj 2 argumenty - 1. nazwa interfejsu, przez który host łączy się z siecią LAN (np. eth0, enp0s1). Drugi to nazwa interfejsu sieci ZeroTier (zawsze zaczyna się od *zt*). 
 
 ### Weryfikacja połączenia
 Na komputerze nieznajdującym się w twojej obecnej sieci spróbuj otworzyć stronę konfiguracyjną routera (u mnie 192.168.90.1). Możesz także pingnąć któryś z hostów klastra, jeśli są już podłączone do sieci. Jeśli połączenie nie działa sprawdź, czy ZeroTier jest aktywny (```sudo zerotier-cli info```) oraz czy zmiany wprowadzane skryptem zapisały się poprawnie (```sudo iptables -S```, powinieneś zobaczyć 2 wpisy zaczynające się od ```-A FORWARD -i```).
 
+## Wykonywanie pliku konfiguracyjnego podczas uruchamiania raspberry
+Dotychczasowa konfiguracja działa do momentu restartu wybranej rasppberki, stąd w tym punkcie skonfigurujemy automatyczne uruchamianie skryptu podczas startu działania maliny.
+
+Pierwszy krok to skonfigurowanie pliku /etc/rc.local na następującą treść, podaj argumenty takie same jak w przypadku sekcji udostępniania clustra (sudo nano /etc/rc.local):
+
+``` bash
+#!/bin/sh
+/sciezka_do_pliku/zt-config.sh interfejs interfejsZT
+exit 0
+```
+
+Przykładowy wygląd pliku:
+
+``` bash
+#!/bin/sh
+/home/ubuntu/zt-config.sh eth0 zt2lrujjgh
+exit 0
+```
+
+Następnie zmień prawa dostępu do plików:
+
+``` bash
+sudo chmod 755 /etc/rc.local
+sudo chmod 755 /sciezka_do_pliku/zt-config.sh
+```
+
+Zainicjalizuj uruchamianie serwisu rc-local podczas bootowania systemu:
+
+``` bash
+sudo systemctl start rc-local
+```
+
+Dzięki takiej konfiguracji podczas uruchamiania raspperki skrypt zostanie uruchomiony automatycznie. Możesz to sprawdzić rebootując malinkę i sprawdzając ```sudo iptables -S``` czy widoczne są dwa wpisy zaczynające się od ```-A FORWARD -i```.
+
 ## That's all Folks!
-Po wykonaniu skryptu management host będzie skonfigurowany do przekazywania pakietów pomiędzy interfejsami. Dzięki temu twój zespół będzie w stanie podłączyć się do clustra bez większych trudności. 
+Po wykonaniu skryptu raspberry będzie skonfigurowana do przekazywania pakietów pomiędzy interfejsami. Dzięki temu twój zespół będzie w stanie podłączyć się do clustra bez większych trudności. 
 
 Uwaga 1: dla niektórych klientów ZT trzeba dodatkowo zaznaczyć opcję *Enable Default Route* przed podłączeniem do sieci. Inaczej dostęp nie będzie działał. 
 
 Uwaga 2: w razie problemów z ZT – a próbował pan wyłączyć i włączyć? ;)
-
-Uwaga 3: zmiany wprowadzone skryptem ```zt-config.sh``` znikną po reboocie, więc w razie potrzeby wykonaj go jeszcze raz.
