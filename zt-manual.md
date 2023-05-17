@@ -1,6 +1,9 @@
 # Poradnik połączenia clustra z siecią ZeroTier (VPN)
 W poradniku przedstawię sposób połączenia udostępnionego clustra z siecią ZeroTier. Umożliwi to dostęp zdalny do clustra bez konieczności otwierania czy przekierowania portów w routerach.
 
+## Uwagi ogólne
+Poniższy opis sporządzono przy założeniu, że ZeroTier jest zainstalowane na jednej z malinek naszgo clustra. W takiej konfiguracji przynajmniej ta malinka powinna cały czas pracować. Pozostałe malinki mogą być wyłączane na czas sensownie długich przerw w pracy - dla oszczędzania malinek jako takich oraz - jeśli malinki mają na stałe włączone wentylatory - dla obniżenia poziomu szumu w pomieszczeniu (słychać je, zwłaszcza w nocy). Gdyby jednak instalację ZeroTier chcieć przeprowadzić na odrębnej "maszynie" (nie malince) pracującej w tej samej podsieci co nasz cluster, wtedy wystarczy "zamienić" słowo raspberka na "maszyna" i instrukcja w 100% stosuje się do tego przypadku. W takim przypadku wszystkie malinki można wyłączać dla zachowania ciszy. Wyłączenie malinek można robić ręcznie wchodząc na każdą przez ssh lub skorzystać ze skryptu shutubu.sh na głównym folderze.
+
 ## Utworzenie sieci ZeroTier
 1. Załóż konto na [zerotier.com](https://my.zerotier.com)
 2. Po zalogowaniu, w panelu kontrolnym wybierz żółty przycisk *Create A Network*. System wygeneruje sieć i przydzieli jej nazwę. Klikając w nią, przejdziesz do ustawień sieci.
