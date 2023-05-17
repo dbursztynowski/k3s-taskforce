@@ -40,6 +40,6 @@ Uwaga: w przypadku korzystania z ZeroTier i jego instalacji na raspberrypi oraz 
 
 ## Eksperymenty gotowe do testów w ramach rozwoju własnego \[stan listy: 2023.05.17\]
 
-**_5GCore- uruchomienie opensource 5GCore (free5GCore) + symulator RAN/_**
-  * instalacja i sprawdzenie działanie (np. ping 8.8.8.8) otwartoźródłowej platformy 5G (Open5GC) w konfiguracji: 5G control plane na klastrze K3s/RaspberryPi, UPF na klastrze K3s/odrębna VM/WirtualBox i emulator sieci RAN (UE+gNodeB) na odrębna VM/VirtualBox
+**_5GCore- uruchomienie opensource 5GCore (free5GC) + symulator RAN/_**
+  * instalacja i sprawdzenie działanie (np. ping 8.8.8.8) otwartoźródłowej platformy 5G/LTE (free5GC) w konfiguracji: 5G control plane na klastrze K3s/RaspberryPi, UPF na klastrze K3s/odrębna VM/VirtualBox i emulator sieci RAN (UE+gNodeB) na odrębnej VM/VirtualBox
   * zadania orkiestracyjno/management-owe do ustalenia (open-source-y nie dają się sensownie skalować horyzontalnie, najwyżej wertykalnie)
