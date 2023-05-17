@@ -1,4 +1,8 @@
-=================================================
+=======================================================
+A what-to-do guide in case of problems that might arise
+=======================================================
+PROBLEM 1
+--------------
 To update expired keys for kubernetes from Google
 --------------
 (based on https://github.com/kubernetes/release/issues/1982#issuecomment-1415573798)
@@ -21,4 +25,7 @@ execute the following:
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor | sudo dd status=none of=/usr/share/keyrings/kubernetes-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 sudo apt update
+
+--------------
+end PROBLEM 1
 ============================================
