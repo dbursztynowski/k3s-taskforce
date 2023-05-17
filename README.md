@@ -4,9 +4,7 @@
 
 * Repozytorium dla studentów SPIW/k3s-taskforce. Opisy postępowania podano w instrukcjach.
 
-* Instrukcje są dostępne w formacie edytowalnym (Word) w celu ich poprawiania / komentowania przez uczestników.
-
-* Wszelkie sugestie są mile widziane, w szególności też propozycje zadań praktycznych do wykonania - już po uruchomieniu, skonfigurowaniu i wstępnym sprawdzeniu klastra "bojem" wg obecnej wersji instrukcji.
+* Wszelkie sugestie są mile widziane, w szególności też propozycje zadań praktycznych do wykonania.
 
 ## **Zakładane do osiągnięcia cele laborki (lista "żywa")**
 
@@ -24,7 +22,7 @@
 
 Drogą do osiągnięcia tych celów jest instalacja klastra k3s "bare metal" na platformie Raspberry Pi, instalacja i konfiguracja wybranych modułów składowych klastra (MetalLB, Traefik) oraz aplikacji poziomu "observability" (Prometheus/Grafana), a także uruchamianie przykładowych "aplikacji" demonstracyjnych w celu ilustracji wybranych konceptów.
 
-## **Co teraz mamy w katalogach**
+## **Co teraz mamy w katalogach/plikach**
 
 **_instrukcje/_** - intrukcje labowe (docelowo do użycia w ramach laborki)
 
