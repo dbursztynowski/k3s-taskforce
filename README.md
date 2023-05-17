@@ -2,7 +2,7 @@
 
 ## **Ogólnie**
 
-* Repozytorium dla studentów SPIW/k3s-taskforce. Opisy postępowania podano w instrukcjach.
+* Repozytorium dla studentów SPIW. Opisy postępowania w ramach tego labu podano w instrukcjach.
 
 * Wszelkie sugestie są mile widziane, w szególności też propozycje zadań praktycznych do wykonania.
 
