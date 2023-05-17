@@ -16,4 +16,4 @@ Gdzie w miejscu \<sieć\> trzeba wpisać adres sieci razem z maska, np. 192.168.
 
 (Powyżej zakładamy względną lokalizację katalogów jak w naszym repozytorium - z uwagi na ścieżki podane w skrypcie.) 
 
-Na końcu działąnia skrypt ściąga z klastra plik config (na potrzeby narzędzia kubectl) i zapisuje go na maszynie management-host jako plik ~/.kube/\<podana-nazwa\>, gdzie \<podana-nazwa\> powinna być wpisana ręcznie, najlepiej jako unikatowa, przed wykonaniem skryptu.
+Na końcu działąnia skrypt ściąga z klastra plik config (na potrzeby narzędzia kubectl) i zapisuje go na maszynie management-host jako plik ~/.kube/\<unikatowa-nazwa\>, gdzie \<unikatowa-nazwa\> jest generowana automatycznie w ramach skryptu (z częścią unikatową przedstawiającą czas utworzenia pliku).
