@@ -38,7 +38,7 @@ Uwaga: w przypadku korzystania z ZeroTier i jego instalacji na raspberrypi oraz 
 
 **_zt-config.sh, zt-manual.md_** - skrypt i instrukcja konfiguracji sieci wirtualnej ZeroTier umożliwiającej zdalny dostęp do klastra przez wszystkich uczestników grupy studenckiej. Także opisano sposób zdalnego włączania/wyłączania klastra (włączania/wyłączania malinek).
 
-**_troubleshooting.txt_** - napotkane problemy i sposób ich rozwiązania; tutaj opisujemy przypadki rozwiązywania problemów wszelakich, które uznajemy za warte skomentowania
+**_troubleshooting.txt_** - napotkane problemy i sposób ich rozwiązania; tutaj opisujemy sposoby rozwiązywania problemów wszelakich, które uznajemy za warte skomentowania
 
 ## Eksperymenty gotowe do testów w ramach rozwoju własnego \[stan listy: 2023.05.17\]
 
