@@ -1,0 +1,27 @@
+---
+# Read here about:
+#  - gather facts: https://www.middlewareinventory.com/blog/ansible-facts-list-how-to-use-ansible-facts/
+#  - inventory_hostname and ansible_hostname: 
+#      https://www.middlewareinventory.com/blog/ansible-inventory_hostname-ansible_hostname-variables/
+
+- name: "Playbook to check the inventory_hostname, ansible_hostname and host IP addresses"
+#  local_action:
+  hosts: local_host
+
+  tasks:
+
+    - name: What is my inventory_hostname
+      debug: var=inventory_hostname
+
+    - name: What is my ansible_hostname
+      debug: var=ansible_hostname
+
+    - name: Show default IP address and gateway
+      debug:
+        msg: "System {{ inventory_hostname }} has \
+              default IP {{ ansible_default_ipv4.address }} \
+              and gateway {{ ansible_default_ipv4.gateway }}"
+      when: ansible_default_ipv4.gateway is defined
+
+    - name: Another way to show IP address
+      debug: var=ansible_default_ipv4.address
