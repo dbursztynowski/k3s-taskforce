@@ -24,7 +24,7 @@ Drogą do osiągnięcia tych celów jest instalacja klastra k3s "bare metal" na 
 
 ## **Co teraz mamy w katalogach/plikach**
 
-**_ansible-tests/_** - proste przykłady ansible; obecnie istota działania gather facts na przykładzie lokalnego hosta
+**_ansible-tests/_** - proste przykłady ansible; obecnie: mikro-demo ilustrujące istotę działania "gather facts" na przykładzie lokalnego hosta
 
 **_instrukcje/_** - intrukcje labowe (docelowo do użycia w ramach laborki)
 
