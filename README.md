@@ -20,7 +20,7 @@
   * jako fragmentem szerszego obszaru "telemetry"/"observability"
   * _szczegółowe działania (poza przeglądaniem w dashboardach informacji na temat stanu samego klastra) pozostają do zaproponowania/opracowania_
 
-Drogą do osiągnięcia tych celów jest instalacja klastra k3s "bare metal" na platformie Raspberry Pi, instalacja i konfiguracja wybranych modułów składowych klastra (MetalLB, Traefik) oraz aplikacji poziomu "observability" (Prometheus/Grafana), a także uruchamianie przykładowych "aplikacji" demonstracyjnych w celu ilustracji wybranych konceptów.
+Drogą do osiągnięcia tych celów jest instalacja klastra k3s "bare metal" na platformie Raspberry Pi, instalacja i konfiguracja wybranych modułów składowych klastra (MetalLB, Traefik) oraz aplikacji poziomu "observability" (Prometheus/Grafana) z wykorzystaniem różnych mechanizmów/funkcjonalności Kubernetes, a także uruchamianie przykładowych "aplikacji" demonstracyjnych w celu ilustracji wybranych konceptów.
 
 ## **Co teraz mamy w katalogach/plikach**
 
