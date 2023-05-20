@@ -4,6 +4,8 @@
 
 * Repozytorium dla studentów SPIW. Opisy postępowania w ramach tego labu podano w instrukcjach.
 
+* Wykorzystujemy K3s - lekką dystrybycję Kubernetesa autorstwa Rancher. Cechuje się ona małym "footprintem", jednak przy zachowaniu pełnej funkcjonalności Kubernetes. Jest to więc rodzaj dystrybucji Kubernetesa, a nie jego okrojona wersja. Preferowanym obszarem zastosowań k3s to środowiska z ograniczoną ilością zasobów obliczeniowych (np. tzw. rozwiązania brzegowe w sieci). Moduły węzła controller (master) zajmują łącznie ok. 512MB RAM, a moduły węzła worker poniżej 50MB RAM. Implementacyjne odstępstwa od "wanilla Kubernetes" polegają np. na tym, że funkcje platfomy w ramach węzła danego typu są zaimplementowane w jednym procesie, jak np. moduły kubelet, kube-proxy i demon flanneld (komponent flannel CNI) w węźle typu worker (w k8s sa one implementowane jako niezależne pody/procesy) (por. https://traefik.io/glossary/k3s-explained/). 
+
 * Wszelkie sugestie są mile widziane, w szególności też propozycje zadań praktycznych do wykonania.
 
 ## **Zakładane do osiągnięcia cele laborki (lista "żywa")**
