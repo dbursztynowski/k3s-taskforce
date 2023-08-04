@@ -47,4 +47,4 @@ Where in place \<network\> you need to enter the network address together with t
 
 (The above assumes the relative location of the directories as in our repository - due to the paths given in the script.)
 
-At the end of the run, the script downloads the config file from the cluster (for kubectl) and saves it on the management-host machine as ~/.kube/\<unique-name\>, where \<unique-name\> is automatically generated and (as of this writing) represents the time when the file was created.
+At the end of the run, the script downloads the config file from the cluster (for the use of kubectl) and saves it on the management host as ~/.kube/\<unique-name\>, where \<unique-name\> is automatically generated and (as of this writing) represents the time when the file was created.
