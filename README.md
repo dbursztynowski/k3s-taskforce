@@ -60,15 +60,15 @@ Uwaga: w przypadku korzystania z ZeroTier i jego instalacji na raspberrypi oraz 
 
 ## **Assumed goals of the laboratory to be achieved ("live" list)**
 
-* getting acquainted with the declarative nature of Ansible (in contrast to highly imperative bash scripts that also are used in the lab) - as an example of a declarative notation used for the automation of configuration tasks **(part 1)**
-* principles of kubernetes networking **(part 2, 3)**
+* getting acquainted with the declarative nature of Ansible (in contrast to highly imperative bash scripts that also are used in the lab) - as an example of a declarative notation used for the automation of configuration tasks **(part 1 of the lab)**
+* principles of kubernetes networking **(part 2, 3 of the lab)**
   * the role of CNI based on flannel CNI
   * Services: ClusterIP, NodePort, LoadBalancer; exposing HTTP services using Ingress
   * NetworkPolicy - rules for user traffic filtering within the cluster
-* getting acquainted with selected aspects of resource and application management in Kubernetes clusters **(part 2, 3)**
+* getting acquainted with selected aspects of resource and application management in Kubernetes clusters **(part 2, 3 of the lab)**
   * controlling the placement of pods by Kubernetes scheduler - _taint_ and _tolerations_ mechanisms
   * _other use cases are welcome - to be invented/proposed by the students (examples: horizontal/vertical scaling, custom metrics, etc., however, tailored to a reasonable "size", still not as simple as changing 'replicas: x' in Deployment \!)_
-* getting acquainted with service monitoring in CNF environments (based on Prometheus/Grafana) **(part 3)**
+* getting acquainted with service monitoring in CNF environments (based on Prometheus/Grafana) **(part 3 of the lab)**
   * as part of a wider domain referred to as "telemetry"/"observability"
   * _apart form installation and very basic operations (viewing information about the state of the cluster in Grafana dashboards), more complex/interesting use cases remain to be prepared and propositions are more than welcome_
 
