@@ -74,7 +74,7 @@ Uwaga: w przypadku korzystania z ZeroTier i jego instalacji na raspberrypi oraz 
 
 The means to achieve these goals is the installation of k3s "bare metal" cluster on Raspberry Pi platform, the installation and configuration of selected cluster components (MetalLB, Traefik) and "observability" level applications (Prometheus/Grafana) using various Kubernetes mechanisms/functionalities, and also running simple demo "applications" to illustrate selected concepts.
 
-## **What do we have in the folders/files**
+## **What we have in the folders/files**
 
 **_ansible-tests/_** - simple examples of Ansible constructs; currently: micro-demo illustrating the essence of "gather facts" based on the example of a local host
 
