@@ -95,6 +95,6 @@ Note: when using ZeroTier and installing it on a Raspberry Pi, and remotely shut
 ## Experiments ready (or almost ready) for testing as part of self-learning \[state of the list: 2023.05.17\]
 
 **_5G Core - deploying 5G Core (free5GC) platform + RAN network simulator_ (interested persons - please contact me on priv)**
-  * installation and basic tests (e.g. ping 8.8.8.8) of the open source 5G platform (free5GC) in the following configuration: (1) 5G core control plane on the K3s/RaspberryPi cluster, (2) 5G core UPF on the K3s/separate VM/VirtualBox cluster, ( 3) RAN network emulator (5G core side, UE+gNodeB equivalent) on a separate VM/VirtualBox
+  * installation and basic tests (e.g. ping 8.8.8.8) of the open source 5G platform (free5GC) in the following configuration: (1) 5G core control plane on the K3s/RaspberryPi cluster, (2) 5G core UPF on the K3s/separate VM/VirtualBox cluster, ( 3) RAN network emulator (equivalent of 5G-radio-network + UE + gNodeB) on a separate VM/VirtualBox
   * specific orchestration/management examples applicable at the Kubernetes level are still to be determined (for example, we know that open-source 5G platforms do not scale horizontally well, and at most a form of vertical scaling of the functions can be attempted)
 
