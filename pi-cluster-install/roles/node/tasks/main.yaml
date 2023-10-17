@@ -10,6 +10,7 @@
   register: k3s_installed
 
 - name: Install k3s-agent on workers (agents)
+# note: K3s bundles its own containerd by default, no need to install it separately
   shell:
     cmd: >
       curl -sfL https://get.k3s.io |
