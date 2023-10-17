@@ -20,10 +20,10 @@
   register: k3s_installed
     
 - name: Install k3s on master
-  # to ze master, widac i po formacie parametrow, i po parametrze 'server' w dyrektywie INSTALL_K3S_EXEC
-  # --node-taint CriticalAddonsOnly=true:NoExecute spowoduje, ze na wezle master nie beda instancjonowane zwykle pody, chyba ze
-  # w deployment zostanie to dozwolone ("przebite") dyrektywa "tolerations" w selektorze pod-ow (zobaczymy to w laborce dot. 
-  # konfiguracji MetalLB/Traefik)
+  # 'master' can be recognized by the parameter format as well as by the parameter 'server' in the INSTALL_K3S_EXEC directive
+  # --node-taint CriticalAddonsOnly=true:NoExecute will prevent orinary pods to be placed on the control (master) unless 'tolerations' 
+  # directive will be used in the pod selector section of the deployment (we will see it thr MetalLB/Traefik installation procedure) 
+  # note: K3s bundles its own containerd by default, no need to install it separately
   shell:
     cmd: >
       curl -sfL https://get.k3s.io | 
