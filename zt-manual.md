@@ -13,7 +13,7 @@ W poradniku przedstawię sposób połączenia udostępnionego clustra z siecią 
 2. Po zalogowaniu, w panelu kontrolnym wybierz żółty przycisk *Create A Network*. System wygeneruje sieć i przydzieli jej nazwę. Klikając w nią, przejdziesz do ustawień sieci.
 
 ## Instalacja ZeroTier na jednym z workerów (np. ostatnia raspberrka od prawej)
- Instalację przeprowadzamy dla wybranej raspberrki, najlepiej wybrać jedną z pracujących jako worker (np. ostatnią z prawej). Logujemy z się z poziomu management hosta poprzez ssh i przeprowadzamy instalację. Instalacja przebiega identycznie dla wszystkich pozostałych hostów, które np. będą łączyć się zdalnie.
+Instalację przeprowadzamy dla wybranej raspberrki, najlepiej wybrać jedną z pracujących jako worker (np. ostatnią z prawej). Logujemy się z poziomu management hosta poprzez ssh i przeprowadzamy instalację. Instalacja przebiega identycznie dla wszystkich pozostałych hostów, które będą łączyć się zdalnie.
 
 1. Zainstaluj klienta sieci za pomocą polecenia
 ```bash
