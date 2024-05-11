@@ -80,6 +80,8 @@ fi
 i=1
 grep -v '^ *#' < $HOST_FILE | while IFS= read -r IP
 do
+    # we know the first item corresponds to the master (control) node while the rest are worker nodes
+    # (the script would have to be updated if more control nodes were allowed for)
     if [ $i -eq 1 ]; then
         echo "Host $MASTER_NODE"
         {
