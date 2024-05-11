@@ -17,7 +17,7 @@
 # NOTICE 2: remember to set the date in the name of file config-cluster-<date> at the last but one line
 #   and verify/align user/password for your cluster nodes
 
-NETWORK="$1"                          # cluster CIDR/mask, script parameter; remember to set it in a script call
+NETWORK="$1"                          # cluster CIDR/mask, script parameter; remember to set it in command line
 USER_NAME="ubuntu"                    # adjust to your settings, login user for your cluster hosts
 PASSWORD="ubuntu"                     # adjust to your settings, password for your cluster hosts
 HOST_FILE="./cluster"                 # auxiliary file for IPs addresses of your hosts
