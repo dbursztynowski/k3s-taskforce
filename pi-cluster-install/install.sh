@@ -43,9 +43,11 @@ rm $HOST_FILE
 rm $INVENTORY_FILE
 
 # discover active Raspberry Pis in the network, store their IP addresses in HOST_FILE
-  #old version: sudo nmap --exclude $(hostname -I | awk '{print $1}') -A -T4 -n -p22 -Pn $NETWORK -oG - | awk '/Ubuntu/{print $2}' > $HOST_FILE
+  # old version: sudo nmap --exclude $(hostname -I | awk '{print $1}') -A -T4 -n -p22 -Pn $NETWORK -oG - | awk '/Ubuntu/{print $2}' > $HOST_FILE
   # better, more selective version - selecting by Raspberry Pi MAC prefixes (the former selects only by OS Ubuntu) \
   # instructive version: sudo nmap -sP 192.168.1.0/24 | awk '/^Nmap/{line=$0}/28:CD:C1|B8:27:EB|DC:A6:32|E4:5F:01/{print line}' | awk '{print $5, $6}' | tr -d '()'
+  # Tip: awk keeps the value of a given variable unchanged until the next occurence of the pattern 
+    # which can set a new value
 sudo nmap -sP $NETWORK | awk '/^Nmap scan report for/{ipaddress=$NF}/28:CD:C1|B8:27:EB|DC:A6:32|E4:5F:01/{print ipaddress}' | tr -d "()" > $HOST_FILE
 HOSTS_NUMBER="$(wc -l $HOST_FILE | awk '{print $1}')"
 # check the number of hosts discovered
