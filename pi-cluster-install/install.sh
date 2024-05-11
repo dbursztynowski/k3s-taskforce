@@ -38,7 +38,7 @@ if [ $# -ne 1 ]; then
     exit 3
 fi
 
-# delete the files
+# cleaning - delete the files (they are filled in each time from a clean slate)
 rm $HOST_FILE
 rm $INVENTORY_FILE
 
