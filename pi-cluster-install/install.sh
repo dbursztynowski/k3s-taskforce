@@ -7,7 +7,10 @@
 # Finaly, it runs ansible playbook to install K3s cluster on those machines.
 # A predefined host with the name given by variable MASTER_NODE is assigned the role of the k3s master in the cluster.
 
-# NOTICE 0: (not important now) set from command line: "$ sudo chmod +s <this-script-name> " to let "sudo nmap ..." run
+# WARNING !!!!: do not enable WiFi on your Pi-s before running this script. Otherwise nmap below will add
+#   your Pi's WiFi port address to HOST_FILE which will confuse the script. 
+
+# NOTICE 0: (not important now) set from command line: "$ sudo chmod +s <this-script-name>" to let "sudo nmap ..." run
 #   without asking for password.
 # NOTICE 1: remember to set cluster CIDR/mask (e.g., 192.168.1.0/24) as script parameter NETWORK; 
 #   thus, a complete script invocation should take the form as, e.g.: ./install.sh 192.168.1.0/24
@@ -16,16 +19,16 @@
 
 NETWORK="$1"                          # cluster CIDR/mask, script parameter; remember to set it in a script call
 USER_NAME="ubuntu"                    # adjust to your settings, login user for your cluster hosts
-PASSWORD="raspberry"                  # adjust to your settings, password for your cluster hosts
+PASSWORD="ubuntu"                     # adjust to your settings, password for your cluster hosts
 HOST_FILE="./cluster"                 # auxiliary file for IPs addresses of your hosts
 INVENTORY_FILE="inventory/hosts.ini"  # Ansible inventory file
 CONFIG_FILE="$HOME/.ssh/config"       # ssh config file to store [hostname IP] pairs for RbPi hosts (to ssh to the RbPi-s)
 ERROR_FILE="/tmp/ssh-copy_error.txt"  # error log file
-SSH_KEY_FILE="$HOME/.ssh/id_ed25519"  # your ssh key, if it does not exist it will be generated
+SSH_KEY_FILE="$HOME/.ssh/id_rsa"      # your ssh key on the management host, if it does not exist it will be generated
 MASTER_GROUP="master"                 # Ansible group of hosts serving as master (one host in our case) - check Ansible files to understand the structure
-MASTER_NODE="kpi061"                  # adjust name prefix to your settings, apply the name format assumed: <your_cluster_prefix><1>
+MASTER_NODE="kpi091"                  # adjust name prefix to your settings, apply the name format assumed: <your_cluster_prefix><1>
 WORKER_GROUP="node"                   # Ansible group of nodes serving as worker - check Ansible files to understand the structure
-WORKER_NODE="kpi06"                   # adjust name prefix to your settings, apply the name format assumed: <your_cluster_prefix><consecutive_integer>
+WORKER_NODE="kpi09"                   # adjust name prefix to your settings, apply the name format assumed: <your_cluster_prefix><consecutive_integer>
 CLUSTER_GROUP="cluster"               # Ansible group of all hosts in the cluster - check Ansible files to understand the structure
 CURRENT_DATE=$(date +%m-%dT%T)        # date-time to generate a unique name of Kubernetes "config" file
 
@@ -43,7 +46,7 @@ rm $INVENTORY_FILE
   #old version: sudo nmap --exclude $(hostname -I | awk '{print $1}') -A -T4 -n -p22 -Pn $NETWORK -oG - | awk '/Ubuntu/{print $2}' > $HOST_FILE
   # better, more selective version - selecting by Raspberry Pi MAC prefixes (the former selects only by OS Ubuntu) \
   # instructive version: sudo nmap -sP 192.168.1.0/24 | awk '/^Nmap/{line=$0}/28:CD:C1|B8:27:EB|DC:A6:32|E4:5F:01/{print line}' | awk '{print $5, $6}' | tr -d '()'
-sudo nmap -sP $NETWORK | awk '/^Nmap/{ipaddress=$NF}/28:CD:C1|B8:27:EB|DC:A6:32|E4:5F:01/{print ipaddress}' | tr -d "()" > $HOST_FILE
+sudo nmap -sP $NETWORK | awk '/Nmap scan report for/{ipaddress=$NF}/28:CD:C1|B8:27:EB|DC:A6:32|E4:5F:01/{print ipaddress}' | tr -d "()" > $HOST_FILE
 HOSTS_NUMBER="$(wc -l $HOST_FILE | awk '{print $1}')"
 # check the number of hosts discovered
 if [ "$HOSTS_NUMBER" -lt "1" ]; then
