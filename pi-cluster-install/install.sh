@@ -56,7 +56,7 @@ if [ "$HOSTS_NUMBER" -lt "1" ]; then
     exit 3
 fi
 
-# if ssh empty, create
+# if ssh is missing, create
 if [ ! -f $CONFIG_FILE ]; then
     mkdir -p ~/.ssh && chmod 700 ~/.ssh
     touch $CONFIG_FILE
@@ -154,4 +154,3 @@ scp $USER_NAME@$MASTER_NODE:~/.kube/config ~/.kube/config-cluster-$CURRENT_DATE
 
 # environment variable - for current boot use only, can be left commented
 #export KUBECONFIG=~/.kube/config-cluster-$CURRENT_DATE
-
