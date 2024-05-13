@@ -156,7 +156,10 @@ fi
 # download the config file (needed by kubectl) form the master node of the cluster
 # Note: if you are already using .kube/config file to access other clusters then update it 
 #   manually with the content of the downloaded file config-cluster-$CURRENT_DATE. Remember
-#   to set appropriate context with kubctl before accessing your k3s cluster.
+#   to set appropriate context with kubctl before accessing your k3s cluster. If your RbPi
+#   cluster is the only that you will control, you can preserve the default name of the
+#   copied file (config), and no other manual updates will be needed.
+#scp $USER_NAME@$MASTER_NODE:~/.kube/config ~/.kube/config
 scp $USER_NAME@$MASTER_NODE:~/.kube/config ~/.kube/config-cluster-$CURRENT_DATE
 
 # environment variable - only useful for current boot, can be left commented
