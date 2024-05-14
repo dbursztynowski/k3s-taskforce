@@ -1,0 +1,35 @@
+---
+# This is only for educational purposes to analyse the magic var hostvars for a selected host.
+# Use JSON rules to access respective fields through index in brackets [] if variable or element
+# of array, and field name with dot separator in maps. 
+# It is reccommended to limit the number of active hosts in the inventory. If "var: hostvars" is
+# uncommented then only one host should be active in the inventory (errors are reported by Ansible otherwise).
+
+- hosts: cluster
+  gather_facts: yes
+  become: yes
+
+  tasks:
+
+  - name: Display all variables/facts known for a host
+#    Notice this task produces very verbose output
+    debug:
+      var: hostvars[inventory_hostname]
+#      var: hostvars
+
+  - name: Host default address - "hostvars[inventory_hostname].ansible_default_ipv4.address"
+    debug:
+      msg: handled host is {{ inventory_hostname }} with default IPv4 {{hostvars[inventory_hostname].ansible_default_ipv4.address}}
+
+  - name: All IPv4 addresses - hostvars[inventory_hostname].ansible_all_ipv4_addresses
+    debug:
+      var: hostvars[inventory_hostname].ansible_all_ipv4_addresses
+
+  - name: Second IPv4 address - hostvars[inventory_hostname].ansible_all_ipv4_addresses[1]
+    debug:
+      var: hostvars[inventory_hostname].ansible_all_ipv4_addresses[1]
+
+  - name: Next level - hostvars[inventory_hostname].ansible_eth0.features.esp_hw_offload
+    debug:
+      var: hostvars[inventory_hostname].ansible_eth0.features.esp_hw_offload
+

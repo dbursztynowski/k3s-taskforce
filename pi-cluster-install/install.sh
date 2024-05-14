@@ -39,7 +39,8 @@ if [ $# -ne 1 ]; then
     exit 3
 fi
 
-# cleaning - delete the files (they are filled in each time from a clean slate)
+# cleaning - delete the files (they are filled in each time from scratch)
+rm $CONFIG_FILE
 rm $HOST_FILE
 rm $INVENTORY_FILE
 
@@ -146,7 +147,7 @@ done
 ansible-playbook playbook_install_k3s.yaml -i $INVENTORY_FILE
 
 # create .kube directory if not present
-if [ ! -d "$HOME/.kube" ]; then
+if ! [ -d "$HOME/.kube" ]; then
     mkdir "$HOME/.kube"
     echo "Created ~/.kube directory"
 else
