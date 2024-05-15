@@ -1,0 +1,15 @@
+---
+- name: read temperature
+  hosts: cluster
+
+  tasks:
+
+  - name: read temperature of cluster node processor
+    ansible.builtin.command: cat /sys/class/thermal/thermal_zone0/temp
+    register: temperature
+
+  - name: print temperature
+    ansible.builtin.debug:
+      msg: temperature.stdout 
+
+# cat /sys/class/thermal/thermal_zone0/temp

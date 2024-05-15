@@ -1,6 +1,6 @@
 ---
-#Updateing/upgrading the servers and installing useful packages (net-tools and netmap)
-# according to https://www.cyberciti.biz/faq/ansible-apt-update-all-packages-on-ubuntu-debian-linux/
+# Updating/upgrading the servers and installing useful packages (net-tools and netmap) according to:
+#   https://www.cyberciti.biz/faq/ansible-apt-update-all-packages-on-ubuntu-debian-linux/
 
 # Updating / upgrading the OS
 - name: Update apt repo and cache on Debian/Ubuntu box
@@ -26,9 +26,8 @@
 
 # Installing useful packages
 # according to https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html#examples
-- name: Install net-tool and nmap
-  apt:
-    pkg:
-    - net-tools
-    - nmap
-    state: latest
+#- name: Install net-tools  <= net-tools actually not needed, use the iproute2 utility; left as an example of use
+#  apt:
+#    pkg:
+#    - net-tools
+#    state: latest

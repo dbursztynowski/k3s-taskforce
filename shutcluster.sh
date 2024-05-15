@@ -1,6 +1,6 @@
 #!/bin/bash
 cd pi-cluster-install
-./shutdown.sh
+./shutcluster.sh
 
 # temperature reading cmd
 # vcgencmd measure_temp
