@@ -6,7 +6,9 @@
 
 - name: "Playbook to check the inventory_hostname, ansible_hostname and host IP addresses"
 #  local_action:
-  hosts: local_host
+  hosts: localhost
+  connection: local
+  gather_facts: true
 
   tasks:
 

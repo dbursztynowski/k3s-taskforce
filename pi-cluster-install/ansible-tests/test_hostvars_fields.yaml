@@ -1,10 +1,15 @@
 # This is only for educational purposes to analyse the magic var hostvars for selected host(s).
-# Use JSON rules to access respective fields through index in brackets [] if variable or element
-# of array or element of map is addressed, or field name with dot separator if map element is 
-# addressed (so, map elements can be accessed by both [<keyname>] and "dot.keyname" (.<keyname>) ).
+# To access access respective fields use index value/variable name in brackets [] if variable or
+# element of array is referenced, i.e., [ index | <variable_name> ]; and for referencing 
+# values of a map use either [' <key_name> '] or <dot><key_name> (i.e., .<key_name>) (so, the values
+# in maps can be referenced in two alternative ways).
 
-# NOTE: It is recommended to limit the number of active hosts in the inventory. If "var: hostvars" is
-# uncommented then only one host should be active in the inventory (errors are reported by Ansible otherwise).
+# NOTE1: To run this example it may be desired to limit the number of active hosts in the
+# inventory because the output from Ansible can be verbose.
+# NOTE2: If "var: hostvars" is left uncommented then only one host should be active in the
+# inventory (errors are reported by Ansible otherwise).
+
+# Run: ansible-playbook test_hostvars_fields.yaml -i inventory/hosts.ini
 
 - hosts: cluster
   gather_facts: yes
@@ -24,7 +29,7 @@
 #     Note: hostvars alone does not work unless there's only one host active in the inventory
 #      var: hostvars
 
-#   Below, a copupele of other examples of accessing various fields in hostvars
+#   Below, a couple of other examples of how to access various fields in hostvars
 
   - name: Host default address - "hostvars[inventory_hostname].ansible_default_ipv4.address"
     debug:

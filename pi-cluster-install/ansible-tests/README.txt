@@ -15,8 +15,9 @@
 # 1. using ansible ad-hoc command 
 ansible <hostgroup> -m setup
 # e.g. (your results will be stored in file gather.facts)
-ansible -i test_hosts all -m setup | tee gather.facts
+ansible -i ../inventory/hosts.ini all -m setup | tee gather.facts
 
 # 2. or running a simple palybook
 # (your results will be sent to standard output)
-ansible-playbook -i test_hosts hostnametest.yaml
+ansible-playbook hostnametest.yaml
+ansible-playbook test_hostvars_fields.yaml -i ../inventory/hosts.ini
