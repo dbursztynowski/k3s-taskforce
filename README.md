@@ -40,6 +40,8 @@ Uwaga: w przypadku korzystania z ZeroTier i jego instalacji na raspberrypi oraz 
 
 **_zt-config.sh, zt-manual.md_** - skrypt i instrukcja konfiguracji sieci wirtualnej ZeroTier umożliwiającej zdalny dostęp do klastra przez wszystkich uczestników grupy studenckiej. Opisano też sposób zdalnego włączania/wyłączania klastra (włączania/wyłączania malinek).
 
+**_temperature_control.md_** - wskazowki dotyczace sterowania temperatura Raspberry Pi (opcja)
+
 **_troubleshooting.txt_** - napotkane problemy i sposób ich rozwiązania; tutaj opisujemy sposoby rozwiązywania problemów wszelakich, które uznajemy za warte skomentowania
 
 ## Eksperymenty gotowe do testów w ramach rozwoju własnego \[stan listy: 2023.05.17\]
@@ -89,6 +91,8 @@ The means to achieve these goals is the installation of k3s "bare metal" cluster
 Note: when using ZeroTier and installing it on a Raspberry Pi, and remotely shutting down/starting the cluster nodes, remember not to close the ZeroTier hosting raspberry (cf. zt-manual.md). (This note is very specifc to the SPIW lab where students of lab teams can set remote access to their cluster to have more flexibility in experimenting).
 
 **_zt-config.sh, zt-manual.md_** - script and instructions for configuring the ZeroTier virtual network enabling remote access to the cluster by all members of a lab team. It also describes how to remotely enable/disable the cluster (enable/disable the Pis).
+
+**_temperature_control.md_** - note on temperature control of Raspberry Pi board (optional)
 
 **_troubleshooting.txt_** - descriptions of problems encountered and hints how to solve them; here we describe the ways to solve all kinds of problems that we consider worth mentioning
 
