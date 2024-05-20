@@ -1,13 +1,14 @@
 ---
-- name: read temperature
+- name: read pi cluster temperature
   hosts: cluster
 
   tasks:
 
-  - name: read temperature host processor
+  - name: Read the temperature of host processor
     ansible.builtin.command: cat /sys/class/thermal/thermal_zone0/temp
     register: temperature
 
-  - name: print temperature (cast stdout onto int and divide)
+  - name: Printing the temperature 
+#   (cast stdout of cat command onto int and normalize to centigrades by dividing by 1000)
     ansible.builtin.debug:
       msg: "Host: {{ hostvars[inventory_hostname].ansible_hostname }} temperature: {{ (temperature.stdout | int) / 1000 }} C"

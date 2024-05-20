@@ -9,14 +9,14 @@
 # A predefined host with the name given by variable MASTER_NODE is assigned the role of the K3s control (master) node.
 
 # WARNING !!!!: do not enable WiFi on your Pi-s before running this script. Otherwise nmap below will add
-#   your Pi's WiFi port address to file HOST_FILE which will confuse the script. 
+#   your Pis' WiFi port addresses to file HOST_FILE which will offend the script. 
 
-# NOTE 1: (not important now) run in the command line in the script directory: $ sudo chmod +s install.sh
-#   This will allow "sudo nmap ..." run without asking for the password.
+# NOTE 1: make sure that you have done this: sudo usermod -aG sudo [name-of-your-local-user]
 # NOTE 2: remember to set cluster CIDR/mask (e.g., 192.168.2.0/24) as script parameter NETWORK; 
-#   thus, a complete script invocation should take the form as, e.g.: ./install.sh 192.168.2.0/24
-# NOTE 3: remember to set the date in the name of file config-cluster-<date> at the last but one line
-#   and verify/align user/password for your cluster nodes
+#   thus, a complete script invocation should take the form as: $ source ./install.sh 192.168.2.0/24
+# NOTE 3: in the parameter list below, verify/adjust user/password for your cluster nodes
+# MOTE 4: remember that file inventory/group_vars/all.yaml is also needed by Ansible playbook and if not present in 
+#   right configuration then you have to prepare it manually.
 
 NETWORK="$1"                          # cluster CIDR/mask, script parameter; remember to set it in the command line
 USER_NAME="ubuntu"                    # adjust to your settings, user login for your cluster hosts
@@ -29,20 +29,42 @@ SSH_KEY_FILE="$HOME/.ssh/id_rsa"      # your ssh key on the management host, if 
 MASTER_GROUP="master"                 # Ansible group of hosts serving as master (one host in our case) - check Ansible files to understand the structure
 MASTER_NODE="kpi091"                  # adjust the name prefix to your settings, apply this format: <cluster_node_prefix><1> (here cluster_node_prefix=kpi09)
 WORKER_GROUP="node"                   # Ansible group of nodes serving as worker - check Ansible files to understand the structure
-WORKER_NODE_PREF="kpi09"              # adjust the name prefix to your settings; for worker nodes apply this format: <cluster_node_prefix><consecutive_integer> (consecutive_integer=2,3,4)
+WORKER_NODE_PREF="kpi09"              # adjust the name prefix to your settings; for worker nodes apply this format:
+                                      #   <cluster_node_prefix><consecutive_integer> (consecutive_integer=2,3,4)
 CLUSTER_GROUP="cluster"               # Ansible group of all hosts in the cluster - check Ansible files to understand the structure
-CURRENT_DATE=$(date +%m-%dT%T)        # date-time to generate a unique name of Kubernetes "config" file
+CURRENT_DATE=$(date +%m-%dT%T)        # date-time suffix to generate a unique name of Kubernetes "kubeconfig" file - to prevent accidental overwriting
 
 # check the presence of NETWORK parameter
 if [ $# -ne 1 ]; then
     echo "Network CIDR/mask missing, provide one and run again. Exiting."
-    exit 3
+    return 3
 fi
 
 # cleaning - delete the files (they are filled in each time from scratch)
-rm $CONFIG_FILE
-rm $HOST_FILE
-rm $INVENTORY_FILE
+
+if [ -e $CONFIG_FILE ]
+then
+    echo "removing $CONFIG_FILE"
+    rm $CONFIG_FILE
+else
+    echo "$CONFIG_FILE not found, skipping"
+fi
+
+if [ -e $INVENTORY_FILE ]
+then
+    echo "removing $INVENTORY_FILE"
+    rm $INVENTORY_FILE
+else
+    echo "$INVENTORY_FILE not found, skipping"
+fi
+
+if [ -e $HOST_FILE ]
+then
+    echo "removing $HOST_FILE"
+    rm $HOST_FILE
+else
+    echo "$HOST_FILE not found, skipping"
+fi
 
 # discover active Raspberry Pis in your network segment and store their IP addresses in file HOST_FILE
   # Below, the nmap utility discovers Raspberry Pis by their MAC prefix according to prefix allocation for the
@@ -50,17 +72,22 @@ rm $INVENTORY_FILE
   # Tip: awk will keep the value of a given variable (ipaddress in our case) unchanged until matching a pattern
   #   able to set a new value for this variable. Such a match can be found after reading several lines by awk
   #   (in our case, this happens on encountering a line with RbPi prefix - to check it, run $ sudo nmap -sn $NETWORK).
-  # Note: if your management host is a VM then its network interface MUST be "bridged" not NAT. This is
+  # Note: if your management host is a VM then its network interface MUST be bridged not NAT. This is
   #   required so that nmap utility has proper visibility of the network.
-sudo nmap -sn $NETWORK | awk '/^Nmap scan report for/{ipaddress=$NF}/28:CD:C1|B8:27:EB|D8:3A:DD|DC:A6:32|E4:5F:01/{print ipaddress}' | tr -d "()" > $HOST_FILE
+echo "discovering hosts"
+sudo nmap -sn $NETWORK | awk '/^Nmap scan report for/{ipaddress=$NF}/28:CD:C1|B8:27:EB|D8:3A:DD|DC:A6:32|E4:5F:01/{print ipaddress}' | tr -d "()" > $HOST_FILE 
 HOSTS_NUMBER="$(wc -l $HOST_FILE | awk '{print $1}')"
+
 # check the number of hosts discovered
 if [ "$HOSTS_NUMBER" -lt "1" ]; then
     echo "No active hosts discovered in network $NETWORK. Exiting."
-    exit 3
+    return 3
 fi
 
+echo "$HOSTS_NUMBER active hosts discovered"
+
 # if ssh is missing, create
+echo "creating .ssh if not present"
 if [ ! -f $CONFIG_FILE ]; then
     mkdir -p ~/.ssh && chmod 700 ~/.ssh
     touch $CONFIG_FILE
@@ -68,21 +95,23 @@ if [ ! -f $CONFIG_FILE ]; then
 fi
 
 # check for the presence of your public key; if you do not have one a new key will be created
+echo "handling public keys"
 if [ ! -f $SSH_KEY_FILE ]; then
     ssh-keygen -q -t rsa -b 4096 -N "" -f $SSH_KEY_FILE
 fi
 
 if [ ! -f  $SSH_KEY_FILE ]; then
     echo "File '$SSH_KEY_FILE' not found!"
-    exit 1
+    return 1
 fi
 
 if [ ! -f $HOST_FILE ]; then
     echo "File '$HOST_FILE' not found!"
-    exit 2
+    return 2
 fi
 
 # iterate over hosts to configure local ssh files and upload your public key to the cluster hosts
+echo "uploading public key to cluster hosts"
 i=1
 grep -v '^ *#' < $HOST_FILE | while IFS= read -r IP
 do
@@ -110,12 +139,13 @@ do
     else
         cat $ERROR_FILE
         echo 
-        exit 3
+        return 3
     fi
     i=$((i+1))
 done
 
 # create/fill in (from scratch) a complete Ansible inventory file for the cluster
+echo "creating Ansible inventory file; remember to check global_vars/all.yaml"
 for ((i=1; i<=HOSTS_NUMBER; i++))
 do
     if [ $i -eq 1 ]; then
@@ -144,14 +174,17 @@ done
 } >> $INVENTORY_FILE
 
 # run ansible playbook installing k3s on cluster hosts
+echo "entering Ansible playbook"
 ansible-playbook playbook_install_k3s.yaml -i $INVENTORY_FILE
+echo "playbook finished"
 
 # create .kube directory if not present
+echo "creating $HOME/.kube directory and copying cluster kubeconfig file into it"
 if ! [ -d "$HOME/.kube" ]; then
     mkdir "$HOME/.kube"
-    echo "Created ~/.kube directory"
+    echo "Created $HOME/.kube directory"
 else
-    echo "Directory ~/.kube already exists"
+    echo "Directory $HOME/.kube already exists"
 fi
 
 # download the config file (needed by kubectl) form the master node of the cluster
@@ -161,7 +194,12 @@ fi
 #   cluster is the only that you will control, you can preserve the default name of the
 #   copied file (config), and no other manual updates will be needed.
 #scp $USER_NAME@$MASTER_NODE:~/.kube/config ~/.kube/config
-scp $USER_NAME@$MASTER_NODE:~/.kube/config ~/.kube/config-cluster-$CURRENT_DATE
+
+scp $USER_NAME@$MASTER_NODE:~/.kube/config $HOME $HOME/.kube/config-cluster-$CURRENT_DATE
+echo "Created kubeconfig file $HOME/.kube/config-cluster-$CURRENT_DATE"
+echo "  - remember to rename it to \"config\" or use KUBECONFIG env variable, or run kubectl --kubeconfig <config-file-name> ..."
 
 # environment variable - only useful for current boot, can be left commented
 #export KUBECONFIG=~/.kube/config-cluster-$CURRENT_DATE
+
+echo "install finished"
