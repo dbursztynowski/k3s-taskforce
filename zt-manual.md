@@ -39,7 +39,7 @@ Konfigurację będziemy "dopinać" na poniższym sprzęcie:
 ### Udostępnienie clustra
 1. Podłączamy komputer, na którym działa management host do sieci utworzonej przez Linksys (czyli zgodnie z Fig. 1 w instrukcji laborattoryjnej K3s-P1-K3s-installation). Management host, jeśli jest implementoweany jako VM, **musi** otrzymywać adres IP za pomocą zmostkowanej karty sieciowej (bridged).
 2. W panelu konfiguracyjnym ZeroTier dodajemy route w karcie *Advanced -> Managed routes*. Mój Linsksys przydziela adresy z klasy 192.168.90.0/24, i taką trasę trzeba wprowadzić do ustawień ZT. 192.168.192.101 to adres rappbery (nadany z puli ZeroTier), który został skonfigurowany wcześniej. Wprowadzamy route **tylko** dla hosta, który jest w jednej sieci z Linksysem.
-![route do sieci linksys](https://i.ibb.co/cyM3vtf/routes.png "route do sieci linksys")
+[route do sieci linksys](https://i.ibb.co/cyM3vtf/routes.png "route do sieci linksys")
 3. Kolejny krok to wprowadzenie zmian w obsłudze pakietów po stronie wybranej rasppberki. Wykonaj plik ```zt-config.sh``` z tego repo na rasppbery jako root (wygodnie jest przekopiować go dzięki MobaXterm). Podaj 2 argumenty - 1. nazwa interfejsu, przez który host łączy się z siecią LAN (np. eth0, enp0s1). Drugi to nazwa interfejsu sieci ZeroTier (zawsze zaczyna się od *zt*). 
 
 ### Weryfikacja połączenia
