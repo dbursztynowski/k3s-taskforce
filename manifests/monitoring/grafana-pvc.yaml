@@ -10,4 +10,3 @@ spec:
   resources:
     requests:
       storage: 500Mi
-# 500 MB claim

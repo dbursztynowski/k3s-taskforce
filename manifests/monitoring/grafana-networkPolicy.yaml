@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/component: grafana
     app.kubernetes.io/name: grafana
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 9.4.3
-  name: grafana-ext
+    app.kubernetes.io/version: 9.3.16
+  name: grafana
   namespace: monitoring
 spec:
   egress:
@@ -19,11 +19,11 @@ spec:
     ports:
     - port: 3000
       protocol: TCP
+    # addition similar to the one in prometheus-networkPolicy.yaml
   - from:
     - ipBlock:
-        cidr: 192.168.1.0/24
+        cidr: 192.168.2.0/24
     - ipBlock:
-#with cidr: 10.42.0.0/16 as defined below ipBlock cidr: 192.168.1.0/24 may be redundant
         cidr: 10.42.0.0/16
   podSelector:
     matchLabels:

@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/instance: k8s
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 2.42.0
+    app.kubernetes.io/version: 2.41.0
   name: prometheus-k8s
   namespace: monitoring
 spec:
@@ -26,15 +26,16 @@ spec:
     - podSelector:
         matchLabels:
           app.kubernetes.io/name: grafana
+  - from:
+    # with cidr: 10.42.0.0/16 as below ipBlock cidr: 192.168.2.0/24 may not be necessary - to be tested
+    # keeping both blocks is safe
+    - ipBlock:
+        cidr: 192.168.2.0/24
+    - ipBlock:
+        cidr: 10.42.0.0/16
     ports:
     - port: 9090
       protocol: TCP
-  - from:
-    - ipBlock:
-        cidr: 192.168.1.0/24
-    - ipBlock:
-#with cidr: 10.42.0.0/16 as defined below ipBlock cidr: 192.168.1.0/24 may be redundant
-        cidr: 10.42.0.0/16
   podSelector:
     matchLabels:
       app.kubernetes.io/component: prometheus
