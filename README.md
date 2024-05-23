@@ -28,6 +28,8 @@ Drogą do osiągnięcia tych celów jest instalacja klastra k3s "bare metal" na 
 
 **_ansible-tests/_** - proste przykłady ansible; obecnie: mikro-demo ilustrujące istotę działania "gather facts" na przykładzie lokalnego hosta
 
+**_gettemp.sh_** - skrypt korzystający z playbook'a Ansible do sprawdzania temperatury procesora malinek
+
 **_instrukcje/_** - intrukcje labowe (docelowo do użycia w ramach laborki)
 
 **_pi-cluster-install/_** - źródłowe pliki instalacyje k3s (bash, Ansible); jednym z oczekiwań (i efektów nauczania) odnośnie tej części laborki jest analiza szablnów Ansible w celu zapoznania się z ich deklaratywną naturą (na tle wybitnie ipmeratywnych skryptów bash)
@@ -36,13 +38,13 @@ Drogą do osiągnięcia tych celów jest instalacja klastra k3s "bare metal" na 
 
 **_shutubu.sh_** - wywołanie w trybie _ad-hoc_ komendy Ansible wyłączającej (_shutdown_) węzły klastra; po jej wywołaniu nie trzeba czekać na zakończenie pracy Ansible i w razie czego można od razu zamknąć swoją maszynę management-host (w tym przypadku Ansible zamyka klaster autonomicznie, bez kontaktowania się zwrotnie z management-host). Trzeba tylko dostosować do swojego przypadku nazwy węzłów klastra w pliku pi-cluster-install/shutdown-hosts.ini. **To jest zalecana forma wyłączania klastra - aby ograniczyć ryzyko wystąpienia uszkodzeń wskutek "twardego" odłączenia zasilania.** Na końcu pliku w komentarzu podano też sposób odczytywania temperatury CPU malinki z wiersza poleceń.
 
-Uwaga: w przypadku korzystania z ZeroTier i jego instalacji na raspberrypi oraz zdalnym zamykaniu/startowaniu węzłów klastra należy pamiętać o niezamykaniu malinki hostującej ZeroTier (por. zt-manual.md). W przypadku zainstalowania ZeroTier (lub podobnej aplikacji) na odrębnej maszynie cały klaster może zostać zamknięty. W przypadku problemów z siecią na terenie akademików PW (niestety, zdarza się z powodu stosowanych polityk bezpieczeństwa) należy interweniować u administratora sieci lokalnej.
-
-**_zt-config.sh, zt-manual.md_** - skrypt i instrukcja konfiguracji sieci wirtualnej ZeroTier umożliwiającej zdalny dostęp do klastra przez wszystkich uczestników grupy studenckiej. Opisano też sposób zdalnego włączania/wyłączania klastra (włączania/wyłączania malinek).
-
 **_temperature_control.md_** - wskazowki dotyczace sterowania temperatura Raspberry Pi (opcja)
 
 **_troubleshooting.txt_** - napotkane problemy i sposób ich rozwiązania; tutaj opisujemy sposoby rozwiązywania problemów wszelakich, które uznajemy za warte skomentowania
+
+**_zt-config.sh, zt-manual.md_** - skrypt i instrukcja konfiguracji sieci wirtualnej ZeroTier umożliwiającej zdalny dostęp do klastra przez wszystkich uczestników grupy studenckiej. Opisano też sposób zdalnego włączania/wyłączania klastra (włączania/wyłączania malinek).
+
+Uwaga: w przypadku korzystania z ZeroTier i jego instalacji na raspberrypi oraz zdalnym zamykaniu/startowaniu węzłów klastra należy pamiętać o niezamykaniu malinki hostującej ZeroTier (por. zt-manual.md). W przypadku zainstalowania ZeroTier (lub podobnej aplikacji) na odrębnej maszynie cały klaster może zostać zamknięty. W przypadku problemów z siecią na terenie akademików PW (niestety, zdarza się z powodu stosowanych polityk bezpieczeństwa) należy interweniować u administratora sieci lokalnej.
 
 ## Eksperymenty gotowe do testów w ramach rozwoju własnego \[stan listy: 2023.05.17\]
 
