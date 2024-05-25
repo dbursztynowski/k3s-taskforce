@@ -40,9 +40,8 @@ Drogą do osiągnięcia tych celów jest instalacja klastra k3s "bare metal" na 
 
 Uwagi: 
 
-W przypadku korzystania z ZeroTier i jego instalacji na wybranym RbPi klastra oraz zdalnym zamykaniu/startowaniu węzłów klastra należy pamiętać o niezamykaniu malinki hostującej ZeroTier (por. zt-manual.md). W przeciwnym razie stracimy dostęp zdalny do klastra. Natomiast w przypadku zainstalowania ZeroTier (lub podobnej aplikacji) na odrębnej maszynie, zamknąć można cały klaster. W przypadku problemów z siecią na terenie akademików PW (niestety, zdarza się z powodu stosowanych polityk bezpieczeństwa) należy interweniować u administratora sieci lokalnej.
-
-Zamykanie klastra poprzez _shutdown_ wyłącza jedynie płytki Raspbbery Pi - nadal pozostają zasilane i pracują TP-Link oraz nakładki PoE. Można je wyłączyć jedynie poprzez wyłączenie zasilania TP-Link. Wtedy jednak zdalne włączenie klastra poprzez restart TP-Link nie będzie już możliwe.
+- W przypadku korzystania z ZeroTier i jego instalacji na wybranym RbPi klastra oraz zdalnym zamykaniu/startowaniu węzłów klastra należy pamiętać o niezamykaniu malinki hostującej ZeroTier (por. zt-manual.md). W przeciwnym razie stracimy dostęp zdalny do klastra. Natomiast w przypadku zainstalowania ZeroTier (lub podobnej aplikacji) na odrębnej maszynie, zamknąć można cały klaster. W przypadku problemów z siecią na terenie akademików PW (niestety, zdarza się z powodu stosowanych polityk bezpieczeństwa) należy interweniować u administratora sieci lokalnej.
+- Zamykanie klastra poprzez _shutdown_ wyłącza jedynie płytki Raspbbery Pi - nadal pozostają zasilane i pracują TP-Link oraz nakładki PoE. Można je wyłączyć jedynie poprzez wyłączenie zasilania TP-Link. Wtedy jednak zdalne włączenie klastra poprzez restart TP-Link nie będzie już możliwe.
 
 **_temperature_control.md_** - wskazowki dotyczące sterowania temperatura Raspberry Pi (opcja)
 
