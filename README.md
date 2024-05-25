@@ -30,7 +30,7 @@ Drogą do osiągnięcia tych celów jest instalacja klastra k3s "bare metal" na 
 
 **_gettemp.sh_** - skrypt korzystający z playbook'a Ansible _get-temp.yaml_ do sprawdzania temperatury procesora malinek
 
-**_instrukcje/_** - intrukcje labowe (docelowo do użycia w ramach laborki)
+**_instrukcje/_** - instrukcje laboratiryjne (podstawa do realizacji ćwiczeń)
 
 **_pi-cluster-install/_** - źródłowe pliki instalacyje k3s (bash, Ansible); jednym z oczekiwań (i efektów nauczania) odnośnie tej części laborki jest analiza szablonów Ansible w celu zapoznania się z ich deklaratywną naturą (na tle wybitnie ipmeratywnych skryptów bash)
 
