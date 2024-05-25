@@ -32,15 +32,19 @@ Drogą do osiągnięcia tych celów jest instalacja klastra k3s "bare metal" na 
 
 **_instrukcje/_** - intrukcje labowe (docelowo do użycia w ramach laborki)
 
-**_pi-cluster-install/_** - źródłowe pliki instalacyje k3s (bash, Ansible); jednym z oczekiwań (i efektów nauczania) odnośnie tej części laborki jest analiza szablnów Ansible w celu zapoznania się z ich deklaratywną naturą (na tle wybitnie ipmeratywnych skryptów bash)
+**_pi-cluster-install/_** - źródłowe pliki instalacyje k3s (bash, Ansible); jednym z oczekiwań (i efektów nauczania) odnośnie tej części laborki jest analiza szablonów Ansible w celu zapoznania się z ich deklaratywną naturą (na tle wybitnie ipmeratywnych skryptów bash)
 
 **_manifests/_** - manifesty Kubernetes dla instalowanych modułów, testowanych wdrożeń (deploymentów), przykłady ćwiczeń laborkowych (na razie _zajawka_ - to co bezpośrednio wynika z obecnej wersji instrukcji i służy głównie poznaniu mechanizów "sieciowych" Kubernetes)
 
-**_shutubu.sh_** - wywołanie w trybie _ad-hoc_ komendy Ansible wyłączającej (_shutdown_) węzły klastra; po jej wywołaniu nie trzeba czekać na zakończenie pracy Ansible i w razie czego można od razu zamknąć swoją maszynę management-host (w tym przypadku Ansible zamyka klaster autonomicznie, bez kontaktowania się zwrotnie z management-host). Trzeba tylko dostosować do swojego przypadku nazwy węzłów klastra w pliku pi-cluster-install/shutdown-hosts.ini. **To jest zalecana forma wyłączania klastra - aby ograniczyć ryzyko wystąpienia uszkodzeń wskutek "twardego" odłączenia zasilania.** Na końcu pliku w komentarzu podano też sposób odczytywania temperatury CPU malinki z wiersza poleceń będąc "na" malince.
+**_shutubu.sh_** - wywołanie w trybie _ad-hoc_ komendy Ansible wyłączającej (_shutdown_) węzły klastra; po jej wywołaniu nie trzeba czekać na zakończenie pracy Ansible i w razie czego można od razu zamknąć swoją maszynę management-host (w tym przypadku Ansible zamyka klaster autonomicznie, bez kontaktowania się zwrotnie z management-host). Trzeba tylko dostosować do swojego przypadku nazwy węzłów klastra w pliku pi-cluster-install/shutdown-hosts.ini. **To jest zalecana forma wyłączania klastra - aby ograniczyć ryzyko wystąpienia uszkodzeń wskutek "twardego" odłączenia zasilania.** Na końcu pliku w komentarzu podano też sposób odczytywania temperatury CPU malinki z wiersza poleceń będąc "na" malince. 
 
-Uwaga: w przypadku korzystania z ZeroTier i jego instalacji na wybranym RbPi klastra oraz zdalnym zamykaniu/startowaniu węzłów klastra należy pamiętać o niezamykaniu malinki hostującej ZeroTier (por. zt-manual.md). W przeciwnym razie stracimy dostp zdalny do klastra. W przypadku zainstalowania ZeroTier (lub podobnej aplikacji) na odrębnej maszynie cały klaster może zostać zamknięty. W przypadku problemów z siecią na terenie akademików PW (niestety, zdarza się z powodu stosowanych polityk bezpieczeństwa) należy interweniować u administratora sieci lokalnej.
+Uwagi: 
 
-**_temperature_control.md_** - wskazowki dotyczace sterowania temperatura Raspberry Pi (opcja)
+W przypadku korzystania z ZeroTier i jego instalacji na wybranym RbPi klastra oraz zdalnym zamykaniu/startowaniu węzłów klastra należy pamiętać o niezamykaniu malinki hostującej ZeroTier (por. zt-manual.md). W przeciwnym razie stracimy dostęp zdalny do klastra. Natomiast w przypadku zainstalowania ZeroTier (lub podobnej aplikacji) na odrębnej maszynie, zamknąć można cały klaster. W przypadku problemów z siecią na terenie akademików PW (niestety, zdarza się z powodu stosowanych polityk bezpieczeństwa) należy interweniować u administratora sieci lokalnej.
+
+Zamykanie klastra poprzez _shutdown_ wyłącza jedynie płytki Raspbbery Pi - nadal pozostają zasilane i pracują TP-Link oraz nakładki PoE. Można je wyłączyć jedynie poprzez wyłączenie zasilania TP-Link. Wtedy jednak zdalne włączenie klastra poprzez restart TP-Link nie będzie już możliwe.
+
+**_temperature_control.md_** - wskazowki dotyczące sterowania temperatura Raspberry Pi (opcja)
 
 **_troubleshooting.txt_** - napotkane problemy i sposób ich rozwiązania; tutaj opisujemy sposoby rozwiązywania problemów wszelakich, które uznajemy za warte skomentowania
 
