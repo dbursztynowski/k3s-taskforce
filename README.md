@@ -48,7 +48,7 @@ Uwagi:
 
 **_zt-config.sh, zt-manual.md_** - skrypt i instrukcja konfiguracji sieci wirtualnej ZeroTier umożliwiającej zdalny dostęp do klastra przez wszystkich uczestników grupy studenckiej. Opisano też sposób zdalnego włączania/wyłączania klastra (włączania/wyłączania malinek).
 
-## Eksperymenty gotowe do testów w ramach rozwoju własnego \[stan listy: 2023.05.17\]
+## Eksperymenty gotowe do testów w ramach rozwoju własnego \[stan listy: 2024.05.25\]
 
 **_5G Core - uruchomienie opensource 5G Core (free5GC) + symulator RAN_ (osoby zainteresowane - kontakt na priv)**
   * instalacja i sprawdzenie działania (np. ping 8.8.8.8) otwartoźródłowej platformy 5G (free5GC) w konfiguracji: (1) 5G core control plane na klastrze K3s/RaspberryPi, (2) 5G core UPF na klastrze K3s/odrębna VM/VirtualBox, (3) emulator sieci RAN (od strony 5G core, ekwiwalent UE+gNodeB) na odrębnej VM/VirtualBox
@@ -102,7 +102,7 @@ Note: when using ZeroTier (see below) and installing it on a Pi in our cluster, 
 
 **_zt-config.sh, zt-manual.md_** - script and instructions for configuring the ZeroTier virtual network enabling remote access to the cluster by all members of a lab team. It also describes how to remotely enable/disable the cluster (enable/disable the Pis).
 
-## Experiments ready (or almost ready) for testing as part of self-learning \[state of the list: 2023.05.17\]
+## Experiments ready (or almost ready) for testing as part of self-learning \[state of the list: 2024.05.25\]
 
 **_5G Core - deploying 5G Core (free5GC) platform + RAN network simulator_ (interested persons - please contact me on priv)**
   * installation and basic tests (e.g. ping 8.8.8.8) of the open source 5G platform (free5GC) in the following configuration: (1) 5G core control plane on the K3s/RaspberryPi cluster, (2) 5G core UPF on the K3s/separate VM/VirtualBox cluster, ( 3) RAN network emulator (equivalent of 5G-radio-network + UE + gNodeB) on a separate VM/VirtualBox
