@@ -94,7 +94,7 @@ The means to achieve these goals is the installation of k3s "bare metal" cluster
 
 **_shutubu.sh_** - executes Ansible _ad-hoc_ command to shutdown the cluster nodes; after invoking _shutubu.sh_, you don't have to wait for Ansible to finish its work, and you can immediately shut down your management host (in this case, Ansible shuts down the cluster autonomously, without contacting back the management host). To use it one only needs to customize the cluster node names in the pi-cluster-install/shutdown-hosts.ini file. **NOTE: This is the recommended (required) form of shutting down the cluster - to reduce the risk of damage caused by a "hard" disconnection of the power supply.** Notice that at the end of the file (in a comment) inctructions to read the raspberry CPU temperature from the command line are also provided (say, a bonus :-) ).
 
-Note: when using ZeroTier (see below) and installing it on a Pi in our cluster, to remotely shut down/start the cluster nodes, remember not to close the Pi that hosts ZeroTier (cf. zt-manual.md). Otherwise remote access to the cluster will be lost .(This note is very specifc to the SPIW lab where students of lab teams can set remote access to their cluster to have more flexibility in experimenting.)
+Note: when using ZeroTier (see below) and installing it on a Pi in our cluster, to remotely shut down/start the cluster nodes, remember not to close the Pi that hosts ZeroTier (cf. zt-manual.md). Otherwise remote access to the cluster will be lost. (This note is very specific to the SPIW lab where the members of lab teams can set remote access to their cluster for experimenting.)
 
 **_temperature_control.md_** - note on temperature control of Raspberry Pi board (optional)
 
