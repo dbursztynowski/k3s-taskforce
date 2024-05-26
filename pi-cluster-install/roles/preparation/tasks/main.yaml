@@ -15,12 +15,22 @@
     line: "{{ hostvars[item].ansible_default_ipv4.address }} {{ item }}"
     state: present
   with_items: "{{ groups.all | difference([inventory_hostname]) }}"
+  
+- name: Enable ip forwarding
+  lineinfile:
+    path: /etc/sysctl.conf
+    search_string: "#net.ipv4.ip_forward=1"
+    line: net.ipv4.ip_forward=1
 
 - name: Update /etc/cloud/cloud.cfg file
   lineinfile:
     dest: /etc/cloud/cloud.cfg
     regexp: "^preserve_hostname:"
     line: "preserve_hostname: true"
+#  register: command_result
+#  failed_when: "'No such file or directory' in command_result.stderr"
+#  
+#- debug: msg="{{command_result.stdout}}"
   
 - name: Clean up netplan config
   replace:
