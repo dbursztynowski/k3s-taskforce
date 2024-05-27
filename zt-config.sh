@@ -19,8 +19,8 @@ fi
 
 if [ $# -eq 2 ]
   then
-
-    echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
+#    echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
+#    echo "net.ipv4.conf.default.rp_filter=2" >> /etc/sysctl.conf
     sysctl -p
 
     iptables -t nat -A POSTROUTING -o $1 -j MASQUERADE
