@@ -17,14 +17,11 @@ Instalację przeprowadzamy dla wybranej raspberrki, najlepiej wybrać jedną z p
 
 ### Uwaga dla maszyn linuksowych
 (w szczególności na Raspberry hostującej VPN, a także na studenckiej maszynie zdalnej)
-
 Należy skonfigurować dwa ustawienia w /etc/sysctl.conf:
-
 a) net.ipv4.ip_forward=1            # odkomentować lub dopisać
 b) net.ipv4.conf.all.rp_filter=2    # odkomentować lub dopisać
    punkt b) jest zgodny z https://docs.zerotier.com/exitnode/#a-linux-gotcha-rp_filter:
-
-Powyższe można zrobić ręcznie, albo powinno być to jednorazowo zrobione przez skrypt ```zt-config.sh```, co opisano dokładnie dalej - w kroku 3) punktu **Udostępnienie clustra**.
+Powyższe można zrobić ręcznie, albo powinno być to jednorazowo zrobione przez skrypt ```zt-config.sh```, co dokładniej opisano w kroku 3) punktu **Udostępnienie clustra** (por. dalej).
 
 ### Właściwa instalacja ZT (na każdej maszynie - czy to raspbbery klastra, czy studencka)
    
