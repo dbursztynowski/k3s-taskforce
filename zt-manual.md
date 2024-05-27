@@ -21,6 +21,7 @@ Instalację przeprowadzamy dla wybranej raspberrki, najlepiej wybrać jedną z p
 Należy skonfigurować dwa ustawienia w /etc/sysctl.conf:
 
 a) ```net.ipv4.ip_forward=1            # odkomentować lub dopisać```
+
 b) ```net.ipv4.conf.all.rp_filter=2    # odkomentować lub dopisać```
 
    punkt b) jest zgodny z https://docs.zerotier.com/exitnode/#a-linux-gotcha-rp_filter:
