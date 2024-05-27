@@ -24,11 +24,11 @@ a) ```net.ipv4.ip_forward=1            # odkomentować lub dopisać```
 
 b) ```net.ipv4.conf.all.rp_filter=2    # odkomentować lub dopisać```
 
-   punkt b) jest zgodny z https://docs.zerotier.com/exitnode/#a-linux-gotcha-rp_filter:
+   punkt b) jest zgodny z https://docs.zerotier.com/exitnode/#a-linux-gotcha-rp_filter
    
 Powyższe można zrobić ręcznie, albo powinno być to jednorazowo zrobione przez skrypt ```zt-config.sh```, co dokładniej opisano w kroku 3) punktu **Udostępnienie clustra** (por. dalej).
 
-### Właściwa instalacja ZT (na każdej maszynie - czy to raspbbery klastra, czy studencka)
+### Właściwa instalacja ZT (na każdej maszynie - czy to raspbbery klastra, czy maszyna studencka)
    
 1. Zainstaluj klienta sieci za pomocą polecenia
 ```bash
