@@ -28,9 +28,12 @@
     regexp: "^preserve_hostname:"
     line: "preserve_hostname: true"
 #  register: command_result
-#  failed_when: "'No such file or directory' in command_result.stderr"
-#  
-#- debug: msg="{{command_result.stdout}}"
+#  failed_when:
+#    - command_result.failed == true
+#    - "'Destination /etc/cloud/cloud.cfg does not exist !' not in command_result.msg"
+#  ignore_errors: true
+#- name: Checking cloud.cfg update result  
+#  debug: msg="{{command_result}}"
   
 - name: Clean up netplan config
   replace:
