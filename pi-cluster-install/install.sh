@@ -191,9 +191,11 @@ fi
 # Note: if you are already using .kube/config file to access other clusters then update it 
 #   manually with the content of the downloaded file config-cluster-$CURRENT_DATE. Remember
 #   to set appropriate context with kubctl before accessing your k3s cluster. If your RbPi
-#   cluster is the only that you will control, you can preserve the default name of the
-#   copied file (config), and no other manual updates will be needed.
-#scp $USER_NAME@$MASTER_NODE:~/.kube/config ~/.kube/config
+#   cluster is the only one that you will control, you can preserve the default name of the
+#   copied file (config), and no other manual updates will be needed. In the later case, 
+#   uncomment the scp command right below and comment out the one currently being active.
+
+#scp $USER_NAME@$MASTER_NODE:~/.kube/config $HOME/.kube/config
 
 scp $USER_NAME@$MASTER_NODE:~/.kube/config $HOME/.kube/config-cluster-$CURRENT_DATE
 echo "Created kubeconfig file $HOME/.kube/config-cluster-$CURRENT_DATE"
