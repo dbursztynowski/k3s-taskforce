@@ -195,8 +195,11 @@ fi
 #   copied file (config), and no other manual updates will be needed. In the later case, 
 #   uncomment the scp command right below and comment out the one currently being active.
 
+# use if kubeconfig file is named config - uncomment these two lines and comment out the three following
 #scp $USER_NAME@$MASTER_NODE:~/.kube/config $HOME/.kube/config
+#echo "Created kubeconfig file $HOME/.kube/config"
 
+# use if kubeconfig file is named config-cluster-$CURRENT_DATE - these three lines to be commented out when using "config" name as above
 scp $USER_NAME@$MASTER_NODE:~/.kube/config $HOME/.kube/config-cluster-$CURRENT_DATE
 echo "Created kubeconfig file $HOME/.kube/config-cluster-$CURRENT_DATE"
 echo "  - remember to rename it to \"config\" or use KUBECONFIG env variable, or run kubectl --kubeconfig <config-file-name> ..."
