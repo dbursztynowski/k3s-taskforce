@@ -195,7 +195,7 @@ fi
 #   copied file (config), and no other manual updates will be needed.
 #scp $USER_NAME@$MASTER_NODE:~/.kube/config ~/.kube/config
 
-scp $USER_NAME@$MASTER_NODE:~/.kube/config $HOME $HOME/.kube/config-cluster-$CURRENT_DATE
+scp $USER_NAME@$MASTER_NODE:~/.kube/config $HOME/.kube/config-cluster-$CURRENT_DATE
 echo "Created kubeconfig file $HOME/.kube/config-cluster-$CURRENT_DATE"
 echo "  - remember to rename it to \"config\" or use KUBECONFIG env variable, or run kubectl --kubeconfig <config-file-name> ..."
 
