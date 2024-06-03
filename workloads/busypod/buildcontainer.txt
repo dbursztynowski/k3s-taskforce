@@ -1,0 +1,3 @@
+# this is how to create the image in Docker Desktop (Windows/Mac OS)
+
+$ docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t dburszty/busycontainer:latest --push .
