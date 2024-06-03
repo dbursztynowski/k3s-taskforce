@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # The script creates a number of busypods with load characteristics defined by the values of arguments being passed.
-# For details about parametrizing the pod refer to the Docker Hub repo: dburszty/artificial-workload-arm64v8:latest
+# For details about parametrizing the pod refer to the Docker Hub repo: 
+#   https://hub.docker.com/repository/docker/dburszty/artificial-workload-amd64/general
 
 PODS_TO_CREATE=1
 NAMESPACE="congestion"
