@@ -8,7 +8,7 @@
 PODS_TO_CREATE=1
 
 # The inter-pod arrival time (sleeptime) will be equal to ( $BASE_INTERPOD_TIME + random-duration-from[0..1] seconds )
-# One can modify this strategy according to her/his needs
+# We randomize the sleep time to desync the pods a little bit more. One can modify this strategy according to her/his needs.
 BASE_INTERPOD_TIME=2.5
 
 # Namespace to be created
@@ -27,17 +27,20 @@ cont=true
 while $cont
 do
 
+  # SET POD NAME ==========
   # pod name will contain: <fixed prefix>-<consecutive integer number>-<unigue suffix expressing milliseconds elapsed from Epoch>
   i=$((i+1))
   name="$PODPREFIX-$i-"$(date +%s%3N)
   echo $name
-  
+
+  # RUN THE POD ===========
   # examples 
   #kubectl run -n $NAMESPACE $name --image=$IMAGE --restart=Never -- 10000 5 oiter=1
   #with default values: kubectl run -n $NAMESPACE $name --image=$IMAGE --restart=Never
   #with run time equal ~30 sec: 
   kubectl run -n $NAMESPACE $name --image=$IMAGE --restart=Never -- 10000 5 otime=30
 
+  # SLEEP TIME ============
   if [ $i != $PODS_TO_CREATE ]; then
     # we set sleeptime = $BASE_INTERPOD_TIME + random-number[0 ... 1] seconds
     base=$BASE_INTERPOD_TIME
