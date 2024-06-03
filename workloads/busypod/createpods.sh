@@ -43,9 +43,8 @@ do
   # SLEEP TIME ============
   if [ $i != $PODS_TO_CREATE ]; then
     # we set sleeptime = $BASE_INTERPOD_TIME + random-number[0 ... 1] seconds
-    base=$BASE_INTERPOD_TIME
     denom=32767                # because $RAND is from the interval [0..32767]
-    sleeptime=$(echo "scale=4; $base + $RANDOM / $denom" | bc)   # use bc - Basic Calculator utility for floating point
+    sleeptime=$(echo "scale=4; $BASE_INTERPOD_TIME + $RANDOM / $denom" | bc)   # use bc - Basic Calculator utility for floating point
     #echo "sleep = $sleeptime"
     sleep $sleeptime
   else
