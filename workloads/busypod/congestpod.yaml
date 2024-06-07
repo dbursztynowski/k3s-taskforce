@@ -1,0 +1,102 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2024-06-03T18:17:41Z"
+  labels:
+    run: congest-1-1717438660805
+  name: congest-1-1717438660805
+  namespace: congestion
+  resourceVersion: "75252"
+  uid: 6260702b-db66-4695-b561-ad8aa546caea
+spec:
+  containers:
+  - args:
+    - "10000"
+    - "5"
+    - otime=180
+    image: dburszty/artificial-workload-arm64v8:latest
+    imagePullPolicy: Always
+    name: congest-1-1717438660805
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-s4g62
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: turing03
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Never
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-s4g62
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-06-03T18:17:41Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-06-03T18:17:44Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-06-03T18:17:44Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-06-03T18:17:41Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://39fce307fccf42311f6fe94cd7410c46db925ef964dcfb08c06cdb8d74f6451b
+    image: docker.io/dburszty/artificial-workload-arm64v8:latest
+    imageID: docker.io/dburszty/artificial-workload-arm64v8@sha256:c39c4e39819ea1ad1ea566c6f121d66e654d16d33cec3f7f5f5198c8400b3da6
+    lastState: {}
+    name: congest-1-1717438660805
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-06-03T18:17:44Z"
+  hostIP: 192.168.2.33
+  phase: Running
+  podIP: 10.42.1.15
+  podIPs:
+  - ip: 10.42.1.15
+  qosClass: BestEffort
+  startTime: "2024-06-03T18:17:41Z"

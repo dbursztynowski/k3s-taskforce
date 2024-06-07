@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# The script creates a number of busypods with load characteristics defined by the values of arguments being passed.
+# For details about parametrizing the pod refer to the Docker Hub repo: 
+#   https://hub.docker.com/repository/docker/dburszty/artificial-workload-amd64/general
+
+# NOTE: this version generates slightly more randomized stream of pods: both inter-pod arrival times and pode xecution 
+#       imes are randomised with average values approx. 60 sec. and 600. sec, respectively.
+
+# Adjust the number of pods to be created; notice one can also modify the while loop to generate an "infinite" number of pods.
+PODS_TO_CREATE=10   # enable incrementing i to put this into force
+
+# The inter-pod arrival time (sleeptime) will be equal to ( $BASE_INTERPOD_TIME + random-duration-from[0..1] seconds )
+# One can modify this strategy according to her/his needs
+#BASE_INTERPOD_TIME=2.5     # in seconds; standard
+BASE_INTERPOD_TIME=60       # in seconds
+
+# Namespace to be created
+NAMESPACE="congestion"
+
+# Pod's name prefix
+PODPREFIX="congest"
+# after reaching this number of succeded pods they will be  deleted
+SUCCEDED_PODS_THRESHOLD=10
+
+# Choose appropriate architecture: amd64 or arm64v8
+IMAGE="dburszty/artificial-workload-arm64v8:latest"
+
+kubectl create namespace $NAMESPACE > /dev/null 2>&1    # > /dev/null 2>&1   - ignores command output
+
+i=0
+j=0
+cont=true
+while $cont
+do
+
+  # pod name will contain: <fixed prefix>-<consecutive integer number>-<unigue suffix expressing milliseconds elapsed from Epoch>
+  #i=$((i+1))
+  j=$((j+1))
+  name="$PODPREFIX-$i-"$(date +%s%3N)
+  echo $name
+
+  # examples
+  #kubectl run -n $NAMESPACE $name --image=$IMAGE --restart=Never -- 10000 5 oiter=1
+  #with default values: kubectl run -n $NAMESPACE $name --image=$IMAGE --restart=Never
+  #with run time equal ~30 sec:
+  denom=32767                # because $RAND is from the interval [0..32767]
+  otime=$(echo "scale=2; 200+800*($RANDOM / $denom)" | bc) 
+  kubectl run -n $NAMESPACE $name --image=$IMAGE --restart=Never -- 10000 10 otime=$otime
+
+  if [ $i != $PODS_TO_CREATE ]; then
+    # we set sleeptime = $BASE_INTERPOD_TIME + random-number[0 ... 1] seconds
+    base=$BASE_INTERPOD_TIME
+    sleeptime=$(echo "scale=4; 1+2*$base*($RANDOM / $denom)" | bc)   # use bc - Basic Calculator utility for floating point
+    #echo "sleep = $sleeptime"
+    sleep $sleeptime
+  else
+    cont=false
+  fi
+
+  # delete succeded pods from time to time
+  if [ $j == $SUCCEDED_PODS_THRESHOLD ]; then
+    j=0
+    kubectl delete -n $NAMESPACE pod --field-selector=status.phase==Succeeded
+    echo "Deleted succeeded pods."
+  fi
+
+done
+
+# delete succeded pods from time to time
+kubectl delete -n $NAMESPACE pod --field-selector=status.phase==Succeeded
+echo "Deleted succeeded pods."
+
+echo "Exiting, created pods: $i."
+
