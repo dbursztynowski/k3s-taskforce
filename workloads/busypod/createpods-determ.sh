@@ -2,7 +2,8 @@
 
 # The script creates a number of busypods with load characteristics defined by the values of arguments being passed.
 # For details about parametrizing the pod refer to the Docker Hub repo: 
-#   https://hub.docker.com/repository/docker/dburszty/artificial-workload-amd64/general
+#   https://hub.docker.com/repository/docker/dburszty/artificial-workload-amd64/general or
+#   https://hub.docker.com/repository/docker/dburszty/artificial-workload-arm64v8/general
 
 # Adjust the number of pods to be created; notice one can also modify the while loop to generate an "infinite" number of pods.
 PODS_TO_CREATE=10
