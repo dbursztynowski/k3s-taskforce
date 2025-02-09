@@ -20,16 +20,22 @@
   register: k3s_installed
     
 - name: Install k3s on master
-  # 'master' can be recognized by the parameter format as well as by the parameter 'server' in the INSTALL_K3S_EXEC directive
-  # --node-taint CriticalAddonsOnly=true:NoExecute will prevent orinary pods to be placed on the control (master) unless 'tolerations' 
-  # directive will be used in the pod selector section of the deployment (we will see it thr MetalLB/Traefik installation procedure) 
+  ### 'master' can be recognized by the parameter format as well as by the parameter 'server' in the INSTALL_K3S_EXEC directive
+  # --node-taint CriticalAddonsOnly=true:NoExecute will prevent orinary pods to be placed on the control (master) unless 'tolerations'
+  # directive will be used in the pod selector section of the deployment (we will see it thr MetalLB/Traefik installation procedure)
+  #   on RPi5, CriticalAddonsOnly=true:NoExecute can be suppressed for more powerfull processor of the RPi5 platform
   # note: K3s bundles its own containerd by default, no need to install it separately
+  ### enable InPlacePodVerticalScaling capability:
+  # curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="=10.42.0.0/16  --kube-apiserver-arg=feature-gates=InPlacePodVerticalScaling=true" sh -
+  # for RPi4:      INSTALL_K3S_EXEC="server --node-taint CriticalAddonsOnly=true:NoExecute --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller" sh -s -
+  # for RPi5:      INSTALL_K3S_EXEC="server --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller --kube-apiserver-arg=feature-gates=InPlacePodVerticalScaling=true" sh -s -
+
   shell:
     cmd: >
       curl -sfL https://get.k3s.io | 
       INSTALL_K3S_VERSION={{ k3s_version }} 
-      INSTALL_K3S_EXEC="server --node-taint CriticalAddonsOnly=true:NoExecute --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller"
-      sh -s -
+#for RPi4      INSTALL_K3S_EXEC="server --node-taint CriticalAddonsOnly=true:NoExecute --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller" sh -s -
+      INSTALL_K3S_EXEC="server --node-taint CriticalAddonsOnly=true:NoExecute --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller --kube-apiserver-arg=feature-gates=InPlacePodVerticalScaling=true" sh -s -
   when: not k3s_installed.stat.exists
 
 - name: Wait for node-token to be created
