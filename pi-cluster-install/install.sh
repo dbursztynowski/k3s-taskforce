@@ -94,7 +94,7 @@ if [ ! -f $CONFIG_FILE ]; then
     chmod 600 $CONFIG_FILE
 fi
 
-# check for the presence of your public key; if you do not have one a new key will be created
+# check for the presence of your public key; if you do not have one a new key without a passphrase will be created
 echo "handling public keys"
 if [ ! -f $SSH_KEY_FILE ]; then
     ssh-keygen -q -t rsa -b 4096 -N "" -f $SSH_KEY_FILE
@@ -187,7 +187,7 @@ else
     echo "Directory $HOME/.kube already exists"
 fi
 
-# download the config file (needed by kubectl) form the master node of the cluster
+# Download the config file (needed by kubectl) form the master node of the cluster.
 # Note: if you are already using .kube/config file to access other clusters then update it 
 #   manually with the content of the downloaded file config-cluster-$CURRENT_DATE. Remember
 #   to set appropriate context with kubctl before accessing your k3s cluster. If your RbPi
@@ -195,11 +195,19 @@ fi
 #   copied file (config), and no other manual updates will be needed. In the later case, 
 #   uncomment the scp command right below and comment out the one currently being active.
 
-# use if kubeconfig file is named config - uncomment these two lines and comment out the three following
+# IMPORTANT: use only one of the options (1) (2) defined below.
+# Option (2) is safer for it does not overwrite anything.
+
+# (1) Clean config file:
+# Use if kubeconfig file on the management host does not exist or is named config and is to be overwritten. If so, 
+# uncomment the following two commands and comment out the three ones in the part "ALTERNATIVE" below.
 #scp $USER_NAME@$MASTER_NODE:~/.kube/config $HOME/.kube/config
 #echo "Created kubeconfig file $HOME/.kube/config"
 
-# use if kubeconfig file is named config-cluster-$CURRENT_DATE - these three lines to be commented out when using "config" name as above
+# (2) ALTERNATIVE to the above option:
+# Use if kubeconfig file exists on the management host and is named config; in this case config file of your cluster 
+# named config-cluster-$CURRENT_DATE will be created on the management host (prevents overwritting). The following
+# three commands have to be commented out when using the "Clean config file" option as specified above.
 scp $USER_NAME@$MASTER_NODE:~/.kube/config $HOME/.kube/config-cluster-$CURRENT_DATE
 echo "Created kubeconfig file $HOME/.kube/config-cluster-$CURRENT_DATE"
 echo "  - remember to rename it to \"config\" or use KUBECONFIG env variable, or run kubectl --kubeconfig <config-file-name> ..."
