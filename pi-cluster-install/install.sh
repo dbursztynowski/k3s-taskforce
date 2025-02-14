@@ -1,4 +1,4 @@
-work segment#!/bin/bash
+#!/bin/bash
 
 # READ ALL THE NOTES BELOW:
 
