@@ -74,7 +74,7 @@ fi
   #   (in our case, this happens on encountering a line with RbPi prefix - to check it, run $ sudo nmap -sn $NETWORK).
   # Note: if your management host is a VM then its network interface MUST be bridged not NAT. This is
   #   required so that nmap utility has proper visibility of the network.
-echo "discovering the hosts in the given subnet"
+echo "discovering RPi hosts in the given subnet and extracting their IP/MAC addresses"
 sudo nmap -sn $NETWORK | awk '/^Nmap scan report for/{ipaddress=$NF}/28:CD:C1|B8:27:EB|D8:3A:DD|DC:A6:32|E4:5F:01|2C:CF:67/{print ipaddress}' | tr -d "()" > $HOST_FILE 
 HOSTS_NUMBER="$(wc -l $HOST_FILE | awk '{print $1}')"
 
