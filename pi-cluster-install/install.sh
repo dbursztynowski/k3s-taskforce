@@ -20,7 +20,7 @@
 
 NETWORK="$1"                          # cluster CIDR/mask, script parameter; remember to set it in the command line
 USER_NAME="ubuntu"                    # adjust to your settings, user login for your cluster hosts
-PASSWORD="raspberrypi"                # adjust to your settings, user password for your cluster RbPi-s
+PASSWORD="ubuntu"                     # adjust to your settings, user password for your cluster RbPi-s
 HOST_FILE="./cluster"                 # auxiliary file for storing IPs addresses of your hosts (needed by the script)
 INVENTORY_FILE="inventory/hosts.ini"  # Ansible inventory file (created by the script from scratch)
 CONFIG_FILE="$HOME/.ssh/config"       # ssh config file to store [hostname IP] pairs for RbPi hosts (to ssh to the RbPi-s)
