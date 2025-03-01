@@ -32,9 +32,9 @@ Drogą do osiągnięcia tych celów jest instalacja klastra k3s "bare metal" na 
 
 **_instrukcje/_** - instrukcje laboratiryjne (podstawa do realizacji ćwiczeń)
 
-**_pi-cluster-install/_** - źródłowe pliki instalacyje k3s (bash, Ansible); jednym z oczekiwań (i efektów nauczania) odnośnie tej części laborki jest analiza szablonów Ansible w celu zapoznania się z ich deklaratywną naturą (na tle wybitnie ipmeratywnych skryptów bash)
-
 **_manifests.db/_** - manifesty Kubernetes dla instalowanych modułów, testowanych wdrożeń (deploymentów), przykłady ćwiczeń laborkowych (na razie _zajawka_ - to co bezpośrednio wynika z obecnej wersji instrukcji i służy głównie poznaniu mechanizów "sieciowych" Kubernetes). Obecnie jest to dokładna wersja plików, które w ramach testów posłużyły do pełnego uruchmienia labu na dwa dni przed otwarciem zajęć. Zostawiono je w repozytorium do dyspozycji studentów tylko dla celów prównawczych w przypadku napotkania problemów. Zasadniczo oczekuje się jednak, że zespoły będą dążyć do wykonania wszystkich ćwiczeń **samodzielnie** na podstawie instrukcji, bez korzystania z tych plików metodą _copy-paste_. 
+
+**_pi-cluster-install/_** - źródłowe pliki instalacyje k3s (bash, Ansible); jednym z oczekiwań (i efektów nauczania) odnośnie tej części laborki jest analiza szablonów Ansible w celu zapoznania się z ich deklaratywną naturą (na tle wybitnie ipmeratywnych skryptów bash)
 
 **_shutubu.sh_** - wywołanie w trybie _ad-hoc_ komendy Ansible wyłączającej (_shutdown_) węzły klastra; po jej wywołaniu nie trzeba czekać na zakończenie pracy Ansible i w razie czego można od razu zamknąć swoją maszynę management-host (w tym przypadku Ansible zamyka klaster autonomicznie, bez kontaktowania się zwrotnie z management-host). Trzeba tylko dostosować do swojego przypadku nazwy węzłów klastra w pliku pi-cluster-install/shutdown-hosts.ini. **To jest zalecana forma wyłączania klastra - aby ograniczyć ryzyko wystąpienia uszkodzeń wskutek "twardego" odłączenia zasilania.** Na końcu pliku w komentarzu podano też sposób odczytywania temperatury CPU malinki z wiersza poleceń będąc "na" malince. 
 
@@ -90,9 +90,9 @@ The means to achieve these goals is the installation of k3s "bare metal" cluster
 
 **_instrukcje/_** - lab guides (the main part of the lab)
 
-**_pi-cluster-install/_** - k3s installation source files (bash, Ansible); one of the goals expected from running this part of the lab is to analyze the Ansible templates in order to get acquainted with the principles of declarative approach to task automation. Note: This will be further extended based on Kubernetes manifest examples and later on (in other labs) based on OpenStack HOT).
-
 **_manifests/_** - Kubernetes manifests for the modules installed during the lab, tested implementations (deployments), examples of lab exercises (for now, a simple _teaser_ that strictly corresponds to the current version of the lab guides and is mainly related to learning Kubernetes networking mechanisms)
+
+**_pi-cluster-install/_** - k3s installation source files (bash, Ansible); one of the goals expected from running this part of the lab is to analyze the Ansible templates in order to get acquainted with the principles of declarative approach to task automation. Note: This will be further extended based on Kubernetes manifest examples and later on (in other labs) based on OpenStack HOT).
 
 **_shutubu.sh_** - executes Ansible _ad-hoc_ command to shutdown the cluster nodes; after invoking _shutubu.sh_, you don't have to wait for Ansible to finish its work, and you can immediately shut down your management host (in this case, Ansible shuts down the cluster autonomously, without contacting back the management host). To use it one only needs to customize the cluster node names in the pi-cluster-install/shutdown-hosts.ini file. **NOTE: This is the recommended (required) form of shutting down the cluster - to reduce the risk of damage caused by a "hard" disconnection of the power supply.** Notice that at the end of the file (in a comment) inctructions to read the raspberry CPU temperature from the command line are also provided (say, a bonus :-) ).
 
