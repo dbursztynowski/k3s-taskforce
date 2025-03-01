@@ -4,7 +4,7 @@
 
 In this experiment, we run a set of pods which we call workload or busy pods and monitor the occupacy of cluster resources as CPU and RAM (but more metrics can be monitored).
 
-Our busypods are deployed by a bash script using our custom manifest of the pod. The script loops according to parameters values encoded inside it. Details regarding how our container works (how it is created, etc.), are given in bash scripts contained in folder busypod and the references cited therein. Please, read this information. After studying the scripts and reading how the pod's container works, you will be able to change the parameters to regulate the load generated in cluster and (after modifying the code of the container application which is simple Python code) even the overall behavior of the container.
+Our busypods are deployed by a bash script using our custom manifest of the pod. The script loops according to parameters values encoded inside it. Details regarding how our container works (how it is created, etc.), are given in bash scripts contained in folder busypod and the references cited therein. Please, read this information. After studying the scripts and reading how the pod's container works, you will be able to change the parameters to regulate the load generated in the cluster and (after modifying the code of the container application which is written in Python) even the overall behavior of the container. Do not hesitate to customize the script(s) or the container application according to your needs.
 
 ### Tasks to do:
 
