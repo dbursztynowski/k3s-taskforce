@@ -71,5 +71,5 @@ done
 kubectl delete -n $NAMESPACE pod --field-selector=status.phase==Succeeded
 echo "Deleted succeeded pods."
 
-echo "Exiting, created pods: $i."
+echo "Exiting, number of created pods: $i."
 
