@@ -9,9 +9,9 @@
 
 #The characteristics of the load are determined by container parameters (see the links above) and by the variables defined below.
 
-# Adjust the number of pods to be created
+# Adjust the number of pods to be created.
 # Notice that setting PODS_TO_CREAT to negative number makes the while loop generate an "infinite" number of pods.
-PODS_TO_CREATE=10
+PODS_TO_CREATE=1
 
 # The inter-pod arrival time (sleeptime) will be equal to ( $BASE_INTERPOD_TIME + random-duration-from[0..1] seconds )
 # One can modify this strategy according to her/his needs
