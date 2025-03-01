@@ -1,9 +1,13 @@
 #!/bin/bash
 
+###################################################
+
 # The script creates a number of busypods with load characteristics defined by the values of arguments being passed.
-# For details about parametrizing the pod refer to the Docker Hub repo: 
+# For details about parametrizing the container refer to the Docker Hub repo: 
 #   https://hub.docker.com/repository/docker/dburszty/artificial-workload-amd64/general or
 #   https://hub.docker.com/repository/docker/dburszty/artificial-workload-arm64v8/general
+
+#The characteristics of the load are determined by container parameters (see the links above) and by the variables defined below.
 
 # Adjust the number of pods to be created; notice one can also modify the while loop to generate an "infinite" number of pods.
 PODS_TO_CREATE=10
@@ -20,6 +24,8 @@ PODPREFIX="congest"
 
 # Choose appropriate architecture: amd64 or arm64v8
 IMAGE="dburszty/artificial-workload-arm64v8:latest"
+
+###################################################
 
 kubectl create namespace $NAMESPACE > /dev/null 2>&1    # > /dev/null 2>&1   - ignores command output
 
