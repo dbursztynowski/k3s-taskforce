@@ -1,4 +1,4 @@
-## **Monitoring resource level metrics
+# Monitoring resource level metrics
 
 ### Overall
 
