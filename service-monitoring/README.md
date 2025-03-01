@@ -1,2 +1,2 @@
-# Service-level monitoring experiment
+# Monitoring service-level metrics
 ## TODO
