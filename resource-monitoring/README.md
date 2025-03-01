@@ -6,5 +6,8 @@ Our busypods are created from our custom manifest. Details regarding how those p
 
 Tasks to do:
 
+1. Read busypod specification and try to calculate pod parameters to load the cluster to a given level, e.g., 30% utilization of RAM.
+2. Run the script deploying the pods and check if the load visible in Prometheus matches (more or less) the assumed value. If the difference is huge, reevalute pod parameters and re-run the experiment to check cluster load again.
+
 
 
