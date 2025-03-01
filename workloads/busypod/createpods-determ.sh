@@ -59,5 +59,5 @@ do
   
 done
 
-echo "Exiting, created pods: $i."
+echo "Exiting, number of created pods: $i."
 
