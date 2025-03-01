@@ -1,16 +1,20 @@
 #!/bin/bash
 
-# The script loops and creates a number of busypods with load characteristics defined by the values of arguments being passed.
-# For details about parametrizing the pod refer to the Docker Hub repo: 
-#   https://hub.docker.com/repository/docker/dburszty/artificial-workload-amd64/general  or
+###################################################
+
+# The script creates a number of busypods with load characteristics defined by the values of arguments being passed.
+# For details about parametrizing the container refer to the Docker Hub repo: 
+#   https://hub.docker.com/repository/docker/dburszty/artificial-workload-amd64/general or
 #   https://hub.docker.com/repository/docker/dburszty/artificial-workload-arm64v8/general
 
-# Adjust the number of pods to be created; notice one can also modify the while loop to generate an "infinite" number of pods.
-# Notice that setting PODS_TO_CREATE to negative number makes the while loop infinite (see the condition in line 46) 
-PODS_TO_CREATE=1
+#The characteristics of the load are determined by container parameters (see the links above) and by the variables defined below.
+
+# Adjust the number of pods to be created
+# Notice that setting PODS_TO_CREAT to negative number makes the while loop generate an "infinite" number of pods.
+PODS_TO_CREATE=10
 
 # The inter-pod arrival time (sleeptime) will be equal to ( $BASE_INTERPOD_TIME + random-duration-from[0..1] seconds )
-# We randomize the sleep time to desync the pods a little bit more. One can modify this strategy according to her/his needs.
+# One can modify this strategy according to her/his needs
 BASE_INTERPOD_TIME=2.5
 
 # Namespace to be created
@@ -21,6 +25,8 @@ PODPREFIX="congest"
 
 # Choose appropriate architecture: amd64 or arm64v8
 IMAGE="dburszty/artificial-workload-arm64v8:latest"
+
+###################################################
 
 kubectl create namespace $NAMESPACE > /dev/null 2>&1    # > /dev/null 2>&1   - ignores command output
 
@@ -55,4 +61,4 @@ do
   
 done
 
-echo "Exiting, created pods: $i."
+echo "Exiting, number of created pods: $i."
