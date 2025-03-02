@@ -21,7 +21,9 @@ Here we are deploying the 5G core network. In addition, we are configuring its d
 TBC
 
 ## Deploy UERANSIM
-Here we are deploying the RAN network emulator. All artifacts are configured so that the RAN emulator can smoothly connect to the core network. Then we will manually change the number of active (connected) UEs (user terminals) and we will monitor their number by observing a selected metric in the core network (in fact, we will monitor the _active-sessions_ metric provided by the AMF function in the 5G core).
+Here we are deploying the RAN network emulator. All artifacts are configured so that the RAN emulator can smoothly connect to the core network.
+
+Later, we will use UERANSIM to manually change the number of active (connected) UEs (user terminals) and we will monitor their number by observing a selected metric in the core network (in fact, we will monitor the _active-sessions_ metric provided by the AMF function in the 5G core) - refer below to _Create/delete UE terminals_ and _Monitor active sessions_.
 
 TBC
 
