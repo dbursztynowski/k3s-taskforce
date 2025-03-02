@@ -4,7 +4,7 @@ The main objective of this part of the laboratory is to provide basic knowledge 
 
 The RAN part of the network will be emulated using UERANSIM, 5G core will be built upon containerized Open5GS platform, and the deployment of both components will be based on Gradiant Helm charts.
 
-For service level orchestration is our only focus in this lab, the 5G network configuration and deployment topic is addressed very briefly. We will cover only the absolute minimum necessary to get the 5G environment up and running. Then we will monitor selected service-level metric using Prometheus. This will underpin our understanding of service monitoring in preparation to Project 2.
+Since the focus of this lab is on service level orchestration, the topic of 5G network configuration and deployment is only very briefly discussed. We will only cover the absolute minimum necessary to enable a 5G environment and manage the number of active terminals in the network. Then we will monitor the selected service-level metric using Prometheus. This will underpin our understanding of service monitoring in preparation to Project 2.
 
 TBC
 
