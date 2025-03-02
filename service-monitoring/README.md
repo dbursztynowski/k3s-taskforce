@@ -1,5 +1,5 @@
 # Monitoring service-level metrics
-## Goals
+## Introduction
 The main objective of this part of the laboratory is to provide basic knowledge of service monitoring that can be used during service orchestration where decision-making is based on service level indicators. This should be clearly distinguished from resource monitoring and resource-level management/orchestration. The scenario involves monitoring emulated 5G network.
 
 The RAN part of the network will be emulated using UERANSIM, 5G core will be built upon containerized Open5GS platform, and the deployment of both components will be based on Gradiant Helm charts.
