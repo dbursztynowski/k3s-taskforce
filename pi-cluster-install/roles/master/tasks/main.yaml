@@ -21,7 +21,7 @@
     
 - name: Install k3s on master
   ### 'master' can be recognized by the parameter format as well as by the parameter 'server' in the INSTALL_K3S_EXEC directive
-  # --node-taint CriticalAddonsOnly=true:NoExecute will prevent orinary pods to be placed on the control (master) unless 'tolerations'
+  # --node-taint CriticalAddonsOnly=true:NoExecute will prevent ordinary pods to be placed on the control (master) unless 'tolerations'
   # directive will be used in the pod selector section of the deployment (we will see it thr MetalLB/Traefik installation procedure)
   #   on RPi5, CriticalAddonsOnly=true:NoExecute can be suppressed for more powerfull processor of the RPi5 platform
   # note: K3s bundles its own containerd by default, no need to install it separately
