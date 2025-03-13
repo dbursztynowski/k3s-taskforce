@@ -1,5 +1,8 @@
 # Zbuduj klaster Kubernetes k3s "bare metal" na Raspberry Pi używając Ansible
 ## K3s Ansible Playbook
+
+Instalacja jest dokładniej opisana w instrukcji Part 1 (P1) w [tym katalogu](../instrukcje).
+
 Skrypt automatycznie wykrywa urządzenia Raspberry Pi w sieci podanej jako argument skryptu na podstawie prefiksów ich adresów MAC i ustanawia z nimi połączenia ssh. Następnie instaluje na tych urządzeniach k3s.
 
 UWAGA: Ze względu na sposób identyfikacji hostów klastra (adres MAC malinki) wymagane jest, aby podczas instalacji klastra w danej sieci nie działały inne urządzenia Raspberry Pi.
@@ -25,7 +28,7 @@ Na końcu działania skrypt ściąga z klastra plik config (na potrzeby narzędz
 
 # Build a Kubernetes k3s "bare metal" cluster on a Raspberry Pi using Ansible
 
-NOTE: This description is also contained in the lab guide Part 1 in [this directory](../instrukcje).
+NOTE: This description is also contained in the lab guide Part 1 (P1) in [this directory](../instrukcje).
 
 ## K3s Ansible Playbook
 The script automatically detects Raspberry Pi devices in the network provided as an argument to the script based on their MAC address prefixes and establishes ssh connections with them. It then installs k3s on these devices.
