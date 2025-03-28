@@ -5,7 +5,7 @@ metadata:
   namespace: kube-system
 spec:
   entryPoints:
-  - web
+  - traefik
   routes:
   - kind: Rule
     match: PathPrefix(`/dashboard`) || PathPrefix(`/api`)

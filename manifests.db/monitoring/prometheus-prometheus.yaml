@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/instance: k8s
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 2.41.0
+    app.kubernetes.io/version: 2.54.1
   name: k8s
   namespace: monitoring
 spec:
@@ -18,7 +18,7 @@ spec:
       port: web
   enableFeatures: []
   externalLabels: {}
-  image: quay.io/prometheus/prometheus:v2.41.0
+  image: quay.io/prometheus/prometheus:v2.54.1
   nodeSelector:
     kubernetes.io/os: linux
   podMetadata:
@@ -27,18 +27,22 @@ spec:
       app.kubernetes.io/instance: k8s
       app.kubernetes.io/name: prometheus
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 2.41.0
+      app.kubernetes.io/version: 2.54.1
   podMonitorNamespaceSelector: {}
   podMonitorSelector: {}
   probeNamespaceSelector: {}
   probeSelector: {}
-  replicas: 1
-  retention: 2d
+  ## SPIW adaptations
+#  replicas: 2
+  replicas: 1              # one replica will be sufficient in our case
+  retention: 2d            # we probably do not need longer retention time 
   resources:
     requests:
       memory: 400Mi
   ruleNamespaceSelector: {}
   ruleSelector: {}
+  scrapeConfigNamespaceSelector: {}
+  scrapeConfigSelector: {}
   securityContext:
     fsGroup: 2000
     runAsNonRoot: true
@@ -46,11 +50,8 @@ spec:
   serviceAccountName: prometheus-k8s
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector: {}
-  version: 2.41.0
-# SPIW addition: define storage which suits our basic needs and allows to control the amount of disk 
-# space used; # unfortunately, at the time of this writing (Oct. 2022) the declaration of 2Gi sharp 
-# will be ignored in k3s and as a workaround we use a soft control in the form of retention property
-# set to 2 days (see above)
+  version: 2.54.1
+  ## SPIW storage
   storage:
     volumeClaimTemplate:
       spec:
