@@ -1,5 +1,6 @@
 ---
-- name: Set Ubuntu hostname for nodes (equal to the inventory_hostname, i.e. the name form hosts.yaml file)
+- name: Set Ubuntu hostname for worker nodes
+  # Hostname will be equal to the inventory_hostname, i.e. the name from hosts.ini file.
   hostname:
     name: "{{ inventory_hostname }}"
     #formerly was kpi09{{ worker_number|int + 2 }}
@@ -10,7 +11,7 @@
   register: k3s_installed
 
 - name: Install k3s-agent on workers (agents)
-# note: K3s bundles its own containerd by default, no need to install it separately
+  # note: K3s bundles its own containerd by default, no need to install it separately
   shell:
     cmd: >
       curl -sfL https://get.k3s.io |

@@ -98,6 +98,8 @@ fi
 echo "handling public keys"
 if [ ! -f $SSH_KEY_FILE ]; then
     ssh-keygen -q -t rsa -b 4096 -N "" -f $SSH_KEY_FILE
+    chmod 600 $SSH_KEY_FILE
+    chmod 644 $SSH_KEY_FILE".pub"
 fi
 
 if [ ! -f  $SSH_KEY_FILE ]; then

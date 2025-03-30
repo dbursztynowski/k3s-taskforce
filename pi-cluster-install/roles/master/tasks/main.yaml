@@ -9,7 +9,8 @@
     to_port: 6443
     proto: tcp
 
-- name: Set Ubuntu hostname for the master (equal to inventory_hostname, i.g., name from the hosts.yaml)
+- name: Set Ubuntu hostname for the master
+  # Hostname will be equal to the inventory_hostname, i.e. the name from hosts.ini file.
   hostname:
     name: "{{ inventory_hostname }}"
     #previously it was explicitly kpi0x1
@@ -30,11 +31,21 @@
   # for RPi4:      INSTALL_K3S_EXEC="server --node-taint CriticalAddonsOnly=true:NoExecute --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller --kube-apiserver-arg=feature-gates=InPlacePodVerticalScaling=true" sh -s -
   # for RPi5:      INSTALL_K3S_EXEC="server                                                --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller --kube-apiserver-arg=feature-gates=InPlacePodVerticalScaling=true" sh -s -
 
+  ## For RPi 4
+#  shell:
+#    cmd: >
+#      curl -sfL https://get.k3s.io | 
+#      INSTALL_K3S_VERSION={{ k3s_version }} 
+#      INSTALL_K3S_EXEC="server --node-taint CriticalAddonsOnly=true:NoExecute --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller --kube-apiserver-arg=feature-gates=InPlacePodVerticalScaling=true" 
+#      sh -s -
+#  when: not k3s_installed.stat.exists
+  
+  ## For RPi 5 (as there are only 3 Pis, we suppress --node-taint CriticalAddonsOnly=true:NoExecute)
   shell:
     cmd: >
       curl -sfL https://get.k3s.io | 
       INSTALL_K3S_VERSION={{ k3s_version }} 
-      INSTALL_K3S_EXEC="server --node-taint CriticalAddonsOnly=true:NoExecute --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller --kube-apiserver-arg=feature-gates=InPlacePodVerticalScaling=true" 
+      INSTALL_K3S_EXEC="server --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller --kube-apiserver-arg=feature-gates=InPlacePodVerticalScaling=true" 
       sh -s -
   when: not k3s_installed.stat.exists
 

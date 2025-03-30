@@ -1,6 +1,6 @@
 ---
-# old k3s_version: v1.31.6+k3s1
-k3s_version: v1.32.1+k3s1 
+k3s_version: v1.31.6+k3s1
+# k3s_version: v1.32.1+k3s1 <=== InPlacePodScaling does not work in this version
 
 # ansible_user: ubuntu
 
