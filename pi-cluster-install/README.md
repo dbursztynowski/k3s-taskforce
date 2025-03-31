@@ -42,7 +42,7 @@ To run the script, use the following command in the Bash shell
 ```bash
    ./install.sh <network>
 ```
-Where in place \<network\> you need to enter the network address together with the mask, e.g. 192.168.1.0/24. This script, after performing the initial configurations (e.g. creating files in the Ansible inventory or installing ssh keys on cluster hosts - see comments inside the script), calls the basic installation playbook for k3s:
+Where in place \<network\> you need to enter the network address together with the mask, e.g. 192.168.1.0/24. This script, after performing the initial configurations (e.g. creating files in the Ansible inventory or installing ssh keys on cluster hosts - see comments inside the script), invokes the basic installation playbook for k3s:
 
 ```bash
    ansible-playbook -i inventory/hosts.ini install_k3s.yaml --extra-vars "network=$NETWORK"
