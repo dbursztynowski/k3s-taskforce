@@ -1,7 +1,7 @@
 # k3s-taskforce
 
 ## **Ogólnie**
-[(English version)](https://github.com/dbursztynowski/k3s-taskforce#english-version)
+[(English version)](./README.md#english-version)
 
 * Repozytorium dla studentów SPIW. Opisy postępowania w ramach tego labu podano w instrukcjach.
 
