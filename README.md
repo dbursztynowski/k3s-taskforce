@@ -1,4 +1,4 @@
-# k3s-taskforce
+# Wirtualizacja funkcji sieciowych w środowisku Kubernetes na platformie Raspberry Pi
 
 ## **Ogólnie**
 [(English version)](./README.md#english-version)
