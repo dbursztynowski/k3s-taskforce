@@ -57,7 +57,7 @@ Uwagi:
   * instalacja i sprawdzenie działania (np. ping 8.8.8.8) otwartoźródłowej platformy 5G (free5GC) w konfiguracji: (1) 5G core control plane na klastrze K3s/RaspberryPi, (2) 5G core UPF na klastrze K3s/odrębna VM/VirtualBox, (3) emulator sieci RAN (od strony 5G core, ekwiwalent UE+gNodeB) na odrębnej VM/VirtualBox
   * konkretne przykłady orkiestracyjno/management-owe na poziomie Kubernetes są do ustalenia (open-source-y nie dają się sensownie skalować horyzontalnie, najwyżej wertykalnie)
 
-# **English version**
+# **Network function virtualization in Kubernetes clusters on Raspberry Pi**
 
 ## **General**
 
