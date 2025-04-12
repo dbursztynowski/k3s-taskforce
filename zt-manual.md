@@ -30,7 +30,7 @@ b) ```net.ipv4.conf.all.rp_filter=2    # odkomentować lub dopisać```
    
 Powyższe można zrobić ręcznie, albo powinno być to jednorazowo zrobione przez skrypt ```zt-config.sh```, co dokładniej opisano w kroku 3) punktu **Udostępnienie clustra** (por. dalej).
 
-### Właściwa instalacja ZT (na każdej maszynie - czy to raspbbery klastra, czy maszyna studencka)
+### Właściwa instalacja ZT (na każdej maszynie - czy to raspbbery klastra, czy odrębna maszyna Linux w sieci klastra)
 
 Choć może nie być to wymagane, zaleca się podłączenie maszyny, na której instalujemy ZT, do docelowej podsieci.
    
