@@ -46,14 +46,14 @@ spec:
           successThreshold: 1
           timeoutSeconds: 2
 #----
-        livenessProbe:
-          failureThreshold: 3
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          successThreshold: 1
-          tcpSocket:
-            port: 3000
-          timeoutSeconds: 1
+#        livenessProbe:
+#          failureThreshold: 3
+#          initialDelaySeconds: 30
+#          periodSeconds: 10
+#          successThreshold: 1
+#          tcpSocket:
+#            port: 3000
+#          timeoutSeconds: 1
 # SPIW added - end
         resources:
           limits:
@@ -176,9 +176,9 @@ spec:
       ## SWPIW added
       - name: grafana-storage
         persistentVolumeClaim:
-          claimName: grafana-local-path-pvc 
-#      - emptyDir: {}                  # to be commented out/deleted
-#        name: grafana-storage         # to be commented out/deleted
+          claimName: grafana-local-path-pvc
+#      - emptyDir: {}                  # SPIW, to be commented out/deleted
+#        name: grafana-storage         # SPIW, to be commented out/deleted
       - name: grafana-datasources
         secret:
           secretName: grafana-datasources
