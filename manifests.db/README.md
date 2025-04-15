@@ -1,8 +1,12 @@
 # Notes
 
 ## Metallb https://metallb.universe.tf/installation/#installation-by-manifest
+
+```
 $ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.9/config/manifests/metallb-native.yaml
+## check ip-pool-config.yaml IP address pools are OK and then 
 $ kubectl apply -f ip-pool-config.yaml
+```
 
 ## Prometheus
 
