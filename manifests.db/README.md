@@ -12,7 +12,7 @@ $ kubectl apply -f ip-pool-config.yaml
 
   Recommended version v1.14
 
-  Install
+#### Install
 
 ```
 $ mkdir monitoring
@@ -29,6 +29,12 @@ $ kubectl wait \
 $ kubectl apply -f monitoring/
 ```
 
+
+#### Tear down the stack
+
+```
+$ kubectl delete --ignore-not-found=true -f manifests/ -f manifests/setup
+```
 ### Problems
 
 - If Prometheus does not scrape metrics form a target and you can see in the GUI or in Prometheus container logs:
