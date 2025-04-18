@@ -45,11 +45,11 @@ Choć może nie być to wymagane, zaleca się podłączenie maszyny, na której 
 ```bash
 curl -s https://install.zerotier.com | sudo bash
 ```
-2. Po zakończeniu instalacji wykonaj poniższe polecenie. ```[NETWORK-ID]``` pobierzesz ze strony z ustawieniami sieci, którą utworzyłeś wcześniej. 
+2. Po zakończeniu instalacji wykonaj poniższe polecenie. Identyfikator utwqorzonej sieci VPN ```[NETWORK-ID]``` pobierzesz ze strony z ustawieniami sieci, którą utworzyłeś wcześniej. 
 ```bash
 sudo zerotier-cli join [NETWORK-ID]
 ```
-3. Jeśli zobaczysz komunikat ```200 join OK``` wróć do panelu kontrolnego ZeroTier i zaakceptuj podłączenie hosta (lista *members*) zaznaczając check box po lewej stronie. System przydzieli hostowi adres IP z odpowiedniej puli (możesz zmienić ją w ustawieniach w górnej części strony).
+3. Jeśli zobaczysz komunikat ```200 join OK``` wróć do panelu kontrolnego ZeroTier i zaakceptuj podłączenie hosta (lista *members*) zaznaczając check box po lewej stronie i następnie wciskając przycisk AUTHORIZE powyżej listy z członkami Twojego VPN. System przydzieli hostowi adres IP z odpowiedniej puli (możesz zmienić ją w ustawieniach w górnej części strony).
 ![akceptacja połączenia hosta](https://i.ibb.co/fX02nVx/accept-connection.png "akceptacja połączenia hosta")
 
 4. Weryfikację przydzielenia adresu IP z puli ZT można przeprowadzić, wykonując polecenie ```ip a | grep "zt"```. W moim przypadku host otrzymał IP 192.168.192.101/24.
@@ -63,8 +63,8 @@ Konfigurację będziemy "dopinać" na poniższym sprzęcie:
 - cluster 
 
 ### Udostępnienie clustra
-1. Podłączamy komputer, na którym działa management host, do sieci utworzonej przez Linksys (czyli zgodnie z Fig. 1 w instrukcji laboratoryjnej _K3s-P1-K3s-installation_). Management host, jeśli jest implementoweany jako VM, **musi** otrzymywać adres IP za pomocą zmostkowanej karty sieciowej (bridged).
-2. W panelu konfiguracyjnym ZeroTier dodajemy route w karcie *Advanced -> Managed routes*. W omawianym tu przykładzie mój Linsksys przydziela adresy z podsieci 192.168.90.0/24 i taką trasę muszę wprowadzić do ustawień ZT. 192.168.192.101 to adres raspberry (nadany z puli ZeroTier), który został skonfigurowany wcześniej. Wprowadzamy route **tylko** dla hosta, który jest w jednej sieci z Linksysem.
+1. Podłączamy komputer, na którym działa management host, do sieci utworzonej przez Linksys lub TOTO-Link (czyli zgodnie z Fig. 1 w instrukcji laboratoryjnej _K3s-P1-K3s-installation_). Management host, jeśli jest implementoweany jako VM, **musi** otrzymywać adres IP za pomocą zmostkowanej karty sieciowej (bridged).
+2. W panelu konfiguracyjnym ZeroTier dodajemy route w karcie *Advanced -> Managed routes*. W omawianym tu przykładzie mój Linsksys przydziela adresy z podsieci 192.168.90.0/24 i taką trasę muszę wprowadzić do ustawień ZT. 192.168.192.101 to adres raspberry (nadany z puli ZeroTier), który został skonfigurowany wcześniej widzieliśmy go powyżej w _Weryfikacji przydzielenia adresu IP_. Wprowadzamy route **tylko** dla hosta, który jest w jednej sieci z Linksysem.
 ![route do sieci linksys - png](instrukcje/routes.png)
 3. Kolejny krok to wprowadzenie zmian w obsłudze pakietów po stronie wybranej rasppberki. Wykonaj na rasppbery plik ```zt-config.sh``` dostępny na niniejszym repo jako **```root```** (```zt-config.sh``` wygodnie jest przekopiować z użyciem MobaXterm). Przed pierwszym uruchomieniem skryptu ```zt-config.sh``` należy go wyedytować i znaleźć oraz odkomentować w nim odpowiednie linie. Po skutecznym wykonaniu tego skryptu linie te należy ponownie zakomentować, aby w kolejnych wywołaniach skryptu nie powielał on tych linni niepotrzebnie (będzie wywoływany prze każdym boocie maszyny - por. dalej opis **Wykonywanie pliku konfiguracyjnego podczas uruchamiania raspberry**). Jeśli konfiguracja ZT na malince wchodzącej w skład klastra jest przeprowadzana już **po** instalacji k3s naszym Ansiblem, wówczas nie należy odkomentowywać linii z _net.ipv4.ip_forward=1_, bowiem nasz Ansible wprowadza to ustawienie na wszystkich węzłach klastra. W wywołaniu skryptu podaj 2 argumenty: **1) nazwa interfejsu**, przez który host łączy się z siecią LAN (np. eth0, enp0s1), **2)** nazwa interfejsu sieci ZeroTier (zawsze zaczyna się od *zt*). 
 
