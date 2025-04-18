@@ -19,6 +19,8 @@ fi
 
 if [ $# -eq 2 ]
   then
+## One shot commands - uncomment before the first execution of the
+## script and commnet again afterwards
 #    echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
 #    echo "net.ipv4.conf.default.rp_filter=2" >> /etc/sysctl.conf
     sysctl -p
