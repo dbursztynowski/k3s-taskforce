@@ -57,8 +57,7 @@ sudo zerotier-cli join [NETWORK-ID]
 4. Weryfikację przydzielenia adresu IP z puli ZT można przeprowadzić, wykonując polecenie ```ip a | grep "zt"```. W moim przypadku host otrzymał IP 192.168.192.101/24.
 ![ip przydzielone hostowi](https://i.ibb.co/SNj1gjG/zt-ip.png "ip przydzielone hostowi")
 
-5. W moim przypadku panel hostów w GUI ZeroTier obejmuje maszynę udostępniającą klaster (jest to małe Raspberry Pi spoza klastra), maszynę wirtualną (management host) oraz host fizyczny pracujący pod Windows, który dołączyłem "na wszelki przypadek".
-6. 
+5. Jak widać poniżej, w moim przypadku panel hostów w GUI ZeroTier obejmuje trzech klientów. W VPN mam maszynę udostępniającą klaster (jest to małe Raspberry Pi spoza klastra), maszynę wirtualną (management host) oraz host fizyczny pracujący pod Windows, który dołączyłem "na wszelki przypadek".
 ![mój panel ZT](instrukcje/my-zt-members.jpg)
 
 ## Zakończenie konfiguracji
