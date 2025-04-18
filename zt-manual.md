@@ -20,7 +20,7 @@ W poradniku przedstawię sposób połączenia udostępnionego clustra z siecią 
 
 (Zakładamy, że hostem udostęoniającym jest jeden z workerów klastra.)
 
-Instalacja ZeroTier przebiega identycznie dla wszystkich hostów - czy to dla hosta udostępniającego klaster przez VPN, czy to dla hostów, które będą łączyć się do klastra zdalnie przez nasz VPN. Jeśli ktoś ma już wcześniej zainstalowany ZeroTier, ten krok można pominąć.
+Instalacja ZeroTier przebiega identycznie dla wszystkich hostów - czy to dla hosta udostępniającego klaster przez VPN, czy to dla hostów, które będą łączyć się do klastra zdalnie przez nasz VPN, także jeśli są nimi maszyny wirtualne. Jeśli ktoś ma już wcześniej zainstalowany ZeroTier, ten krok można pominąć.
 
 Instalację na hoście udostępniającym przeprowadzamy dla wybranej raspberrki; najlepiej wybrać jedną z pracujących jako worker (np. ostatnią z prawej). Logujemy się z poziomu management hosta poprzez ssh i przeprowadzamy instalację. 
 
@@ -37,7 +37,9 @@ b) ```net.ipv4.conf.all.rp_filter=2    # odkomentować lub dopisać```
    
 Powyższe można zrobić ręcznie, albo powinno być to jednorazowo zrobione przez skrypt ```zt-config.sh```, co dokładniej opisano w kroku 3) punktu **Udostępnienie clustra** (por. dalej).
 
-### Właściwa instalacja ZT (na każdej maszynie - czy to raspbbery klastra, czy odrębna maszyna Linux w sieci klastra)
+### Właściwa instalacja ZT
+
+Instalacja na każdej maszynie - czy będzie to maszyna udostępniająca (raspbbery klastra lub inna), czy też maszyna Linux fizyczna lub wirtualna, która ma pełnić rolę management host.
 
 Choć może nie być to wymagane, zaleca się podłączenie maszyny, na której instalujemy ZT, do docelowej podsieci.
    
@@ -62,11 +64,12 @@ Konfigurację będziemy "dopinać" na poniższym sprzęcie:
 - zdalny management host, również skonfigurowany zgodnie z instrukcją (poprzedni podpunkt)
 - cluster 
 
-### Udostępnienie clustra dla naszego management hosdt
-1. Podłączamy komputer, na którym działa management host, do sieci utworzonej przez Linksys lub TOTO-Link (czyli zgodnie z Fig. 1 w instrukcji laboratoryjnej _K3s-P1-K3s-installation_). Management host, jeśli jest implementoweany jako VM (ja tak mam), **musi** otrzymywać adres IP za pomocą zmostkowanej karty sieciowej (w VirtualBox jest to tryb **bridged**).
-2. W panelu konfiguracyjnym ZeroTier dodajemy route w karcie *Advanced -> Managed routes*. W omawianym tu przykładzie mój Linsksys przydziela adresy z podsieci **192.168.90.0/24** i taką trasę docelową (destination) muszę wprowadzić do ustawień ZeroTier. Adres **192.168.192.101** to adres udostępniającej raspberry (nadany z puli ZeroTier), który został skonfigurowany wcześniej - widzieliśmy go powyżej w _Weryfikacji przydzielenia adresu IP_. Pełni on rolę adresu gateway'a (_via_). Wprowadzamy route **tylko** dla hosta, który jest w jednej sieci z Linksysem.
+### Udostępnienie clustra dla naszego management host
+1. Podłączamy komputer, na którym działa nasz management host, do sieci utworzonej przez Linksys lub TOTO-Link (czyli zgodnie z Fig. 1 w instrukcji laboratoryjnej _K3s-P1-K3s-installation_).
+2. Management host, jeśli jest implementoweany jako maszyna wirtualna (ja tak mam), **musi** otrzymywać adres IP za pomocą zmostkowanej karty sieciowej (w VirtualBox jest to tryb **bridged**).
+3. W panelu konfiguracyjnym ZeroTier dodajemy route w karcie *Advanced -> Managed routes*. W omawianym tu przykładzie mój Linsksys przydziela adresy z podsieci **192.168.90.0/24** i taką trasę docelową (destination) muszę wprowadzić do ustawień ZeroTier. Adres **192.168.192.101** to adres udostępniającej raspberry (nadany z puli ZeroTier), który został skonfigurowany wcześniej - widzieliśmy go powyżej w _Weryfikacji przydzielenia adresu IP_. Pełni on rolę adresu gateway'a (_via_). Wprowadzamy route **tylko** dla hosta, który jest w jednej sieci z Linksysem.
 ![route do sieci linksys - png](instrukcje/routes.png)
-3. Kolejny krok to wprowadzenie zmian w obsłudze pakietów po stronie wybranej rasppberki. Wykonaj na rasppbery jako **```root```** (sudo) skrypt ```zt-config.sh``` dostępny na niniejszym repo (```zt-config.sh``` wygodnie jest przekopiować z użyciem np. MobaXterm czy komendy scp). **Przed pierwszym uruchomieniem skryptu ```zt-config.sh``` należy go wyedytować** i znaleźć oraz odkomentować w nim odpowiednie linie skomentowane jako _One shot commands_. Po skutecznym wykonaniu tego skryptu linie te należy ponownie zakomentować, aby w kolejnych wywołaniach skryptu nie powielał on tych linii niepotrzebnie (będzie wywoływany prze każdym boocie maszyny - por. dalej opis **Wykonywanie pliku konfiguracyjnego podczas uruchamiania raspberry**). Jeśli konfiguracja ZT na malince wchodzącej w skład klastra jest przeprowadzana już **po** instalacji k3s naszym Ansiblem, wówczas nie należy odkomentowywać linii z _net.ipv4.ip_forward=1_, bowiem nasz Ansible wprowadza to ustawienie na wszystkich węzłach klastra. W wywołaniu skryptu podaj 2 argumenty w tej kolejności: (1) **nazwa interfejsu**, przez który Twój host łączy się z siecią LAN (np. eth0, enp0s1), (2) **nazwa interfejsu sieci ZeroTier** (zawsze zaczyna się od _zt_, np. _ztkseyd7cq_). 
+4. Kolejny krok to wprowadzenie zmian w obsłudze pakietów po stronie wybranej rasppberki. Wykonaj na rasppbery jako **```root```** (sudo) skrypt ```zt-config.sh``` dostępny na niniejszym repo (```zt-config.sh``` wygodnie jest przekopiować z użyciem np. MobaXterm czy komendy scp). **Przed pierwszym uruchomieniem skryptu ```zt-config.sh``` należy go wyedytować** i znaleźć oraz odkomentować w nim odpowiednie linie skomentowane jako _One shot commands_. Po skutecznym wykonaniu tego skryptu linie te należy ponownie zakomentować, aby w kolejnych wywołaniach skryptu nie powielał on tych linii niepotrzebnie (będzie wywoływany prze każdym boocie maszyny - por. dalej opis **Wykonywanie pliku konfiguracyjnego podczas uruchamiania raspberry**). Jeśli konfiguracja ZT na malince wchodzącej w skład klastra jest przeprowadzana już **po** instalacji k3s naszym Ansiblem, wówczas nie należy odkomentowywać linii z _net.ipv4.ip_forward=1_, bowiem nasz Ansible wprowadza to ustawienie na wszystkich węzłach klastra. W wywołaniu skryptu podaj 2 argumenty w tej kolejności: (1) **nazwa interfejsu**, przez który Twój host łączy się z siecią LAN (np. eth0, enp0s1), (2) **nazwa interfejsu sieci ZeroTier** (zawsze zaczyna się od _zt_, np. _ztkseyd7cq_). 
 
 ### Weryfikacja połączenia
 Na komputerze nieznajdującym się w twojej obecnej sieci spróbuj otworzyć stronę konfiguracyjną routera (u mnie 192.168.90.1). Możesz także pingnąć któryś z hostów klastra, jeśli są już podłączone do sieci. Jeśli połączenie nie działa sprawdź, czy ZeroTier jest aktywny (```sudo zerotier-cli info```) oraz czy zmiany wprowadzane skryptem zapisały się poprawnie (```sudo iptables -S```, powinieneś zobaczyć 2 wpisy zaczynające się od ```-A FORWARD -i```).
