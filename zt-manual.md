@@ -37,7 +37,7 @@ b) ```net.ipv4.conf.all.rp_filter=2    # odkomentować lub dopisać```
    
 Powyższe można zrobić ręcznie, albo powinno być to jednorazowo zrobione przez skrypt ```zt-config.sh```, co dokładniej opisano w kroku 3) punktu **Udostępnienie clustra** (por. dalej).
 
-### Właściwa instalacja ZT
+### Właściwa instalacja ZT i dołączanie hostów do VPN
 
 Instalacja na każdej maszynie - czy będzie to maszyna udostępniająca (raspbbery klastra lub inna), czy też maszyna Linux fizyczna lub wirtualna, która ma pełnić rolę management host.
 
@@ -56,6 +56,10 @@ sudo zerotier-cli join [NETWORK-ID]
 
 4. Weryfikację przydzielenia adresu IP z puli ZT można przeprowadzić, wykonując polecenie ```ip a | grep "zt"```. W moim przypadku host otrzymał IP 192.168.192.101/24.
 ![ip przydzielone hostowi](https://i.ibb.co/SNj1gjG/zt-ip.png "ip przydzielone hostowi")
+
+5. W moim przypadku panel hostów w GUI ZeroTier obejmuje maszynę udostępniającą klaster (jest to małe Raspberry Pi spoza klastra), maszynę wirtualną (management host) oraz host fizyczny pracujący pod Windows, który dołączyłem "na wszelki przypadek".
+6. 
+![mój panel ZT](instrukcje/my-zt-members.jpg)
 
 ## Zakończenie konfiguracji
 Konfigurację będziemy "dopinać" na poniższym sprzęcie:
