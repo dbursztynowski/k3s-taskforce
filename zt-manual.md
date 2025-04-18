@@ -18,7 +18,7 @@ W poradniku przedstawię sposób połączenia udostępnionego clustra z siecią 
 
 ## Instalacja ZeroTier
 
-(Zakładamy, że hostem udostęoniającym jest to jeden z workerów klastra.)
+(Zakładamy, że hostem udostęoniającym jest jeden z workerów klastra.)
 
 Instalacja ZeroTier przebiega identycznie dla wszystkich hostów - czy to dla hosta udostępniającego klaster przez VPN, czy to dla hostów, które będą łączyć się do klastra zdalnie przez nasz VPN. Jeśli ktoś ma już wcześniej zainstalowany ZeroTier, ten krok można pominąć.
 
