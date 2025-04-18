@@ -77,8 +77,9 @@ Konfigurację będziemy "dopinać" na poniższym sprzęcie:
 ### Weryfikacja połączenia
 Na komputerze nieznajdującym się w twojej obecnej sieci spróbuj otworzyć stronę konfiguracyjną routera (u mnie 192.168.90.1). Możesz także pingnąć któryś z hostów klastra, jeśli są już podłączone do sieci. Jeśli połączenie nie działa sprawdź, czy ZeroTier jest aktywny (```sudo zerotier-cli info```) oraz czy zmiany wprowadzane skryptem zapisały się poprawnie (```sudo iptables -S```, powinieneś zobaczyć 2 wpisy zaczynające się od ```-A FORWARD -i```).
 
-## Wykonywanie pliku konfiguracyjnego podczas uruchamiania raspberry
-Dotychczasowa konfiguracja działa do momentu restartu rasppberki (maszyny) udostępniającej. Zmiany powinny jednak mieć trwały charakter, dlatego w tym punkcie skonfigurujemy automatyczne uruchamianie skryptu podczas startu naszej maliny.
+## Automatyczne uruchamianie agenta VPN na maszynie udostępniającej
+
+Dotychczasowa konfiguracja działa do momentu restartu rasppberki (maszyny) udostępniającej. Zmiany powinny jednak mieć trwały charakter, dlatego w tym punkcie skonfigurujemy automatyczne uruchamianie skryptu `zt-config.sh` podczas startu naszej maliny.
 
 Pierwszy krok to skonfigurowanie pliku /etc/rc.local na następującą treść, podaj argumenty takie same jak w przypadku sekcji udostępniania clustra (sudo nano /etc/rc.local):
 
