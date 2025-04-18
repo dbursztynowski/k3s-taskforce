@@ -16,8 +16,13 @@ W poradniku przedstawię sposób połączenia udostępnionego clustra z siecią 
 1. Załóż konto na [zerotier.com](https://my.zerotier.com)
 2. Po zalogowaniu, w panelu kontrolnym wybierz żółty przycisk *Create A Network*. System wygeneruje sieć i przydzieli jej nazwę. Klikając w nią, przejdziesz do ustawień sieci.
 
-## Instalacja ZeroTier na jednym z workerów klastra (np. ostatnia raspberrka od prawej)
-Instalację przeprowadzamy dla wybranej raspberrki, najlepiej wybrać jedną z pracujących jako worker (np. ostatnią z prawej). Logujemy się z poziomu management hosta poprzez ssh i przeprowadzamy instalację. Instalacja przebiega identycznie dla wszystkich pozostałych hostów, które będą łączyć się zdalnie przez nasz VPN.
+## Instalacja ZeroTier
+
+(Zakładamy, że hostem udostęoniającym jest to jeden z workerów klastra.)
+
+Instalacja ZeroTier przebiega identycznie dla wszystkich hostów - czy to dla hosta udostępniającego klaster przez VPN, czy to dla hostów, które będą łączyć się do klastra zdalnie przez nasz VPN. Jeśli ktoś ma już wcześniej zainstalowany ZeroTier, ten krok można pominąć.
+
+Instalację na hoście udostępniającym przeprowadzamy dla wybranej raspberrki; najlepiej wybrać jedną z pracujących jako worker (np. ostatnią z prawej). Logujemy się z poziomu management hosta poprzez ssh i przeprowadzamy instalację. 
 
 ### Uwaga dla maszyn linuksowych
 (w szczególności na Raspberry hostującej VPN, a także na studenckiej maszynie zdalnej)
