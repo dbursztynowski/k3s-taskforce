@@ -41,11 +41,24 @@
 #  when: not k3s_installed.stat.exists
   
   ## For RPi 5 (as there are only 3 Pis, we suppress --node-taint CriticalAddonsOnly=true:NoExecute)
+#  shell:
+#    cmd: >
+#      curl -sfL https://get.k3s.io | 
+#      INSTALL_K3S_VERSION={{ k3s_version }} 
+#      INSTALL_K3S_EXEC="server --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller" 
+#      sh -s -
+#  when: not k3s_installed.stat.exists
   shell:
     cmd: >
-      curl -sfL https://get.k3s.io | 
-      INSTALL_K3S_VERSION={{ k3s_version }} 
-      INSTALL_K3S_EXEC="server --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller" 
+      curl -sfL https://get.k3s.io |
+      INSTALL_K3S_VERSION={{ k3s_version }}
+      INSTALL_K3S_EXEC="server
+      --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller
+      --kube-apiserver-arg=feature-gates=InPlacePodVerticalScaling=true
+      --kube-controller-manager-arg=feature-gates=InPlacePodVerticalScaling=true
+      --kube-scheduler-arg=feature-gates=InPlacePodVerticalScaling=true
+      --kubelet-arg=feature-gates=InPlacePodVerticalScaling=true
+      --kube-proxy-arg=feature-gates=InPlacePodVerticalScaling=true"
       sh -s -
   when: not k3s_installed.stat.exists
 
