@@ -47,7 +47,7 @@ Choć może nie być to wymagane, zaleca się podłączenie maszyny, na której 
 ```bash
 curl -s https://install.zerotier.com | sudo bash
 ```
-2. Po zakończeniu instalacji wykonaj poniższe polecenie. Identyfikator utwqorzonej sieci VPN ```[NETWORK-ID]``` pobierzesz ze strony z ustawieniami sieci, którą utworzyłeś wcześniej. 
+2. Po zakończeniu instalacji wykonaj poniższe polecenie. Identyfikator utworzonej sieci VPN ```[NETWORK-ID]``` pobierzesz ze strony z ustawieniami sieci, którą utworzyłeś wcześniej. 
 ```bash
 sudo zerotier-cli join [NETWORK-ID]
 ```
