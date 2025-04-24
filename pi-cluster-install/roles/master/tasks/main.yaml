@@ -48,6 +48,8 @@
 #      INSTALL_K3S_EXEC="server --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller" 
 #      sh -s -
 #  when: not k3s_installed.stat.exists
+
+  # setting feature-gate here enables InPlacePodVerticalScaling on cluster nodes
   shell:
     cmd: >
       curl -sfL https://get.k3s.io |
