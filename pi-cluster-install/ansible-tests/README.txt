@@ -13,11 +13,14 @@
 # (all artifacts are in the folder, you only need to adjust the hostname to your environmant)
 
 # 1. using ansible ad-hoc command 
-ansible <hostgroup> -m setup
+ansible -i <inventory-file> <host-group-name> -m setup
 # e.g. (your results will be stored in file gather.facts)
+ansible -i ../inventory/hosts.ini master -m setup | tee gather.facts
 ansible -i ../inventory/hosts.ini all -m setup | tee gather.facts
 
 # 2. or running a simple palybook
 # (your results will be sent to standard output)
+# this will be applied to your local machine
 ansible-playbook hostnametest.yaml
+# this will be applied to host according to inventory
 ansible-playbook test_hostvars_fields.yaml -i ../inventory/hosts.ini
