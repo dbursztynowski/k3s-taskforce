@@ -11,7 +11,7 @@
 
 # Run: ansible-playbook test_hostvars_fields.yaml -i inventory/hosts.ini
 
-- hosts: cluster
+- hosts: master
   gather_facts: yes
   become: yes
 
@@ -19,12 +19,14 @@
 
   - name: Display all variables/facts known for a host
     debug:
-#     Note: both two following forms work well and give the same result
+#     Note: both of the two following forms work well and give the same result
 #      var: hostvars[inventory_hostname]['ansible_facts']['distribution']
 #      var: hostvars[inventory_hostname].ansible_facts.distribution
-
 #     Note: this var produces very verbose output
-      var: hostvars[inventory_hostname]
+      var: hostvars[inventory_hostname].ansible_facts
+
+#     Note: this var produces very verbose output and sometimes even fails (in our case, fails for master group - do not know why)
+#      var: hostvars[inventory_hostname]
 
 #     Note: hostvars alone does not work unless there's only one host active in the inventory
 #      var: hostvars
