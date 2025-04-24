@@ -1,5 +1,5 @@
 ---
-# One needs to take care of ~/.ssh/cofig file with correct RbPi hostname/IP mapping.
+# One needs to take care of ~/.ssh/config file with correct RbPi hostname/IP mapping.
 # Normally, this is prepared by install.sh so no maual updates are needed, but in 
 # case of problems check it. 
 
