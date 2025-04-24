@@ -3,7 +3,7 @@
 # READ ALL THE NOTES BELOW:
 
 # This script installs K3s on a Raspberry Pi cluster. More specifically, it selects running Raspberry Pi machines in a
-# subnetwork with a given CIDR range and creates their ssh # config names based on the <prefix>-<id> pattern and
+# subnetwork with a given CIDR range and creates their ~/.ssh/config names based on the <prefix>-<id> pattern and
 # configures ssh credentials for accessing them remotely using Ansible. Then, it runs ansible playbook to install K3s
 # on those machines and finally downloads Kubernetes config file from the control node of the cluster.
 # A predefined host with the name given by variable MASTER_NODE is assigned the role of the K3s control (master) node.
