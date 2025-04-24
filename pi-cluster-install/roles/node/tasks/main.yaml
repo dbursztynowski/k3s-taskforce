@@ -13,7 +13,7 @@
 
 - name: Install k3s-agent on workers (agents)
   # note: K3s bundles its own containerd by default, no need to install it separately
-  # setting feature-gate serves here to enable InPlacePodVerticalScaling on cluster nodes
+  # setting feature-gate here enables InPlacePodVerticalScaling on cluster nodes
   shell:
     cmd: >
       curl -sfL https://get.k3s.io |
