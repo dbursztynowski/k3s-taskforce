@@ -3,7 +3,7 @@
 
 # Simple demo: checking inventory_hostname, ansible_hostname and IP addresses of local host
 
-# What Ansible does at the very beginning of its run: gathers facts (detailed configuration infrmation)
+# What Ansible does at the very beginning of its run: gathers facts (detailed configuration information)
 # about your hosts. In our example, we gather facts only about our local host, but similar information
 # will be collected about target hosts. Worth of noting is how detailed the gathered information is.
 # - reading about gathering facts: 
