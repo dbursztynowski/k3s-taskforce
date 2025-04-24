@@ -112,7 +112,7 @@ if [ ! -f $HOST_FILE ]; then
     return 2
 fi
 
-# iterate over hosts to configure local ssh files and upload your public key to the cluster hosts
+# iterate over hosts to configure local ssh files and upload your public key to your cluster hosts
 echo "uploading public key to cluster hosts"
 i=1
 grep -v '^ *#' < $HOST_FILE | while IFS= read -r IP
