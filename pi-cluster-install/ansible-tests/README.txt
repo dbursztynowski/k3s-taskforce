@@ -16,9 +16,12 @@
 ####################
 # (all artifacts are in the folder, you only need to adjust the hostname to your environmant)
 
-##### 1. using ansible ad-hoc command to chck cluster hosts(s)
-ansible -i <inventory-file> <host-group-name> -m setup
+##### 1. using ansible ad-hoc command
+# checking own (localhost) host
+ansible localhost -m setup
 
+# checking cluster hosts(s) using inventory file
+ansible -i <inventory-file> <host-group-name> -m setup
 # e.g. (your results will be stored in file gather.facts)
 ansible -i ../inventory/hosts.ini master -m setup | tee gather.facts
 ansible -i ../inventory/hosts.ini all -m setup | tee gather.facts
@@ -26,8 +29,11 @@ ansible -i ../inventory/hosts.ini all -m setup | tee gather.facts
 ##### 2. or running a simple palybook
 # (the results will be sent to standard output)
 
-# this will be applied to your local machine
+# this will be applied to your local machine (indicated in hostnametest.yaml)
 ansible-playbook hostnametest.yaml
 
-# this will be applied to host according to inventory
-ansible-playbook test_hostvars_fields.yaml -i ../inventory/hosts.ini
+# this will be applied to hosts according to inventory
+# all hosts
+ansible-playbook -i ../inventory/hosts.ini test_hostvars_fields.yaml
+# hosts belonging to group master
+ansible-playbook -i ../inventory/hosts.ini master test_hostvars_fields.yaml 
