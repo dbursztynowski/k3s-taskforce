@@ -15,4 +15,5 @@ master_ip: "{{ hostvars[groups['master'][0]]['ansible_default_ipv4']['address'] 
 k3s_token: "{{ hostvars[groups['master'][0]]['token'] }}"
 
 # worker_number is not used now, can be deleted, but let's keep as example of accessing inventory variables
+#   notice 'index' is Jinja2 method here so the (.) notation is used to define the parameter list
 worker_number: "{{ groups['node'].index(inventory_hostname) }}"
