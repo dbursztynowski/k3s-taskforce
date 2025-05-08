@@ -11,7 +11,9 @@ W niniejszym poradniku przedstawiamy sposób połączenia klastra z siecią Zero
 
 3. Zdalne włączenie klastra jest możliwe poprzez reboot klastrowego swicha TP-Link. Podczas rebootu odłącza on i ponownie podaje zasilanie na porty PoE, co powoduje twarde włączenie płyt Raspberry Pi. Przez przeglądarkę wchodzimy na pulpit zarządzania swicha TP-Link, a tam w zakładce System wybieramy komendę Reboot. Z powyższego widać też, dlaczego w przypadku zainstalowania ZeroTier na jednej z malinek nie można jej wyłączać - musi ona zapewnić zdalne wejście do podsieci w celu przeprowadzenia rebootu switcha. Dlatego też, gdyby chcieć zdalnie wyłączać i włączać _wszystkie_ malinki, Zero Tier musimy zainstalować na maszynie odrębnej względem klastra (ale w tej samej co klaster podsieci).
 
-4. **WAŻNE: obecna wersja skryptu install.sh wymaga**, aby sama instalacja klastra była przeprowadzona w docelowym segmencie L2 sieci - niemożliwa jest instalacja przez VPN. Inymi słowy, maszyna management i klaster muszą pracować podczas instalacji w tym samym segmencie L2. Wynika to z tego, że narzędzie `nmap`, wykorzystywane w naszym przypadku do pobrania adresów MAC malin naszego klastra, musi mieć bezpośredni dostęp do właściwego segmentu L2 sieci. Tymczasem raspberry udostąpniające, pełniąc rolę rutera L3 rezydującego pomiędzy segmentem L2 naszego VPN a segmentem L2 klastra, uniemożliwia komunikację między tymi segmentami w warstwie L2.
+Uwa
+
+5. **WAŻNE: obecna wersja skryptu install.sh wymaga**, aby sama instalacja klastra była przeprowadzona w docelowym segmencie L2 sieci - niemożliwa jest instalacja przez VPN. Inymi słowy, maszyna management i klaster muszą pracować podczas instalacji w tym samym segmencie L2. Wynika to z tego, że narzędzie `nmap`, wykorzystywane w naszym przypadku do pobrania adresów MAC malin naszego klastra, musi mieć bezpośredni dostęp do właściwego segmentu L2 sieci. Tymczasem raspberry udostąpniające, pełniąc rolę rutera L3 rezydującego pomiędzy segmentem L2 naszego VPN a segmentem L2 klastra, uniemożliwia komunikację między tymi segmentami w warstwie L2.
 
 ## Utworzenie sieci ZeroTier
 1. Załóż konto na [zerotier.com](https://my.zerotier.com)
