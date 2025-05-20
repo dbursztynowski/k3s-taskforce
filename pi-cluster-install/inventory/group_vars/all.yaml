@@ -1,7 +1,11 @@
 ---
 #k3s_version: v1.31.6+k3s1 <=== InPlacePodScaling does not work with this version
 #k3s_version: v1.32.1+k3s1 <=== InPlacePodScaling does not work with this version
+<<<<<<< HEAD
 #k3s_version: v1.32.3+k3s1 <== in place pod scaling unstable 
+=======
+#k3s_version: v1.32.3+k3s1
+>>>>>>> 48faa14 (update k3s version)
 k3s_version: v1.33.0+k3s1
 
 # ansible_user: ubuntu
