@@ -1,7 +1,7 @@
 # Wirtualizacja funkcji sieciowych w środowisku Kubernetes na platformie Raspberry Pi
 
 ## **Ogólnie**
-[(English version)](./README.md#english-version)
+[(English version)](./README.md#network-function-virtualization-in-kubernetes-clusters-on-raspberry-pi)
 
 * Repozytorium dla studentów SPIW. Opisy postępowania w ramach tego labu podano w instrukcjach.
 
