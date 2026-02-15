@@ -1,5 +1,8 @@
 # Notes
 
+## Treat this directory as privte and do not use it.
+Here, my personal version of the stuff is stored and non-standard (maybe even invalid) configurations may be present. Quit it - you are expected to do the labs according to the guides.
+
 ## Metallb https://metallb.universe.tf/installation/#installation-by-manifest
 
 ```
