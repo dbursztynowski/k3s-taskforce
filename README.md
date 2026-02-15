@@ -21,8 +21,8 @@
   * _inne - do wymyślenia/zaproponowania w ramach task-force (przykłady pożądanych: skalowanie poziome/pionowe, własne metryki, ... - w sensownym wymiarze, ale niekoniecznie tak proste, jak zmiana 'replicas: x' w Deploymencie \!)_
 * zapoznanie się z problematyką monitorowania i skalowania usług w środowiskacch CNF (na podstawie Prometheus/Grafana) **(instrukcje, część P3)**
   * jako fragmentem szerszego obszaru "telemetry"/"observability"/"orchestration"
-    * Uwaga: w zakresie skalowania, rozpatrywane jest skalowanie pionowe w odmianie _in-place pod vertical scaling_ 
   * _szczegółowe działania (poza przeglądaniem w dashboardach informacji na temat stanu samego klastra) pozostają do zaproponowania/opracowania_
+  * uwaga: w zakresie skalowania, obecnie rozpatrywane jest skalowanie pionowe w odmianie _in-place pod vertical scaling_ 
 
 Drogą do osiągnięcia tych celów jest instalacja klastra k3s "bare metal" na platformie Raspberry Pi, instalacja i konfiguracja wybranych modułów składowych klastra (MetalLB, Traefik) oraz aplikacji poziomu "observability" (Prometheus/Grafana) z wykorzystaniem różnych mechanizmów/funkcjonalności Kubernetes, a także uruchamianie przykładowych "aplikacji" demonstracyjnych w celu ilustracji wybranych konceptów.
 
@@ -74,8 +74,8 @@ Uwagi:
   * _other use cases are welcome - to be invented/proposed by the students (examples: horizontal/vertical scaling, custom metrics, etc., ideally tailored to a reasonable "size", but not as simple as changing 'replicas: x' in Deployment \!)_
 * getting acquainted with service monitoring and scaling in CNF environments (based on Prometheus/Grafana) **(instrukcje/guides, part P1)**
   * as part of a wider domain referred to as "telemetry"/"observability"/"orchestration"
-    * Note: as for scaling, so-called _in-place pod vertical scaling_ is dealt with 
   * _apart form installation and very basic operations (viewing information about the state of the cluster in Grafana dashboards), more complex/interesting use cases remain to be prepared and propositions are more than welcome_
+  * note: when it comes to scaling, we are currently dealing with the so-called _in-place pod vertical scaling_ 
 
 The means to achieve these goals is the installation of k3s "bare metal" cluster on Raspberry Pi platform, the installation and configuration of selected cluster components (MetalLB, Traefik) and "observability" level applications (Prometheus/Grafana) using various Kubernetes mechanisms/functionalities, and also running simple demo "applications" to illustrate selected concepts.
 
