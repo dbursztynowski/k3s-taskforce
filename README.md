@@ -11,16 +11,17 @@
 
 ## **Zakładane do osiągnięcia cele laborki (lista "żywa")**
 
-* zapoznanie się z deklaratywną naturą Ansible (na tle wybitnie imperatywnych skryptów bash) - jako przykładu notacji deklaratywnej do automatyzacji zadań konfiguracyjnych **(part 1)**
-* zapoznanie się z zasadami "sieciowania" (_networking_) w klastrach kubernetes **(instrukcje part 2 i 3)**
+* zapoznanie się z deklaratywną naturą Ansible (na tle wybitnie imperatywnych skryptów bash) - jako przykładu notacji deklaratywnej do automatyzacji zadań konfiguracyjnych **(część P1)**
+* zapoznanie się z zasadami "sieciowania" (_networking_) w klastrach kubernetes **(istrukcje, części P2 i P3)**
   * koncepcja CNI na podstawie CNI flannel
   * usługi (Service) typu ClusterIP, NodePort, LoadBalancer; ekspozycja usług HTTP poprzez mechanizm Ingress
   * koncepcja NetworkPolicy (reguły filtrowania ruchu na poziomie użytkowym)
-* zapoznanie się z wybranymi aspektami zarządzania zasobami i aplikacjami w klastrach Kubernetes **(instrukcje part 2 i 3)**
+* zapoznanie się z wybranymi aspektami zarządzania zasobami i aplikacjami w klastrach Kubernetes **(instrukcje, części P2 i P3)**
   * ograniczanie swobody rozkładania podów przez Kubernetes scheduler - mechanizmy _taint_ i _tolerations_
   * _inne - do wymyślenia/zaproponowania w ramach task-force (przykłady pożądanych: skalowanie poziome/pionowe, własne metryki, ... - w sensownym wymiarze, ale niekoniecznie tak proste, jak zmiana 'replicas: x' w Deploymencie \!)_
-* zapoznanie się z problematyką monitorowania usług w środowiskacch CNF (na podstawie Prometheus/Grafana) **(instrukcja part 3)**
-  * jako fragmentem szerszego obszaru "telemetry"/"observability"
+* zapoznanie się z problematyką monitorowania i skalowania usług w środowiskacch CNF (na podstawie Prometheus/Grafana) **(instrukcje, część P3)**
+  * jako fragmentem szerszego obszaru "telemetry"/"observability"/"orchestration"
+    * Uwaga: w zakresie skalowania, rozpatrywane jest skalowanie pionowe w odmianie _in-place pod vertical scaling_ 
   * _szczegółowe działania (poza przeglądaniem w dashboardach informacji na temat stanu samego klastra) pozostają do zaproponowania/opracowania_
 
 Drogą do osiągnięcia tych celów jest instalacja klastra k3s "bare metal" na platformie Raspberry Pi, instalacja i konfiguracja wybranych modułów składowych klastra (MetalLB, Traefik) oraz aplikacji poziomu "observability" (Prometheus/Grafana) z wykorzystaniem różnych mechanizmów/funkcjonalności Kubernetes, a także uruchamianie przykładowych "aplikacji" demonstracyjnych w celu ilustracji wybranych konceptów.
@@ -63,16 +64,17 @@ Uwagi:
 
 ## **Assumed goals of the laboratory to be achieved ("live" list)**
 
-* getting acquainted with the declarative nature of Ansible (in contrast to highly imperative bash scripts that also are used in the lab) - as an example of a declarative notation used for the automation of configuration tasks **(part 1 of the lab)**
-* principles of kubernetes networking **(guides part 2 and 3)**
+* getting acquainted with the declarative nature of Ansible (in contrast to highly imperative bash scripts that also are used in the lab) - as an example of a declarative notation used for the automation of configuration tasks **(instrukcje/guides, part P1)**
+* principles of kubernetes networking **(instrukcje/guides, parts P2, P3)**
   * the role of CNI based on flannel CNI
   * Services: ClusterIP, NodePort, LoadBalancer; exposing HTTP services using Ingress
   * NetworkPolicy - rules for user-plane traffic filtering within the cluster
-* getting acquainted with selected aspects of resource and application management in Kubernetes clusters **(guides part 2 and 3)**
+* getting acquainted with selected aspects of resource and application management in Kubernetes clusters **(instrukcje/guides, parts P2, P3)**
   * controlling the placement of pods by Kubernetes scheduler - _taint_ and _tolerations_ mechanisms
   * _other use cases are welcome - to be invented/proposed by the students (examples: horizontal/vertical scaling, custom metrics, etc., ideally tailored to a reasonable "size", but not as simple as changing 'replicas: x' in Deployment \!)_
-* getting acquainted with service monitoring in CNF environments (based on Prometheus/Grafana) **(guide part 3)**
-  * as part of a wider domain referred to as "telemetry"/"observability"
+* getting acquainted with service monitoring and scaling in CNF environments (based on Prometheus/Grafana) **(instrukcje/guides, part P1)**
+  * as part of a wider domain referred to as "telemetry"/"observability"/"orchestration"
+    * Note: as for scaling, so-called _in-place pod vertical scaling_ is dealt with 
   * _apart form installation and very basic operations (viewing information about the state of the cluster in Grafana dashboards), more complex/interesting use cases remain to be prepared and propositions are more than welcome_
 
 The means to achieve these goals is the installation of k3s "bare metal" cluster on Raspberry Pi platform, the installation and configuration of selected cluster components (MetalLB, Traefik) and "observability" level applications (Prometheus/Grafana) using various Kubernetes mechanisms/functionalities, and also running simple demo "applications" to illustrate selected concepts.
