@@ -31,7 +31,7 @@ Drogą do osiągnięcia tych celów jest instalacja klastra k3s "bare metal" na 
 
 **_gettemp.sh_** - skrypt korzystający z playbook'a Ansible _get-temp.yaml_ do sprawdzania temperatury procesora malinek
 
-**_instrukcje/_** - instrukcje laboratiryjne (podstawa do realizacji ćwiczeń)
+**_instrukcje/_** - instrukcje laboratoryjne - podstawa do realizacji ćwiczeń (niestety, na razie dostępne tylko tylko jako pliki PDF)
 
 **_manifests.db/_** - manifesty Kubernetes dla instalowanych modułów, testowanych wdrożeń (deploymentów), przykłady ćwiczeń laborkowych (na razie _zajawka_ - to co bezpośrednio wynika z obecnej wersji instrukcji i służy głównie poznaniu mechanizów "sieciowych" Kubernetes). Obecnie jest to dokładna wersja plików, które w ramach testów posłużyły do pełnego uruchmienia labu na dwa dni przed otwarciem zajęć. Zostawiono je w repozytorium do dyspozycji studentów tylko dla celów prównawczych w przypadku napotkania problemów. Zasadniczo oczekuje się jednak, że zespoły będą dążyć do wykonania wszystkich ćwiczeń **samodzielnie** na podstawie instrukcji, bez korzystania z tych plików metodą _copy-paste_. 
 
@@ -83,7 +83,7 @@ The means to achieve these goals is the installation of k3s "bare metal" cluster
 
 **_gettemp.sh_** - script that uses Ansible playbook _get-temp.yaml_ for checking processor temperature of the RbPis in the cluster
 
-**_instrukcje/_** - lab guides (the main part of the lab)
+**_instrukcje/_** - lab guides - the main part of the lab (unfortunately, for now only available as PDF files)
 
 **_manifests/_** - Kubernetes manifests for the modules installed during the lab, tested implementations (deployments), examples of lab exercises (for now, a simple _teaser_ that strictly corresponds to the current version of the lab guides and is mainly related to learning Kubernetes networking mechanisms)
 
