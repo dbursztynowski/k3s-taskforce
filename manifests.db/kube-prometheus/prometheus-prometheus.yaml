@@ -1,0 +1,72 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  labels:
+    app.kubernetes.io/component: prometheus
+    app.kubernetes.io/instance: k8s
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/part-of: kube-prometheus
+    app.kubernetes.io/version: 3.5.0
+  name: k8s
+  namespace: monitoring
+spec:
+  # SPIW addition - to scrape metrics from Open5GS
+  scrapeClasses:
+  - name: open5gs-scrape
+    default: true
+    fallbackScrapeProtocol: PrometheusText0.0.4 # Sets the fallback protocol
+  # end SPIW
+
+  alerting:
+    alertmanagers:
+    - apiVersion: v2
+      name: alertmanager-main
+      namespace: monitoring
+      port: web
+  enableFeatures: []
+  externalLabels: {}
+  image: quay.io/prometheus/prometheus:v3.5.0
+  nodeSelector:
+    kubernetes.io/os: linux
+  podMetadata:
+    labels:
+      app.kubernetes.io/component: prometheus
+      app.kubernetes.io/instance: k8s
+      app.kubernetes.io/name: prometheus
+      app.kubernetes.io/part-of: kube-prometheus
+      app.kubernetes.io/version: 3.5.0
+  podMonitorNamespaceSelector: {}
+  podMonitorSelector: {}
+  probeNamespaceSelector: {}
+  probeSelector: {}
+# replicas: 2
+# SPIW: one replica and retention to 2 days is sufficient for us
+  replicas: 1              # one replica will be sufficient in our case
+  retention: 2d            # we probably do not need longer retention time
+  resources:
+    requests:
+      memory: 400Mi
+  ruleNamespaceSelector: {}
+  ruleSelector: {}
+  scrapeConfigNamespaceSelector: {}
+  scrapeConfigSelector: {}
+  securityContext:
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+  serviceAccountName: prometheus-k8s
+  serviceMonitorNamespaceSelector: {}
+  serviceMonitorSelector: {}
+  version: 3.5.0
+# SPIW addition: define storage which suits our basic needs and allows to control the amount of disk 
+# space used; unfortunately, at the time of this writing (March 2025) the declaration of 2Gi will be # ignored in k3s and as a workaround we use a soft control in the form of retention property set to
+# two days (see above)
+  storage:
+    volumeClaimTemplate:
+      spec:
+        storageClassName: local-path
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 2Gi

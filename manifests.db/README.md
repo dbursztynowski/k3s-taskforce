@@ -3,6 +3,10 @@
 ## Treat this directory as privte and do not use it.
 Here, my personal version of the stuff is stored and non-standard (maybe even invalid) configurations may be present. Abandon it and follow the guides.
 
+## Grafana
+
+recommended pwd after initial logging: grafana
+
 ## Metallb https://metallb.universe.tf/installation/#installation-by-manifest
 
 ```
