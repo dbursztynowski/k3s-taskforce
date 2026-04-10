@@ -22,7 +22,7 @@
     search_string: "#net.ipv4.ip_forward=1"
     line: net.ipv4.ip_forward=1
 
-- name: Update /etc/cloud/cloud.cfg file
+- name: Update /etc/cloud/cloud.cfg file for a changed host name to persist reboots
   lineinfile:
     path: /etc/cloud/cloud.cfg
     regexp: "^preserve_hostname:"
@@ -42,7 +42,7 @@
     regexp: '^(.*)$'
     replace: ''
 
-- name: Configure Static IP address
+- name: Configure Static IP address for netplan
   blockinfile:
     path: /etc/netplan/50-cloud-init.yaml
     insertafter: "following:"
