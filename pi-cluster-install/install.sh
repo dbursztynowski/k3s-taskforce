@@ -4,20 +4,21 @@
 
 ## This script installs K3s on a Raspberry Pi cluster. It uses nmap utility for Raspberry Pi discovery so it MUST be run on a node
 ## attached to the same subnetwork as Raspberry Pi boards. More specifically, this script:
-##   1. (line 89, 90) selects Raspberry Pi machines running in a subnetwork with the CIDR provided as script parameter and stores
+##   1. (lines 49-79) deletes files on the menagement host that will be populated from scratch (backup your ~/.ssh/config file if needed)
+##   1. (line 90, 91) discovers active Raspberry Pi machines in a subnetwork defined by the CIDR provided as script parameter and stores
 ## their IP address in local file 'cluster'.
-##   2. (lines 100-158) creates, if missing, local directory ~/.ssh directory and a SSH key (RSA). Generates the target hostname for each
-## RPi and populates pairs (RPi-hostname, IP address) in local file ~/.ssh/config. RPi hostname follows the pattern <prefix><integer_number>.
-## <prefix> is set by the value of variable CLUSTER_NODE_PREF. The script also copies local RSA public key to the RPi hosts for the use by Ansible.
-##   3. (lines 160-187) creates a complete Ansible inventory as the file hosts.ini. Populates Ansible inventory_hostname for each RPi
-## using the same pattern as in step 1 above (for ~/.ssh/config file). The Ansible playbook (line 191) will then persistently set the Linux
-## hostname of each RPi to be equal to the inventory_hostname (so, the hostname set during microSD card preparation will be overriden).
-## In the result, for each RPi its hostname, and inventory_hostname and ansible_hostname variables will be equal to each other. Moreover,
-## it populates Ansible host groups and Ansible connection variables in the hosts.ini file.
-##   4. (lines 189+) finally, runs Ansible playbook to install K3s on those machines and downloads Kubernetes .kube/config file from the
+##   2. (lines 101-159) creates, if missing, local directory ~/.ssh and a SSH key (RSA). Generates the target hostname for each RPi and
+## populates pairs (RPi-hostname, IP address) in local file ~/.ssh/config. RPi hostname follows the pattern <prefix><integer_number>. <prefix>
+## is given by the value of variable CLUSTER_NODE_PREF. The script also copies local RSA public key to the RPi hosts for the use by Ansible.
+##   3. (lines 161-188) populates a complete Ansible inventory as the file hosts.ini. Populates Ansible inventory_hostname for each RPi
+## using the same pattern as in step 2 above (for the ~/.ssh/config file). Our Ansible playbook (line 192) will persistently set the Linux
+## hostname of each RPi to be equal to the inventory_hostname (so, the RPi hostname set during microSD card preparation will be overriden).
+## In the result, for each RPi its Linux hostname, and inventory_hostname and ansible_hostname variables will be equal to each other.
+## Moreover, it populates Ansible host groups and Ansible connection variables in the hosts.ini file.
+##   4. (lines 190+) finally, runs Ansible playbook to install K3s on those machines and downloads Kubernetes .kube/config file from the
 ## control node of the cluster for the use by the kubectl tool.
 ## Host with the name stored in the script variable MASTER_NODE is assigned the role of the K3s control (master) node. In reference to our
-## Raspberries, this will be the board with the lowest IP address discovered by the nmap utility (line 89).
+## Raspberries, this will be the board with the lowest IP address discovered by the nmap utility (line 90).
 
 # WARNING !!!!: Basically, we do not need to enable WiFi on the RPis. But if you will for any reason, do not do that before
 # running this script. Otherwise nmap below will add your Pis' WiFi port addresses to file HOST_FILE which will offend the script. 
