@@ -4,13 +4,13 @@
 
 - name: Update the /etc/hosts file with localhost name
   lineinfile:
-    dest: /etc/hosts
+    path: /etc/hosts
     regexp: "^127.0.0.1"
     line: "127.0.0.1 {{ inventory_hostname }}"
 
 - name: Update the /etc/hosts file with other cluster nodes' IP and hostname
   lineinfile:
-    dest: /etc/hosts
+    path: /etc/hosts
     regexp: ".*{{ item }}$"
     line: "{{ hostvars[item].ansible_default_ipv4.address }} {{ item }}"
     state: present
@@ -24,7 +24,7 @@
 
 - name: Update /etc/cloud/cloud.cfg file
   lineinfile:
-    dest: /etc/cloud/cloud.cfg
+    path: /etc/cloud/cloud.cfg
     regexp: "^preserve_hostname:"
     line: "preserve_hostname: true"
 #  register: command_result
