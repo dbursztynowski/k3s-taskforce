@@ -2,21 +2,26 @@
 
 # READ ALL THE NOTES BELOW:
 
-# This script installs K3s on a Raspberry Pi cluster. More specifically, it selects running Raspberry Pi machines in a
-# subnetwork with a given CIDR range and creates their ~/.ssh/config names based on the <prefix>-<id> pattern and
-# configures ssh credentials for accessing them remotely using Ansible. Then, it runs ansible playbook to install K3s
-# on those machines and finally downloads Kubernetes config file from the control node of the cluster.
-# A predefined host with the name given by variable MASTER_NODE is assigned the role of the K3s control (master) node.
+## This script installs K3s on a Raspberry Pi cluster. More specifically, it:
+##   1. selects Raspberry Pi machines running in a subnetwork with a given CIDR range and stores their data
+## (name, IP address) in local ~/.ssh/config. RPi host names follow the pattern <prefix><integer_number>. If missing,
+## local ~/.ssh directory and SSH key are created, too. Copies SSH public key to the RPi hosts for the use by Ansible.
+##   2. creates local file hosts.ini which will be used as Ansible inventory. It contains Ansible inventory_hostname for each RPi as
+## generated in step 1 above and used in the ~/.ssh/config file. Ansible playbook will later permanently set Linux hostname in our RPis
+## equal to the inventory_hostname variable (so, the hostname set during microSD card preparation will be overriden). In result, for each
+## RPi its # hostname, inventory_hostname and ansible_hostname will be equal to each other. Ansible host groups and Ansible connection
+##   3. finally, runs ansible playbook to install K3s on those machines and downloads Kubernetes .kube/config file from the control
+## node of the cluster. A predefined host with the name given by variable MASTER_NODE is assigned the role of the K3s control (master) node.
 
-# WARNING !!!!: do not enable WiFi on your Pi-s before running this script. Otherwise nmap below will add
-#   your Pis' WiFi port addresses to file HOST_FILE which will offend the script. 
+# WARNING !!!!: Basically, we do not need to enable WiFi on the RPis. But if you will for any reason, do not do that before
+# running this script. Otherwise nmap below will add your Pis' WiFi port addresses to file HOST_FILE which will offend the script. 
 
 # NOTE 1: make sure that you have done this: sudo usermod -aG sudo [name-of-your-local-user]
 # NOTE 2: remember to set cluster CIDR/mask (e.g., 192.168.2.0/24) as script parameter NETWORK; 
-#   thus, a complete script invocation should take the form as: $ source ./install.sh 192.168.2.0/24
+#   thus, a complete script invocation should take the form as, e.g., $ source ./install.sh 192.168.10.0/24
 # NOTE 3: in the parameter list below, verify/adjust user/password for your cluster nodes
 # MOTE 4: remember that file inventory/group_vars/all.yaml is also needed by Ansible playbook and if not present in 
-#   right configuration then you have to prepare it manually.
+#   right configuration then you will have to adjust it manually.
 
 NETWORK="$1"                          # cluster CIDR/mask, script parameter; remember to set it in the command line
 USER_NAME="ubuntu"                    # adjust to your settings, user login for your cluster hosts
