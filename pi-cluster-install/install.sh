@@ -9,9 +9,9 @@
 ## If missing, local directory ~/.ssh directory and a SSH key (RSA) are created, too. RPi hostname follows the pattern
 ## <prefix><integer_number>. The script also copies local RSA public key to the RPi hosts for the use by Ansible.
 ##   3. (lines 159-186) creates a complete Ansible inventory as local file hosts.ini. It contains Ansible inventory_hostname for each RPi as
-## generated in step 1 above and used in the ~/.ssh/config file. Ansible playbook will later permanently set Linux hostname in our RPis
-## equal to the inventory_hostname variable (so, the hostname set during microSD card preparation will be overriden). In the result, for each
-## RPi its # hostname, inventory_hostname and ansible_hostname will be equal to each other. Ansible host groups and Ansible connection
+## generated in step 1 above and used in the ~/.ssh/config file. The Ansible playbook will then persistently set the Linux hostname on each
+## RPi to be equal to the inventory_hostname variable (so, the hostname set during microSD card preparation will be overriden). In the result,
+## for each RPi its hostname, inventory_hostname and ansible_hostname will be equal to each other. Ansible host groups and Ansible connection
 ## variables will also be generated and written by the script to the hosts.ini file.
 ##   4. (lines 188+) finally, runs ansible playbook to install K3s on those machines and downloads Kubernetes .kube/config file from the control
 ## node of the cluster.
