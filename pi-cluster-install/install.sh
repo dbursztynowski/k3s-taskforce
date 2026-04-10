@@ -3,15 +3,20 @@
 # READ ALL THE NOTES BELOW:
 
 ## This script installs K3s on a Raspberry Pi cluster. More specifically, it:
-##   1. selects Raspberry Pi machines running in a subnetwork with a given CIDR range and stores their data
-## (name, IP address) in local ~/.ssh/config. RPi host names follow the pattern <prefix><integer_number>. If missing,
-## local ~/.ssh directory and SSH key are created, too. Copies SSH public key to the RPi hosts for the use by Ansible.
-##   2. creates local file hosts.ini which will be used as Ansible inventory. It contains Ansible inventory_hostname for each RPi as
+##   1. (line 86, 87) selects Raspberry Pi machines running in a subnetwork with a given CIDR range and stores their IP address in
+## local file cluster.
+##   2. (lines 99-156) Generates the target hostname for each RPi and stores pairs (RPi-hostname, IP address) in local ~/.ssh/config.
+## If missing, local directory ~/.ssh directory and a SSH key (RSA) are created, too. RPi hostname follows the pattern
+## <prefix><integer_number>. The script also copies local RSA public key to the RPi hosts for the use by Ansible.
+##   3. (lines 159-186) creates complete Ansible inventory as local file hosts.ini. It contains Ansible inventory_hostname for each RPi as
 ## generated in step 1 above and used in the ~/.ssh/config file. Ansible playbook will later permanently set Linux hostname in our RPis
-## equal to the inventory_hostname variable (so, the hostname set during microSD card preparation will be overriden). In result, for each
+## equal to the inventory_hostname variable (so, the hostname set during microSD card preparation will be overriden). In the result, for each
 ## RPi its # hostname, inventory_hostname and ansible_hostname will be equal to each other. Ansible host groups and Ansible connection
-##   3. finally, runs ansible playbook to install K3s on those machines and downloads Kubernetes .kube/config file from the control
-## node of the cluster. A predefined host with the name given by variable MASTER_NODE is assigned the role of the K3s control (master) node.
+## variables will also be generated and written by the script to the hosts.ini file.
+##   4. (lines 188+) finally, runs ansible playbook to install K3s on those machines and downloads Kubernetes .kube/config file from the control
+## node of the cluster.
+# A predefined host with the name stored in the script variable MASTER_NODE is assigned the role of the K3s control (master) node.
+## Regarding our RPis, this will be the board with the lowest IP address (found as the first one by the nmap utility).
 
 # WARNING !!!!: Basically, we do not need to enable WiFi on the RPis. But if you will for any reason, do not do that before
 # running this script. Otherwise nmap below will add your Pis' WiFi port addresses to file HOST_FILE which will offend the script. 
