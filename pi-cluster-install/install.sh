@@ -8,7 +8,7 @@
 ##   2. (lines 99-156) Generates the target hostname for each RPi and stores pairs (RPi-hostname, IP address) in local ~/.ssh/config.
 ## If missing, local directory ~/.ssh directory and a SSH key (RSA) are created, too. RPi hostname follows the pattern
 ## <prefix><integer_number>. The script also copies local RSA public key to the RPi hosts for the use by Ansible.
-##   3. (lines 159-186) creates complete Ansible inventory as local file hosts.ini. It contains Ansible inventory_hostname for each RPi as
+##   3. (lines 159-186) creates a complete Ansible inventory as local file hosts.ini. It contains Ansible inventory_hostname for each RPi as
 ## generated in step 1 above and used in the ~/.ssh/config file. Ansible playbook will later permanently set Linux hostname in our RPis
 ## equal to the inventory_hostname variable (so, the hostname set during microSD card preparation will be overriden). In the result, for each
 ## RPi its # hostname, inventory_hostname and ansible_hostname will be equal to each other. Ansible host groups and Ansible connection
