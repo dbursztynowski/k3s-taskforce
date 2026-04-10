@@ -201,18 +201,18 @@ fi
 # Option (2) is safer for it does not overwrite anything.
 
 # (1) Clean config file:
-# Use if kubeconfig file on the management host does not exist or is named config and is to be overwritten. If so, 
+# Use if kubeconfig file on the management host does not exist or does exist with the neme config and is to be overwritten. If so, 
 # uncomment the following two commands and comment out the three ones in the part "ALTERNATIVE" below.
-#scp $USER_NAME@$MASTER_NODE:~/.kube/config $HOME/.kube/config
-#echo "Created kubeconfig file $HOME/.kube/config"
+scp $USER_NAME@$MASTER_NODE:~/.kube/config $HOME/.kube/config
+echo "Created kubeconfig file $HOME/.kube/config"
 
 # (2) ALTERNATIVE to the above option:
 # Use if kubeconfig file exists on the management host and is named config; in this case config file of your cluster 
 # named config-cluster-$CURRENT_DATE will be created on the management host (prevents overwritting). The following
 # three commands have to be commented out when using the "Clean config file" option as specified above.
-scp $USER_NAME@$MASTER_NODE:~/.kube/config $HOME/.kube/config-cluster-$CURRENT_DATE
-echo "Created kubeconfig file $HOME/.kube/config-cluster-$CURRENT_DATE"
-echo "  - remember to rename it to \"config\" or use KUBECONFIG env variable, or run kubectl --kubeconfig <config-file-name> ..."
+#scp $USER_NAME@$MASTER_NODE:~/.kube/config $HOME/.kube/config-cluster-$CURRENT_DATE
+#echo "Created kubeconfig file $HOME/.kube/config-cluster-$CURRENT_DATE"
+#echo "  - remember to rename it to \"config\" or use KUBECONFIG env variable, or run kubectl --kubeconfig <config-file-name> ..."
 
 # environment variable - only useful for current boot, can be left commented
 #export KUBECONFIG=~/.kube/config-cluster-$CURRENT_DATE
