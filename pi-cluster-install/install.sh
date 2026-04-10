@@ -2,8 +2,8 @@
 
 # READ ALL THE NOTES BELOW:
 
-## This script installs K3s on a Raspberry Pi cluster. It uses nmap utility for Raspberry Pi discovery ss it MUST be run on a node
-## attached to the same subnetwork as the cluster. More specifically, this script:
+## This script installs K3s on a Raspberry Pi cluster. It uses nmap utility for Raspberry Pi discovery so it MUST be run on a node
+## attached to the same subnetwork as Raspberry Pi boards. More specifically, this script:
 ##   1. (line 89, 90) selects Raspberry Pi machines running in a subnetwork with the CIDR provided as script parameter and stores
 ## their IP address in local file 'cluster'.
 ##   2. (lines 100-158) creates, if missing, local directory ~/.ssh directory and a SSH key (RSA). Generates the target hostname for each
