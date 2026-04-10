@@ -57,7 +57,7 @@
               addresses: [{{ gateway }}, 8.8.8.8, 8.8.4.4]
         version: 2
 
-- name: Apply netplan
+- name: Apply network configuration with netplan (on Raspberry Pi OS need to install netplan before)
   shell: netplan apply
 
 - name: Enable cgroup according to https://docs.k3s.io/advanced#raspberry-pi
@@ -71,7 +71,7 @@
   - "cgroup_enable=memory"
   register: cgroup_activation
 
-- name: Reboot
+- name: Reboot if something changed in the cgroup_* settings
   reboot:
   when:
   - cgroup_activation is changed
