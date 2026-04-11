@@ -101,6 +101,6 @@ Note: when using ZeroTier (see below) and installing it on a Pi in our cluster, 
 
 **_workloads_** - in subdirectory busypod: Docker file for container image that can be used in workload generation test of the cluster and example bash script allowing one to produce multiple workload pods using kubectl commands and our container image; it can be used for generating varying workloads in the cluster and monitor/visualise cluster performance metrics with Prometheus and Grafana
 
-**_zt-config.sh, zt-manual.md_** - script and instructions for configuring the ZeroTier virtual network enabling remote access to the cluster by all members of a lab team. It also describes how to remotely enable/disable the cluster (enable/disable the Pis).
+**_zt-config.sh, [zt-manual.md](https://github.com/dbursztynowski/k3s-taskforce/blob/master/zt-manual.md)_** - script and instructions (in Polish) for configuring the ZeroTier virtual network enabling remote access to the cluster by all members of a lab team. It also describes how to remotely enable/disable the cluster (enable/disable the RPis).
 
 
