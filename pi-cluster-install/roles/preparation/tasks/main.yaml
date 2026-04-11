@@ -43,7 +43,12 @@
     replace: ''
 
 - name: Configure Static IP address for netplan
-# note that ansible_default_ipv4.address is set based on MAC address from the static DHCP pool
+# Note that ansible_default_ipv4.address belongs to the static DHCP pool and was set based host's MAC address. That
+# means the IP address does not change and Ansible continues to maintain ssh connectivity to the host. However, if our address
+# assignment method relied on changing the IP address on-the-fly than Ansible ssh connection to the host would break. In that
+# case waiting for reconnection of Ansible would be needed (and possibly also networking settings on the hosts and on the
+# management host would need to be updated); see this for Ansible reconnection:
+# https://stackoverflow.com/questions/60181867/ansible-is-there-a-way-to-change-a-windows-server-ip-address-using-ansible/61299910#61299910
   blockinfile:
     path: /etc/netplan/50-cloud-init.yaml
     insertafter: "following:"
@@ -59,6 +64,8 @@
         version: 2
 
 - name: Apply network configuration with netplan (on Raspberry Pi OS need to install netplan before)
+# Notice that because of setting the IP address as fixed BUT not changing it's value, Ansible ssh
+# connection to the host remains active (does not break). See also the note in the previous task.
   shell: netplan apply
 
 - name: Enable cgroup according to https://docs.k3s.io/advanced#raspberry-pi
