@@ -50,7 +50,7 @@ Uwagi:
 
 **_workloads_** - podkatalog busypod: Docker file dla obrazu kontenera pozwalającego realizować testy obciążeniowe klastra (głównie na poziomie CPU) i przykładowy skrypt bash do tworzenia wielu podów obciążeniowych z wykorzytaniem komend kubectl i naszego obrazu; można wykorzystać go w celu emulacji zmiennego obciążenia klastra i monitorowania parametrów wydajnościowych klastra przy użyciu Prometheus i Grafana
 
-**_zt-config.sh, zt-manual.md_** - skrypt i instrukcja konfiguracji sieci wirtualnej ZeroTier umożliwiającej zdalny dostęp do klastra przez wszystkich uczestników grupy studenckiej. Opisano też sposób zdalnego włączania/wyłączania klastra (włączania/wyłączania malinek).
+**_zt-config.sh, [zt-manual.md](https://github.com/dbursztynowski/k3s-taskforce/blob/master/zt-manual.md)_** - skrypt i instrukcja konfiguracji sieci wirtualnej ZeroTier umożliwiającej zdalny dostęp do klastra przez wszystkich uczestników grupy studenckiej. Opisano też sposób zdalnego włączania/wyłączania klastra (włączania/wyłączania malinek).
 
 # **Network function virtualization in Kubernetes clusters on Raspberry Pi**
 
