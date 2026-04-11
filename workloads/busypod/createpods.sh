@@ -2,7 +2,7 @@
 
 ###################################################
 
-# The script creates a number of busypods with load characteristics defined by the values of arguments being passed.
+# The script generates randomized stream of busypods with load characteristics defined by the values of arguments being passed.
 # For details about parametrizing the container refer to the Docker Hub repo: 
 #   https://hub.docker.com/repository/docker/dburszty/artificial-workload-amd64/general or
 #   https://hub.docker.com/repository/docker/dburszty/artificial-workload-arm64v8/general
@@ -45,7 +45,7 @@ do
   # examples 
   #kubectl run -n $NAMESPACE $name --image=$IMAGE --restart=Never -- 10000 5 oiter=1
   #with default values: kubectl run -n $NAMESPACE $name --image=$IMAGE --restart=Never
-  #with run time equal ~30 sec: 
+  #with pod life time equal to ~30 sec: 
   kubectl run -n $NAMESPACE $name --image=$IMAGE --restart=Never -- 10000 5 otime=30
 
   # SLEEP TIME ============
