@@ -10,7 +10,7 @@ Our busypods are deployed by a bash script using our custom manifest of the pod.
 
 Use the artifacts available in the **[workload/busypod](../workloads/busypod)** folder.
 
-1. Read the busypod container specification available in the [Dockerhub repo](https://hub.docker.com/r/dburszty/artificial-workload-arm64v8) and in the bash scripts in the [busypod folder](../workloads/busypod). Estimate the required values of script and container parameters to load the cluster to a given level, e.g., 30% utilization of CPU. Notice that the script with extension **.org** contains instructions that delete terminated pods (its beneficial if the script creates a lot of pods). You can adapt this part in your implementation (remaining scripts do not contain this deletion).
+1. Read the busypod container specification available in the [Dockerhub repo](https://hub.docker.com/r/dburszty/artificial-workload-arm64v8) and in the bash scripts in the [busypod folder](../workloads/busypod). Estimate the required values of script and container parameters to load the cluster to a given level, e.g., 30% utilization of CPU. Notice that the script with extension **createpods-random.sh** contains instructions that delete terminated pods (it is beneficial if the script runs for a long time, creates a lot of pods and the number of terminated pods becomes very large). You can adapt this part in your implementation (remaining scripts do not contain this deletion).
 2. Run your script to deploy busypods and check if the load visible in Grafana matches (more or less) the value assumed in point 1. If the difference is huge, reevalute script/container parameters and re-run the experiment to check your cluster load again.
 3. Sumarize your conclusions from this experiment.
 
