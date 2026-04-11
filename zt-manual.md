@@ -1,4 +1,7 @@
 # Poradnik połączenia klastra z siecią ZeroTier (VPN)
+
+(autor instrukcji: Franciszek Dec)
+
 W niniejszym poradniku przedstawiamy sposób połączenia klastra z siecią ZeroTier. Umożliwi to dostęp zdalny do klastra bez konieczności otwierania czy przekierowania portów w routerach naszej fizycznej sieci.
 
 ## Uwagi ogólne
