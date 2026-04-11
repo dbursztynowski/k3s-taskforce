@@ -6,7 +6,7 @@ In this experiment, we run a set of pods which we call workload or busypods and 
 
 Our busypods are deployed by a bash script using our custom manifest of the pod. The script loops according to parameters provided in command line and a couple of encoded parameters. Details regarding how our container works (how it is created, etc.), are given in bash scripts contained in folder [workload/busypod](../workloads/busypod) and the references cited therein. Please, read these descriptions. After studying the scripts and understanding how the pod's container works, you will be able to change the parameters to regulate the load generated in the cluster and even modify the overall behavior of the container (the latter after modifying the Python code of the container application and generating a new image).
 
-### Tasks to do:
+### Tasks to be completed:
 
 Use the artifacts available in the **[workload/busypod](../workloads/busypod)** folder. The recommended version to start with is named **createpods.sh**.
 
