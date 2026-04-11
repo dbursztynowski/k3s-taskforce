@@ -43,6 +43,7 @@
     replace: ''
 
 - name: Configure Static IP address for netplan
+# note that ansible_default_ipv4.address is set based on MAC address from the static DHCP pool
   blockinfile:
     path: /etc/netplan/50-cloud-init.yaml
     insertafter: "following:"
