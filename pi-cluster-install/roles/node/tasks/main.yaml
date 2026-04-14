@@ -6,7 +6,7 @@
     #formerly was kpi09{{ worker_number|int + 2 }}
 
 - name: Check if k3s already installed
-  # not a thorough test - only existence of a directory
+  # not a thorough test - only the existence of a directory
   stat:
     path: /usr/local/bin/k3s
   register: k3s_installed
