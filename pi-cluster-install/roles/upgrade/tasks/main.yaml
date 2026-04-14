@@ -1,5 +1,5 @@
 ---
-# Updating/upgrading the servers and installing useful packages (net-tools and netmap) according to:
+# Updating/upgrading the servers; could also contain installing useful packages. See also:
 #   https://www.cyberciti.biz/faq/ansible-apt-update-all-packages-on-ubuntu-debian-linux/
 
 # Updating / upgrading the OS
