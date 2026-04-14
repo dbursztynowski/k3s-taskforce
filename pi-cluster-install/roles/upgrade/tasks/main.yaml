@@ -10,11 +10,11 @@
   apt: upgrade=dist force_apt_get=yes
 
 - name: Check if a reboot is needed on the box
+  stat: path=/run/reboot-required get_checksum=false
   register: reboot_required_file
-#  stat: path=/var/run/reboot-required get_md5=no get_md5 deprecated
-  stat: path=/var/run/reboot-required get_checksum=false
 
 - name: Reboot the box if kernel updated
+# however, read this: https://www.debian.org/doc/debian-policy/ch-opersys.html#signaling-that-a-reboot-is-required
   reboot:
     msg: "Reboot initiated by Ansible for kernel updates"
     connect_timeout: 5
