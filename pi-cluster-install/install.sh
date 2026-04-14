@@ -184,7 +184,7 @@ done
     echo -e "ansible_become_method=sudo"
     echo -e "ansible_become_pass=$PASSWORD"
     echo -e "ansible_ssh_private_key_file=$SSH_KEY_FILE"
-    echo -e "cfg_static_network=true"
+#    echo -e "cfg_static_network=true"
 } >> $INVENTORY_FILE
 
 # run ansible playbook installing k3s on cluster hosts
