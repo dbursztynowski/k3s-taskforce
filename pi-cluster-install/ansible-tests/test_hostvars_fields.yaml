@@ -11,7 +11,7 @@
 
 # Run: ansible-playbook test_hostvars_fields.yaml -i inventory/hosts.ini
 
-- hosts: master
+- hosts: localhost
   gather_facts: yes
   become: yes
 
@@ -20,10 +20,10 @@
   - name: Display all variables/facts known for a host
     debug:
 #     Note: both of the two following forms work well and give the same result
-#      var: hostvars[inventory_hostname]['ansible_facts']['distribution']
+      var: hostvars[inventory_hostname]['ansible_facts']['distribution']
 #      var: hostvars[inventory_hostname].ansible_facts.distribution
 #     Note: this var produces very verbose output
-      var: hostvars[inventory_hostname].ansible_facts
+#      var: hostvars[inventory_hostname].ansible_facts
 
 #     Note: this var produces very verbose output and sometimes even fails (in our case, fails for master group - do not know why)
 #      var: hostvars[inventory_hostname]
@@ -32,6 +32,10 @@
 #      var: hostvars
 
 #   Below, a couple of other examples of how to access various fields in hostvars
+
+  - name: Host IPv4 information - hostvars[inventory_hostname].ansible_default_ipv4
+    debug:
+      var:  hostvars[inventory_hostname].ansible_default_ipv4
 
   - name: Host default address - "hostvars[inventory_hostname].ansible_default_ipv4.address"
     debug:
