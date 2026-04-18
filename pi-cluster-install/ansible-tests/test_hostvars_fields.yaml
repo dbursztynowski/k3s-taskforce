@@ -23,7 +23,7 @@
       var: hostvars[inventory_hostname]['ansible_facts']['distribution']
 #      var: hostvars[inventory_hostname].ansible_facts.distribution
 #     Note: this var produces very verbose output
-#      var: hostvars[inventory_hostname].ansible_facts
+      var: hostvars[inventory_hostname].ansible_facts
 
 #     Note: this var produces very verbose output and sometimes even fails (in our case, fails for master group - do not know why)
 #      var: hostvars[inventory_hostname]
