@@ -1,6 +1,6 @@
 # Kubernetes K3s na platformie Raspberry Pi
 
-### Instalacja klastra, podstawy sieciowania Kubernetes (CNI), monitoring z użyciem stosu kube-prometheus
+### Instalacja klastra, podstawy sieciowania Kubernetes (CNI) i usługi Kubernetes, monitoring z użyciem stosu kube-prometheus
 
 ## **Ogólnie**
 [(English version)](./README.md#network-function-virtualization-in-kubernetes-clusters-on-raspberry-pi)
@@ -54,7 +54,9 @@ Uwagi:
 
 **_zt-config.sh, [zt-manual.md](https://github.com/dbursztynowski/k3s-taskforce/blob/master/zt-manual.md)_** - skrypt i instrukcja konfiguracji sieci wirtualnej ZeroTier umożliwiającej zdalny dostęp do klastra przez wszystkich uczestników grupy studenckiej. Opisano też sposób zdalnego włączania/wyłączania klastra (włączania/wyłączania malinek).
 
-# **Network function virtualization in Kubernetes clusters on Raspberry Pi**
+# **Kubernetes K3s clusters on on Raspberry Pi**
+
+### Cluster instalation, basics of Kubernetes networking (CNI) and Kubernetes services, monitoring using kube-prometheus
 
 ## **General**
 
