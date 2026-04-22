@@ -1,6 +1,6 @@
 # Kubernetes K3s na platformie Raspberry Pi
 
-### Instalacja klastra, monitoring z użyciem stosu kube-prometheus
+### Instalacja klastra, podstawy sieciowania Kubernetes (CNI), monitoring z użyciem stosu kube-prometheus
 
 ## **Ogólnie**
 [(English version)](./README.md#network-function-virtualization-in-kubernetes-clusters-on-raspberry-pi)
