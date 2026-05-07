@@ -30,6 +30,8 @@ Drogą do osiągnięcia tych celów jest instalacja klastra k3s "bare metal" na 
 
 ## **Co teraz mamy w katalogach/plikach**
 
+**_ansible.cfg_** - plik konfiguracyjny Ansible z ustawieniem interpretera Python (ustawienie domyślnie zakomentowane). W razie wystąpienia ostrzeżeń Ansible dotyczących interpretera można odkomentować i ustawić właściwą dla swojej instalacji wersję interpretera.
+
 **_ansible-tests/_** - proste przykłady wykorzystania Ansible; obecnie: mikro-demo ilustrujące istotę działania "gather facts" na przykładzie lokalnego hosta
 
 **_gettemp.sh_** - skrypt korzystający z playbook'a Ansible _get-temp.yaml_ do sprawdzania temperatury procesora malinek
@@ -84,6 +86,8 @@ Uwagi:
 The means to achieve these goals is the installation of k3s "bare metal" cluster on Raspberry Pi platform, the installation and configuration of selected cluster components (MetalLB, Traefik) and "observability" level applications (Prometheus/Grafana) using various Kubernetes mechanisms/functionalities, and also running simple demo "applications" to illustrate selected concepts.
 
 ## **What we have in the folders/files**
+
+**_ansible.cfg/_** - Ansible configuration file with the Python interpreter settings (commented out by default). If you encounter any Ansible warnings about the interpreter, you can uncomment it and set the correct interpreter version for your installation.
 
 **_ansible-tests/_** - simple examples of Ansible constructs; currently: micro-demo illustrating the essence of "gather facts" based on the example of a local host
 
