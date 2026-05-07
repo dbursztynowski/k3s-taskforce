@@ -42,7 +42,7 @@ MASTER_GROUP="master"                 # Ansible group of hosts serving as master
 CLUSTER_NODE_PREF="k3s0"              # name prefix for Raspberry Pi cluster nodes, adjust to the setting for your RPis
 MASTER_NODE=$CLUSTER_NODE_PREF"1"     # apply this format: <cluster_node_prefix><1>
 WORKER_GROUP="node"                   # Ansible group of nodes serving as agent/worker - check Ansible files to understand the structure
-WORKER_NODE_PREF= $CLUSTER_NODE_PREF  # for worker node name apply this format: <worker_node_pref><consecutive_integer> (consecutive_integer=2,3,4 so worker names will be k3s02, ...)
+WORKER_NODE_PREF=$CLUSTER_NODE_PREF   # for worker node name apply this format: <worker_node_pref><consecutive_integer> (consecutive_integer=2,3,4 so worker names will be k3s02, ...)
 CLUSTER_GROUP="cluster"               # Ansible group of all hosts in the cluster - check Ansible files to understand the structure
 CURRENT_DATE=$(date +%m-%dT%T)        # date-time suffix to generate a unique name of Kubernetes "kubeconfig" file - to prevent accidental overwriting
 
