@@ -16,6 +16,7 @@
     #previously it was explicitly kpi0x1
 
 - name: Check if k3s already installed
+  # introduces some level of idempotency in installing k3s on the master node
   stat:
     path: /usr/local/bin/k3s
   register: k3s_installed
@@ -32,24 +33,25 @@
   # for RPi5:      INSTALL_K3S_EXEC="server                                                --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller" sh -s -
 
   ## For RPi with 4GB RAM
+#  shell:
+#    cmd: >
+#      curl -sfL https://get.k3s.io |
+#      INSTALL_K3S_VERSION={{ k3s_version }}
+#      INSTALL_K3S_EXEC="server --node-taint CriticalAddonsOnly=true:NoExecute --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller" 
+#      sh -s -
+#  when: not k3s_installed.stat.exists
+
+  ## For RPi with 8+ GB RAM. Also for RPi 5 (as there are only 3 Pis, we suppress --node-taint CriticalAddonsOnly=true:NoExecute).
   shell:
     cmd: >
       curl -sfL https://get.k3s.io |
       INSTALL_K3S_VERSION={{ k3s_version }}
-      INSTALL_K3S_EXEC="server --node-taint CriticalAddonsOnly=true:NoExecute --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller" 
+      INSTALL_K3S_EXEC="server --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller"
       sh -s -
   when: not k3s_installed.stat.exists
 
-  ## For RPi with 8+ GB RAM. Also for RPi 5 (as there are only 3 Pis, we suppress --node-taint CriticalAddonsOnly=true:NoExecute).
-#  shell:
-#    cmd: >
-#      curl -sfL https://get.k3s.io | 
-#      INSTALL_K3S_VERSION={{ k3s_version }} 
-#      INSTALL_K3S_EXEC="server --write-kubeconfig-mode 644 --disable servicelb --disable-cloud-controller" 
-#      sh -s -
-#  when: not k3s_installed.stat.exists
-
   # setting feature-gate here enables InPlacePodVerticalScaling on cluster nodes
+  # this may be unnecessary for releases 1.33+, but we leave it for any case 
   shell:
     cmd: >
       curl -sfL https://get.k3s.io |
